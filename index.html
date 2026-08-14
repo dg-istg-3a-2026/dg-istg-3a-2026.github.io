@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>?</title>
   
-  <!-- Favicon Dinámico en SVG recreando el "?!" -->
+  <!-- Favicon Dinámico en SVG -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'><style>@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@900'); text{font-family:'DynaPuff',system-ui,sans-serif;font-weight:900;font-size:80px;dominant-baseline:central;} .bg-q{stroke:%230B1B2F;stroke-width:24px;stroke-linejoin:round;} .bg-e{stroke:%23FF5500;stroke-width:24px;stroke-linejoin:round;} .md{stroke:white;stroke-width:12px;stroke-linejoin:round;} .f-q{fill:%230B1B2F;} .f-e{fill:%23FF5500;}</style><text x='15' y='55' class='bg-q'>?</text><text x='15' y='55' class='md'>?</text><text x='15' y='55' class='f-q'>?</text><text x='70' y='55' class='bg-e'>!</text><text x='70' y='55' class='md'>!</text><text x='70' y='55' class='f-e'>!</text></svg>">
   
   <script src="https://cdn.tailwindcss.com"></script>
@@ -55,9 +55,12 @@
     .animate-logo-float { animation: logoFloat 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite; transform-origin: center center; }
   </style>
 
-  <!-- ANTI-DEBUGGING Y PROTECCIÓN -->
+  <!-- ANTI-DEBUGGING Y PROTECCIÓN AVANZADA -->
   <script>
+    // 1. Bloquear click derecho absoluto
     document.addEventListener('contextmenu', e => e.preventDefault());
+    
+    // 2. Bloquear atajos de teclado críticos (F12, Inspeccionar, Ver Código Fuente, Guardar, Imprimir)
     document.addEventListener('keydown', (e) => {
       if (
         e.keyCode === 123 || 
@@ -68,15 +71,24 @@
         return false;
       }
     });
-    setInterval(function() { (function() { return false; }['constructor']('debugger')()); }, 50);
+
+    // 3. Trampa de Depuración (Congela la pestaña si intentan analizar el código)
+    setInterval(function() {
+      (function() { return false; }['constructor']('debugger')());
+    }, 150);
+
+    // 4. Limpieza y Spam en Consola para ocultar variables
     setInterval(() => {
       console.clear();
-      console.log("%cACCESO DENEGADO", "color: red; font-size: 40px; font-weight: bold; text-shadow: 2px 2px 0 #000;");
-      console.log("%cEl código fuente y los activos están protegidos.", "color: white; font-size: 16px;");
+      console.log("%cACCESO DENEGADO", "color: #FF5500; font-size: 40px; font-weight: bold; text-shadow: 2px 2px 0 #000; font-family: sans-serif;");
+      console.log("%cEl código fuente y los activos de esta página están protegidos.", "color: white; font-size: 16px; font-family: sans-serif;");
     }, 1000);
   </script>
 </head>
 <body class="h-full w-full relative bg-slate-950 text-slate-100 select-none overflow-hidden">
+
+  <!-- Cajas de Error Visibles -->
+  <div id="errorLog" class="fixed top-2 left-1/2 -translate-x-1/2 z-[100] text-xs text-white bg-red-600/90 px-4 py-2 rounded shadow-lg hidden pointer-events-none text-center"></div>
 
   <!-- Loader Visual -->
   <div id="initialLoader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#FAF5EF] text-slate-900 pointer-events-auto">
@@ -126,21 +138,17 @@
   <canvas id="bgCanvas"></canvas>
   <canvas id="mainCanvas"></canvas>
 
-  <!-- Lógica Principal -->
   <script type="module">
-    /* STREAMING_CHUNK: Importando librerías de Firebase */
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getFirestore, doc, getDoc, setDoc, onSnapshot, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    /* STREAMING_CHUNK: Configurando estado base */
     const VALID_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg', '.bmp', '.avif'];
 
-    // OFUSCACIÓN DE DATOS (Base64) - dg-istg-3a-2026 / dg-istg-3a-2026.github.io / MochilaDeCaleb
     const state = {
-      owner: atob('ZGctaXN0Zy0zYS0yMDI2'), 
-      repo: atob('ZGctaXN0Zy0zYS0yMDI2LmdpdGh1Yi5pbw=='), 
-      branch: atob('TW9jaGlsYURlQ2FsZWI='), 
+      owner: atob('ZGctaXN0Zy0zYS0yMDI2'), // dg-istg-3a-2026
+      repo: atob('ZGctaXN0Zy0zYS0yMDI2LmdpdGh1Yi5pbw=='), // dg-istg-3a-2026.github.io
+      branch: atob('TW9jaGlsYURlQ2FsZWI='), // MochilaDeCaleb
       fileList: [],
       errorCount: 0
     };
@@ -151,6 +159,7 @@
     const mainCtx = mainCanvas.getContext('2d');
     const initialLoader = document.getElementById('initialLoader');
     const reactionBar = document.getElementById('reactionBar');
+    const errorLog = document.getElementById('errorLog');
 
     let db = null; 
     let auth = null;
@@ -163,24 +172,27 @@
       projectId: "web-feria-istg-2026",
       storageBucket: "web-feria-istg-2026.firebasestorage.app",
       messagingSenderId: "434583648721",
-      appId: "1:434583648721:web:a31a4ec9e99dc7faf8c8f0",
-      measurementId: "G-PKQQRYMBCB"
+      appId: "1:434583648721:web:a31a4ec9e99dc7faf8c8f0"
     };
 
-    /* STREAMING_CHUNK: Inicializando aplicación y eventos */
+    // Función para mostrar errores en pantalla (ya que no hay consola)
+    function showError(msg) {
+      if(errorLog) {
+        errorLog.textContent = msg;
+        errorLog.classList.remove('hidden');
+        setTimeout(() => { errorLog.classList.add('hidden'); }, 6000);
+      }
+    }
+
     window.onload = async function() {
       resizeCanvas();
       window.addEventListener('resize', resizeCanvas);
       
-      // Mostrar la animación del ?! de inmediato
       if (document.fonts) {
         document.fonts.ready.then(() => {
           const sticker = document.getElementById('stickerAssembly');
           if (sticker) sticker.classList.remove('opacity-0');
         });
-      } else {
-        const sticker = document.getElementById('stickerAssembly');
-        if (sticker) sticker.classList.remove('opacity-0');
       }
 
       await initFirebaseAndApp();
@@ -195,12 +207,15 @@
         await signInAnonymously(auth); 
         initReactionsListener();
       } catch (e) {
-        console.warn("Ejecutando sin BD o error en Firebase:", e);
+        if(e.code === 'auth/admin-restricted-operation' || e.code === 'auth/operation-not-allowed') {
+           showError("Activa Autenticación Anónima en Firebase");
+        } else {
+           showError("Error Firebase: " + e.message);
+        }
       }
       await initGallery();
     }
 
-    /* STREAMING_CHUNK: Configurando base de datos en tiempo real */
     function initReactionsListener() {
       if (!db || !auth.currentUser) return;
       const reactionsDocRef = doc(db, 'Feria2026', 'Reacciones');
@@ -212,17 +227,19 @@
             if (countEl) countEl.textContent = data[emoji] || 0;
           });
         }
-      }, () => {});
+      }, (err) => {
+         if (err.code === 'permission-denied') {
+            showError("Faltan permisos en Firestore (Cambia Rules a true)");
+         }
+      });
     }
 
     window.handleReactionClick = async function(emoji) {
-      // 1. Optimistic Update (Cambio visual inmediato)
       const countEl = document.getElementById(`count-${emoji}`);
       if (countEl) {
         countEl.textContent = parseInt(countEl.textContent || '0') + 1;
       }
 
-      // 2. Efecto visual
       const el = document.createElement('div');
       el.textContent = emoji;
       el.className = 'fixed text-3xl sm:text-4xl z-50 pointer-events-none drop-shadow-lg';
@@ -244,16 +261,18 @@
       });
       setTimeout(() => el.remove(), 1200);
 
-      // 3. Guardar
       if (db && auth && auth.currentUser) {
         try {
           const reactionsDocRef = doc(db, 'Feria2026', 'Reacciones');
           await setDoc(reactionsDocRef, { [emoji]: increment(1) }, { merge: true });
-        } catch (err) {}
+        } catch (err) {
+           if (err.code === 'permission-denied') {
+              showError("Faltan permisos en Firestore (Cambia Rules a true)");
+           }
+        }
       }
     };
 
-    /* STREAMING_CHUNK: Cargando galería desde Github */
     async function fetchAllGitHubImages(owner, repo, branch) {
       let collectedFiles = [];
       try {
@@ -278,11 +297,11 @@
       if (state.fileList.length > 0) { 
         await assignAndLoadUniqueImage(); 
       } else { 
+        showError("No se encontraron imágenes en el repositorio de GitHub.");
         dismissInitialLoader(); 
       }
     }
 
-    /* STREAMING_CHUNK: Asignando turnos con Firebase */
     async function assignAndLoadUniqueImage() {
       let assignedIndex = 0;
       if (db && auth && auth.currentUser) {
@@ -302,7 +321,6 @@
       displayImageByIndex(assignedIndex);
     }
 
-    /* STREAMING_CHUNK: Mostrando imagen en Canvas */
     function displayImageByIndex(index) {
       if (index < 0 || index >= state.fileList.length) return;
       const file = state.fileList[index];
@@ -353,7 +371,6 @@
       mainCtx.restore();
     }
 
-    /* STREAMING_CHUNK: Controlando animación final */
     const loaderStartTime = Date.now();
     let isLoaderDismissing = false;
     
@@ -386,4 +403,3 @@
   </script>
 </body>
 </html>
-```eof
