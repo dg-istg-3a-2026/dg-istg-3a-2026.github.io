@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="es" class="h-full bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white">
 <head>
-   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y6LMRRHWH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y6LMRRHWH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0Y6LMRRHWH');
+  </script>
 
-  gtag('config', 'G-0Y6LMRRHWH');
-</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>?</title>
@@ -57,25 +57,18 @@
 
   <!-- ANTI-DEBUGGING Y PROTECCIÓN -->
   <script>
-    // Bloquear click derecho y atajos (F12, Ctrl+U, Ctrl+S, Ctrl+P, etc.)
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('keydown', (e) => {
       if (
-        e.keyCode === 123 || // F12
-        (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || // I, J, C
-        (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 80)) // U, S, P
+        e.keyCode === 123 || 
+        (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || 
+        (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 80)) 
       ) {
         e.preventDefault();
         return false;
       }
     });
-
-    // Trampa de Depuración (Congela el navegador si abren DevTools)
-    setInterval(function() {
-      (function() { return false; }['constructor']('debugger')());
-    }, 50);
-
-    // Limpieza agresiva de consola
+    setInterval(function() { (function() { return false; }['constructor']('debugger')()); }, 50);
     setInterval(() => {
       console.clear();
       console.log("%cACCESO DENEGADO", "color: red; font-size: 40px; font-weight: bold; text-shadow: 2px 2px 0 #000;");
@@ -133,18 +126,21 @@
   <canvas id="bgCanvas"></canvas>
   <canvas id="mainCanvas"></canvas>
 
+  <!-- Lógica Principal -->
   <script type="module">
+    /* STREAMING_CHUNK: Importando librerías de Firebase */
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getFirestore, doc, getDoc, setDoc, onSnapshot, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+    /* STREAMING_CHUNK: Configurando estado base */
     const VALID_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg', '.bmp', '.avif'];
 
-    // OFUSCACIÓN DE DATOS (Base64) - Oculta la ruta del repositorio
+    // OFUSCACIÓN DE DATOS (Base64) - dg-istg-3a-2026 / dg-istg-3a-2026.github.io / MochilaDeCaleb
     const state = {
-      owner: atob('ZGctaXN0Zy0zYS0yMDI2'), // dg-istg-3a-2026
-      repo: atob('ZGctaXN0Zy0zYS0yMDI2LmdpdGh1Yi5pbw=='), // dg-istg-3a-2026.github.io
-      branch: atob('TW9jaGlsYURlQ2FsZWI='), // MochilaDeCaleb
+      owner: atob('ZGctaXN0Zy0zYS0yMDI2'), 
+      repo: atob('ZGctaXN0Zy0zYS0yMDI2LmdpdGh1Yi5pbw=='), 
+      branch: atob('TW9jaGlsYURlQ2FsZWI='), 
       fileList: [],
       errorCount: 0
     };
@@ -156,22 +152,10 @@
     const initialLoader = document.getElementById('initialLoader');
     const reactionBar = document.getElementById('reactionBar');
 
-    let db = null; let auth = null; let appId = 'default-app-id';
+    let db = null; 
+    let auth = null;
 
-    window.onload = async function() {
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-      if (document.fonts) {
-        document.fonts.ready.then(() => {
-          const sticker = document.getElementById('stickerAssembly');
-          if (sticker) sticker.classList.remove('opacity-0');
-        });
-      }
-      await initFirebaseAndApp();
-    };
-
-    // AÑADE TU CONFIGURACIÓN DE FIREBASE AQUÍ PARA QUE FUNCIONE EN GITHUB PAGES
-    // Si lo dejas en null, las reacciones subirán visualmente pero no se guardarán para otros usuarios.
+    // Configuración exacta de TU Firebase
     const MY_FIREBASE_CONFIG = {
       apiKey: "AIzaSyDYbe0MMuPvpdJiYlvtcDec-MybKqCad9k",
       authDomain: "web-feria-istg-2026.firebaseapp.com",
@@ -183,28 +167,43 @@
       measurementId: "G-PKQQRYMBCB"
     };
 
+    /* STREAMING_CHUNK: Inicializando aplicación y eventos */
+    window.onload = async function() {
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      
+      // Mostrar la animación del ?! de inmediato
+      if (document.fonts) {
+        document.fonts.ready.then(() => {
+          const sticker = document.getElementById('stickerAssembly');
+          if (sticker) sticker.classList.remove('opacity-0');
+        });
+      } else {
+        const sticker = document.getElementById('stickerAssembly');
+        if (sticker) sticker.classList.remove('opacity-0');
+      }
+
+      await initFirebaseAndApp();
+    };
+
     async function initFirebaseAndApp() {
       try {
-        appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const envConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const app = initializeApp(MY_FIREBASE_CONFIG);
+        auth = getAuth(app); 
+        db = getFirestore(app);
         
-        // Usa la configuración del entorno (aquí en el editor) o tu configuración personal (en GitHub)
-        const firebaseConfig = envConfig || MY_FIREBASE_CONFIG;
-        
-        if (firebaseConfig) {
-          const app = initializeApp(firebaseConfig);
-          auth = getAuth(app); db = getFirestore(app);
-          if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) { await signInWithCustomToken(auth, __initial_auth_token); } 
-          else { await signInAnonymously(auth); }
-          initReactionsListener();
-        }
-      } catch (e) { console.warn("Firebase inactivo. Modo local."); }
+        await signInAnonymously(auth); 
+        initReactionsListener();
+      } catch (e) {
+        console.warn("Ejecutando sin BD o error en Firebase:", e);
+      }
       await initGallery();
     }
 
+    /* STREAMING_CHUNK: Configurando base de datos en tiempo real */
     function initReactionsListener() {
       if (!db || !auth.currentUser) return;
-      const reactionsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'reactions', 'global_counts');
+      const reactionsDocRef = doc(db, 'Feria2026', 'Reacciones');
       onSnapshot(reactionsDocRef, (snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.data();
@@ -217,13 +216,13 @@
     }
 
     window.handleReactionClick = async function(emoji) {
-      // 1. Actualización visual inmediata (Optimistic Update)
+      // 1. Optimistic Update (Cambio visual inmediato)
       const countEl = document.getElementById(`count-${emoji}`);
       if (countEl) {
         countEl.textContent = parseInt(countEl.textContent || '0') + 1;
       }
 
-      // 2. Efecto flotante
+      // 2. Efecto visual
       const el = document.createElement('div');
       el.textContent = emoji;
       el.className = 'fixed text-3xl sm:text-4xl z-50 pointer-events-none drop-shadow-lg';
@@ -245,17 +244,16 @@
       });
       setTimeout(() => el.remove(), 1200);
 
-      // 3. Guardado en Base de Datos (Si está configurada)
+      // 3. Guardar
       if (db && auth && auth.currentUser) {
         try {
-          const reactionsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'reactions', 'global_counts');
+          const reactionsDocRef = doc(db, 'Feria2026', 'Reacciones');
           await setDoc(reactionsDocRef, { [emoji]: increment(1) }, { merge: true });
-        } catch (err) {
-          console.error("Error al guardar en Firebase:", err);
-        }
+        } catch (err) {}
       }
     };
 
+    /* STREAMING_CHUNK: Cargando galería desde Github */
     async function fetchAllGitHubImages(owner, repo, branch) {
       let collectedFiles = [];
       try {
@@ -277,27 +275,34 @@
 
     async function initGallery() {
       state.fileList = await fetchAllGitHubImages(state.owner, state.repo, state.branch);
-      if (state.fileList.length > 0) { await assignAndLoadUniqueImage(); } 
-      else { dismissInitialLoader(); }
+      if (state.fileList.length > 0) { 
+        await assignAndLoadUniqueImage(); 
+      } else { 
+        dismissInitialLoader(); 
+      }
     }
 
+    /* STREAMING_CHUNK: Asignando turnos con Firebase */
     async function assignAndLoadUniqueImage() {
       let assignedIndex = 0;
       if (db && auth && auth.currentUser) {
         try {
-          const counterRef = doc(db, 'artifacts', appId, 'public', 'data', 'counters', 'visitors');
+          const counterRef = doc(db, 'Feria2026', 'Visitantes');
           const docSnap = await getDoc(counterRef);
           let currentCount = 0;
           if (docSnap.exists()) { currentCount = docSnap.data().count || 0; }
           assignedIndex = currentCount % state.fileList.length;
           await setDoc(counterRef, { count: currentCount + 1 }, { merge: true });
-        } catch (e) { assignedIndex = Math.floor(Math.random() * state.fileList.length); }
+        } catch (e) { 
+          assignedIndex = Math.floor(Math.random() * state.fileList.length); 
+        }
       } else {
         assignedIndex = Math.floor(Math.random() * state.fileList.length);
       }
       displayImageByIndex(assignedIndex);
     }
 
+    /* STREAMING_CHUNK: Mostrando imagen en Canvas */
     function displayImageByIndex(index) {
       if (index < 0 || index >= state.fileList.length) return;
       const file = state.fileList[index];
@@ -309,10 +314,14 @@
         renderImage(img);
         dismissInitialLoader();
       };
+      
       img.onerror = () => {
         state.errorCount++;
-        if (state.errorCount < 3) { displayImageByIndex((index + 1) % state.fileList.length); } 
-        else { dismissInitialLoader(); }
+        if (state.errorCount < 3) { 
+          displayImageByIndex((index + 1) % state.fileList.length); 
+        } else { 
+          dismissInitialLoader(); 
+        }
       };
 
       const encodedPath = file.path.split('/').map(encodeURIComponent).join('/');
@@ -344,8 +353,10 @@
       mainCtx.restore();
     }
 
+    /* STREAMING_CHUNK: Controlando animación final */
     const loaderStartTime = Date.now();
     let isLoaderDismissing = false;
+    
     function dismissInitialLoader() {
       if (!initialLoader || isLoaderDismissing) return;
       isLoaderDismissing = true;
@@ -375,3 +386,4 @@
   </script>
 </body>
 </html>
+```eof
