@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="h-full bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white">
+<html lang="es" class="h-full bg-[#030712] text-slate-100 antialiased selection:bg-orange-500 selection:text-white">
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y6LMRRHWH"></script>
@@ -12,19 +12,47 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>?</title>
+  <title>?!</title>
   
-  <!-- Favicon Dinámico en SVG -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'><style>@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@900'); text{font-family:'DynaPuff',system-ui,sans-serif;font-weight:900;font-size:80px;dominant-baseline:central;} .bg-q{stroke:%230B1B2F;stroke-width:24px;stroke-linejoin:round;} .bg-e{stroke:%23FF5500;stroke-width:24px;stroke-linejoin:round;} .md{stroke:white;stroke-width:12px;stroke-linejoin:round;} .f-q{fill:%230B1B2F;} .f-e{fill:%23FF5500;}</style><text x='15' y='55' class='bg-q'>?</text><text x='15' y='55' class='md'>?</text><text x='15' y='55' class='f-q'>?</text><text x='70' y='55' class='bg-e'>!</text><text x='70' y='55' class='md'>!</text><text x='70' y='55' class='f-e'>!</text></svg>">
   
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@700;900&family=Inter:wght@400;600;700&display=block" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@700;900&family=Inter:wght@300;400;600;700&display=block" rel="stylesheet">
 
   <script>
     tailwind.config = {
-      theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], display: ['DynaPuff', 'cursive', 'sans-serif'] } } }
+      theme: { 
+        extend: { 
+          fontFamily: { 
+            sans: ['Inter', 'sans-serif'], 
+            display: ['DynaPuff', 'cursive', 'sans-serif'] 
+          },
+          animation: {
+            'pop': 'popCounter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+            'slide-up-fade': 'slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'danmaku': 'danmakuFloat 8s cubic-bezier(0.25, 1, 0.5, 1) forwards',
+          },
+          keyframes: {
+            popCounter: {
+              '0%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.6) translateY(-4px)', backgroundColor: '#f97316', color: '#fff' },
+              '100%': { transform: 'scale(1)' }
+            },
+            slideUpFade: {
+              '0%': { opacity: 0, transform: 'translateY(20px) scale(0.95)' },
+              '100%': { opacity: 1, transform: 'translateY(0) scale(1)' }
+            },
+            danmakuFloat: {
+              '0%': { opacity: 0, transform: 'translate3d(0, 80px, 0) scale(0.85) rotate(-2deg)' },
+              '12%': { opacity: 1, transform: 'translate3d(0, 0px, 0) scale(1) rotate(1deg)' },
+              '85%': { opacity: 1, transform: 'translate3d(0, -320px, 0) scale(1) rotate(-1deg)' },
+              '100%': { opacity: 0, transform: 'translate3d(0, -400px, 0) scale(0.95) rotate(2deg)' }
+            }
+          }
+        } 
+      }
     }
   </script>
 
@@ -32,139 +60,201 @@
     body, html {
       margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
       background-color: #030712; user-select: none; -webkit-user-select: none; touch-action: none;
-      font-family: 'Inter', sans-serif;
     }
     #bgCanvas {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      filter: blur(40px) brightness(0.4) saturate(1.3); transform: scale(1.12); z-index: 1; pointer-events: none;
+      filter: blur(50px) brightness(0.3) saturate(1.5); transform: scale(1.15); z-index: 1; pointer-events: none;
+      transition: filter 0.8s ease-out;
     }
     #mainCanvas {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       z-index: 2; pointer-events: none;
     }
+    
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
+    .custom-scrollbar:hover::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); }
+
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(35px);
+      -webkit-backdrop-filter: blur(35px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+    
+    .floating-comment-bubble {
+      position: absolute;
+      z-index: 35;
+      pointer-events: none;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 85, 0, 0.3);
+      border-radius: 9999px;
+      padding: 9px 20px;
+      color: #f8fafc;
+      font-weight: 300;
+      font-size: 13px;
+      box-shadow: 0 15px 35px -5px rgba(255, 85, 0, 0.15);
+      animation: danmakuFloat 8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      max-width: 280px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .text-stroke-outer-navy { -webkit-text-stroke: 28px #0B1B2F; paint-order: stroke fill; stroke-linejoin: round; stroke-linecap: round; }
     .text-stroke-outer-orange { -webkit-text-stroke: 28px #FF5500; paint-order: stroke fill; stroke-linejoin: round; stroke-linecap: round; }
     .text-stroke-mid-white { -webkit-text-stroke: 16px #FFFFFF; paint-order: stroke fill; stroke-linejoin: round; stroke-linecap: round; }
     @keyframes elasticAnticipation { 0%, 100% { transform: scale(1) translateY(0); } 50% { transform: scale(1.04) translateY(-6px); } }
     @keyframes doubtSway { 0%, 100% { transform: rotate(-8deg) translateY(0); } 35% { transform: rotate(6deg) translateY(-10px); } 70% { transform: rotate(-12deg) translateY(4px); } }
     @keyframes surpriseBounce { 0%, 100% { transform: translateY(0) rotate(4deg) scale(1); } 20% { transform: translateY(-24px) rotate(12deg) scale(1.1); } 38% { transform: translateY(3px) rotate(-2deg) scale(0.95); } 55% { transform: translateY(-10px) rotate(6deg) scale(1.04); } 72% { transform: translateY(0) rotate(3deg) scale(1); } }
-    @keyframes logoFloat { 0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05)); } 50% { transform: translateY(-8px) rotate(-1.5deg) scale(1.03); filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.1)); } }
     .animate-sticker-group { animation: elasticAnticipation 3s ease-in-out infinite; transform-origin: center center; }
     .animate-doubt { animation: doubtSway 2.7s ease-in-out infinite; transform-origin: center bottom; }
     .animate-surprise { animation: surpriseBounce 2.7s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; transform-origin: center bottom; }
-    .animate-logo-float { animation: logoFloat 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite; transform-origin: center center; }
   </style>
 
-  <!-- ANTI-DEBUGGING Y PROTECCIÓN AVANZADA -->
   <script>
-    // 1. Bloquear click derecho absoluto
     document.addEventListener('contextmenu', e => e.preventDefault());
-    
-    // 2. Bloquear atajos de teclado críticos (F12, Inspeccionar, Ver Código Fuente, Guardar, Imprimir)
     document.addEventListener('keydown', (e) => {
-      if (
-        e.keyCode === 123 || 
-        (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || 
-        (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 80)) 
-      ) {
-        e.preventDefault();
-        return false;
-      }
+      if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 80))) { e.preventDefault(); return false; }
     });
-
-    // 3. Trampa de Depuración (Congela la pestaña si intentan analizar el código)
-    setInterval(function() {
-      (function() { return false; }['constructor']('debugger')());
-    }, 150);
-
-    // 4. Limpieza y Spam en Consola para ocultar variables
-    setInterval(() => {
-      console.clear();
-      console.log("%cACCESO DENEGADO", "color: #FF5500; font-size: 40px; font-weight: bold; text-shadow: 2px 2px 0 #000; font-family: sans-serif;");
-      console.log("%cEl código fuente y los activos de esta página están protegidos.", "color: white; font-size: 16px; font-family: sans-serif;");
-    }, 1000);
+    setInterval(function() { (function() { return false; }['constructor']('debugger')()); }, 500);
   </script>
 </head>
-<body class="h-full w-full relative bg-slate-950 text-slate-100 select-none overflow-hidden">
+<body class="h-full w-full relative select-none overflow-hidden text-slate-100 font-sans" ondragstart="return false;" ondrop="return false;">
 
-  <!-- Cajas de Error Visibles -->
-  <div id="errorLog" class="fixed top-2 left-1/2 -translate-x-1/2 z-[100] text-xs text-white bg-red-600/90 px-4 py-2 rounded shadow-lg hidden pointer-events-none text-center"></div>
+  <!-- Capa de Comentarios Flotantes Danmaku en Tiempo Real -->
+  <div id="floatingCommentsLayer" class="absolute inset-0 z-[35] pointer-events-none overflow-hidden"></div>
 
-  <!-- Loader Visual -->
-  <div id="initialLoader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#FAF5EF] text-slate-900 pointer-events-auto">
+  <!-- Canvases -->
+  <canvas id="bgCanvas"></canvas>
+  <canvas id="mainCanvas"></canvas>
+
+  <div id="initialLoader" class="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-[#FAF5EF] text-slate-900 pointer-events-auto">
     <div class="relative flex flex-col items-center justify-center p-6 text-center max-w-sm">
-      <div id="stickerAssembly" class="relative w-80 h-72 sm:w-96 sm:h-80 flex items-center justify-center mb-2 animate-sticker-group opacity-0 transition-opacity duration-200">
-        <div class="relative z-10 flex items-center justify-center font-display font-black leading-none text-[150px] sm:text-[180px] tracking-tight">
+      <div id="stickerAssembly" class="relative w-80 h-72 sm:w-96 sm:h-80 flex items-center justify-center mb-2 animate-sticker-group font-dynapuff opacity-0 transition-opacity duration-200">
+        <div class="relative z-10 flex items-center justify-center font-black leading-none text-[150px] sm:text-[180px] tracking-tight">
           <div class="relative inline-block animate-doubt mx-[-10px] sm:mx-[-12px]">
-            <span class="absolute inset-0 text-[#0B1B2F] text-stroke-outer-navy select-none" aria-hidden="true">?</span>
-            <span class="absolute inset-0 text-white text-stroke-mid-white select-none" aria-hidden="true">?</span>
-            <span class="relative text-[#0B1B2F] select-none">?</span>
+            <span class="absolute inset-0 text-[#0B1B2F] text-stroke-outer-navy" aria-hidden="true">?</span>
+            <span class="absolute inset-0 text-white text-stroke-mid-white" aria-hidden="true">?</span>
+            <span class="relative text-[#0B1B2F]">?</span>
           </div>
           <div class="relative inline-block animate-surprise mx-[-10px] sm:mx-[-12px]">
-            <span class="absolute inset-0 text-[#FF5500] text-stroke-outer-orange select-none" aria-hidden="true">!</span>
-            <span class="absolute inset-0 text-white text-stroke-mid-white select-none" aria-hidden="true">!</span>
-            <span class="relative text-[#FF5500] select-none">!</span>
+            <span class="absolute inset-0 text-[#FF5500] text-stroke-outer-orange" aria-hidden="true">!</span>
+            <span class="absolute inset-0 text-white text-stroke-mid-white" aria-hidden="true">!</span>
+            <span class="relative text-[#FF5500]">!</span>
           </div>
         </div>
       </div>
-      <img src="https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg" alt="Logo" class="h-7 sm:h-9 w-auto max-w-[130px] sm:max-w-[160px] object-contain mt-6 opacity-90 animate-logo-float"/>
+      <img src="https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg" id="secureLogo" alt="Logo" class="h-8 object-contain mt-6 opacity-80" draggable="false"/>
     </div>
   </div>
 
-  <!-- Barra de Reacciones -->
-  <div id="reactionBar" class="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-1 sm:gap-1.5 p-1.5 px-2 sm:px-3 bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl opacity-0 translate-y-10 transition-all duration-700 ease-out pointer-events-auto">
-    <button onclick="handleReactionClick('😍')" class="group relative flex items-center gap-1 px-2 py-1 rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95 pointer-events-auto cursor-pointer">
-      <span class="text-lg sm:text-xl">😍</span>
-      <span id="count-😍" class="text-[10px] sm:text-xs font-bold text-slate-300 min-w-[12px] text-center">0</span>
-    </button>
-    <button onclick="handleReactionClick('😂')" class="group relative flex items-center gap-1 px-2 py-1 rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95 pointer-events-auto cursor-pointer">
-      <span class="text-lg sm:text-xl">😂</span>
-      <span id="count-😂" class="text-[10px] sm:text-xs font-bold text-slate-300 min-w-[12px] text-center">0</span>
-    </button>
-    <button onclick="handleReactionClick('🤡')" class="group relative flex items-center gap-1 px-2 py-1 rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95 pointer-events-auto cursor-pointer">
-      <span class="text-lg sm:text-xl">🤡</span>
-      <span id="count-🤡" class="text-[10px] sm:text-xs font-bold text-slate-300 min-w-[12px] text-center">0</span>
-    </button>
-    <button onclick="handleReactionClick('😱')" class="group relative flex items-center gap-1 px-2 py-1 rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95 pointer-events-auto cursor-pointer">
-      <span class="text-lg sm:text-xl">😱</span>
-      <span id="count-😱" class="text-[10px] sm:text-xs font-bold text-slate-300 min-w-[12px] text-center">0</span>
-    </button>
-    <button onclick="handleReactionClick('🤌')" class="group relative flex items-center gap-1 px-2 py-1 rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95 pointer-events-auto cursor-pointer">
-      <span class="text-lg sm:text-xl">🤌</span>
-      <span id="count-🤌" class="text-[10px] sm:text-xs font-bold text-slate-300 min-w-[12px] text-center">0</span>
-    </button>
-  </div>
+  <!-- HUD Inteligente -->
+  <div id="hud-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2.5 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 translate-y-16 pointer-events-none w-full max-w-sm sm:max-w-md px-4" onmouseenter="keepHudActive()" onmouseleave="startHudIdleTimer()">
+    
+    <!-- Ventana Flotante de Comentarios Transparente Glass -->
+    <div id="commentsPopup" class="w-full glass-panel rounded-[32px] flex flex-col overflow-hidden origin-bottom transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] scale-y-0 opacity-0 h-0 pointer-events-none">
+      
+      <!-- Cabecera de la Ventana -->
+      <div class="px-5 pt-4 pb-2 border-b border-white/10 flex items-center justify-between">
+        <span class="text-xs font-display tracking-wider uppercase text-orange-400">Comentarios</span>
+        <button onclick="toggleCommentsPopup()" class="text-white/50 hover:text-white p-1 rounded-full cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
 
-  <canvas id="bgCanvas"></canvas>
-  <canvas id="mainCanvas"></canvas>
+      <!-- Lista de Comentarios -->
+      <div id="commentsList" class="flex-1 p-4 overflow-y-auto space-y-3 flex flex-col custom-scrollbar min-h-[180px] max-h-[250px]">
+        <div class="flex-1 flex items-center justify-center text-center text-xs font-light text-white/40 animate-pulse">Sincronizando críticas...</div>
+      </div>
+
+      <!-- Input Minimalista Transparente Naranja -->
+      <form id="commentForm" onsubmit="handleCommentSubmit(event)" class="p-3 border-t border-white/10 bg-transparent">
+        <div class="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/15 rounded-2xl p-1.5 transition-all focus-within:border-orange-500/60 focus-within:bg-black/40">
+          <input type="text" id="commentText" placeholder="Escribe crítica constructiva..." required maxlength="150" autocomplete="off"
+            class="flex-1 bg-transparent text-xs sm:text-sm font-light text-slate-100 placeholder-white/30 px-3 py-1.5 outline-none">
+          <button type="submit" class="p-2.5 bg-orange-500 hover:bg-orange-400 text-white rounded-[14px] shadow-[0_0_15px_rgba(255,85,0,0.4)] transition-transform active:scale-90 flex items-center justify-center cursor-pointer pointer-events-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Dock Style Reaction Bar sin minimizar -->
+    <div id="reactionDock" class="flex items-center gap-1 p-2 glass-panel rounded-[28px] pointer-events-auto w-max mx-auto shadow-2xl relative transition-all duration-300">
+      
+      <script>
+        const reactionsData = [
+          { emoji: '😍', joke: 'Mínimo Común Múltiplo', id: 'love' },
+          { emoji: '😂', joke: 'Comic Sans en Título', id: 'laugh' },
+          { emoji: '🤡', joke: 'Kerning Caótico', id: 'clown' },
+          { emoji: '😱', joke: 'Píxel Muerto en la Cara', id: 'scream' },
+          { emoji: '🤌', joke: 'Sin Guía de Estilos', id: 'chef' }
+        ];
+
+        document.write(reactionsData.map(r => `
+          <button onclick="handleReactionClick('${r.emoji}', '${r.joke}')" id="btn-${r.emoji}" class="group relative flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-[18px] bg-transparent hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 active:scale-90 focus:outline-none overflow-visible cursor-pointer pointer-events-auto">
+            <span class="text-xl sm:text-2xl transition-transform duration-300 group-hover:scale-125 filter group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] relative z-10">${r.emoji}</span>
+            <div id="badge-${r.emoji}" class="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-0.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-[9px] font-display font-bold text-slate-200 shadow-md z-20">
+              <span id="count-${r.emoji}">0</span>
+            </div>
+          </button>
+        `).join(''));
+      </script>
+
+      <!-- Divisor -->
+      <div class="w-[1px] h-7 bg-white/20 mx-1 rounded-full"></div>
+
+      <!-- Botón de Comentarios -->
+      <button onclick="toggleCommentsPopup()" id="toggleChatBtn" class="group relative flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-[18px] bg-orange-500/20 hover:bg-orange-500/40 border border-orange-400/30 text-orange-200 transition-all duration-300 hover:-translate-y-1 active:scale-90 focus:outline-none cursor-pointer pointer-events-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition-transform duration-300 group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+        </svg>
+        <div id="badge-chat" class="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-0.5 bg-orange-500 text-white rounded-full flex items-center justify-center text-[9px] font-display font-bold shadow-md border border-orange-300/50">
+          <span id="commentCountBadge">0</span>
+        </div>
+      </button>
+    </div>
+  </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc, onSnapshot, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, setDoc, onSnapshot, collection, addDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     const VALID_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg', '.bmp', '.avif'];
 
     const state = {
-      owner: atob('ZGctaXN0Zy0zYS0yMDI2'), // dg-istg-3a-2026
-      repo: atob('ZGctaXN0Zy0zYS0yMDI2LmdpdGh1Yi5pbw=='), // dg-istg-3a-2026.github.io
-      branch: atob('TW9jaGlsYURlQ2FsZWI='), // MochilaDeCaleb
+      owner: 'dg-istg-3a-2026',
+      repo: 'dg-istg-3a-2026.github.io',
+      branch: 'MochilaDeCaleb',
       fileList: [],
+      currentImagePath: '',
       errorCount: 0
     };
+
+    let userCurrentReaction = null;
+    let currentImageComments = [];  
+    let commentFloatingInterval = null;
+    let isInitialCommentsStaggeredDone = false;
 
     const bgCanvas = document.getElementById('bgCanvas');
     const mainCanvas = document.getElementById('mainCanvas');
     const bgCtx = bgCanvas.getContext('2d');
     const mainCtx = mainCanvas.getContext('2d');
-    const initialLoader = document.getElementById('initialLoader');
-    const reactionBar = document.getElementById('reactionBar');
-    const errorLog = document.getElementById('errorLog');
+    const hudContainer = document.getElementById('hud-container');
+    const floatingLayer = document.getElementById('floatingCommentsLayer');
 
-    let db = null; 
-    let auth = null;
+    let db = null; let auth = null;
 
-    // Configuración exacta de TU Firebase
     const MY_FIREBASE_CONFIG = {
       apiKey: "AIzaSyDYbe0MMuPvpdJiYlvtcDec-MybKqCad9k",
       authDomain: "web-feria-istg-2026.firebaseapp.com",
@@ -175,118 +265,352 @@
       appId: "1:434583648721:web:a31a4ec9e99dc7faf8c8f0"
     };
 
-    // Función para mostrar errores en pantalla (ya que no hay consola)
-    function showError(msg) {
-      if(errorLog) {
-        errorLog.textContent = msg;
-        errorLog.classList.remove('hidden');
-        setTimeout(() => { errorLog.classList.add('hidden'); }, 6000);
+    // Lógica HUD Global
+    let hudActivityTimer = null;
+    let isChatOpen = false;
+    let hudHovered = false;
+    window.isGalleryReady = false;
+
+    window.keepHudActive = function() {
+      hudHovered = true;
+      resetHudActivity();
+    };
+
+    window.startHudIdleTimer = function() {
+      hudHovered = false;
+      resetHudActivity();
+    };
+
+    window.resetHudActivity = function() {
+      if (!window.isGalleryReady) return;
+      
+      hudContainer.classList.remove('opacity-25', 'opacity-0', 'translate-y-16');
+      hudContainer.classList.add('opacity-100', 'translate-y-0');
+      hudContainer.classList.remove('pointer-events-none');
+      
+      clearTimeout(hudActivityTimer);
+      
+      if (!isChatOpen && !hudHovered) {
+        hudActivityTimer = setTimeout(() => {
+          if (!isChatOpen && !hudHovered) {
+            hudContainer.classList.add('opacity-25');
+          }
+        }, 3500);
       }
-    }
+    };
+
+    window.addEventListener('mousemove', () => {
+      if(window.isGalleryReady) window.resetHudActivity();
+    });
+    window.addEventListener('touchstart', () => {
+      if(window.isGalleryReady) window.resetHudActivity();
+    });
 
     window.onload = async function() {
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-      
-      if (document.fonts) {
-        document.fonts.ready.then(() => {
+      resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+      if (document.fonts) document.fonts.ready.then(() => {
           const sticker = document.getElementById('stickerAssembly');
           if (sticker) sticker.classList.remove('opacity-0');
-        });
-      }
-
+      });
       await initFirebaseAndApp();
     };
 
     async function initFirebaseAndApp() {
       try {
         const app = initializeApp(MY_FIREBASE_CONFIG);
-        auth = getAuth(app); 
-        db = getFirestore(app);
-        
+        auth = getAuth(app); db = getFirestore(app);
         await signInAnonymously(auth); 
-        initReactionsListener();
+        await initGallery();
       } catch (e) {
-        if(e.code === 'auth/admin-restricted-operation' || e.code === 'auth/operation-not-allowed') {
-           showError("Activa Autenticación Anónima en Firebase");
-        } else {
-           showError("Error Firebase: " + e.message);
-        }
+        await initGallery();
       }
-      await initGallery();
     }
 
-    function initReactionsListener() {
+    function getImageDocId(path) { return btoa(path).replace(/[/+=]/g, '_'); }
+
+    let activeReactionsUnsubscribe = null;
+    let activeCommentsUnsubscribe = null;
+
+    async function setupRealtimeListeners(imagePath) {
       if (!db || !auth.currentUser) return;
-      const reactionsDocRef = doc(db, 'Feria2026', 'Reacciones');
-      onSnapshot(reactionsDocRef, (snapshot) => {
-        if (snapshot.exists()) {
-          const data = snapshot.data();
-          ['😍', '😂', '🤡', '😱', '🤌'].forEach(emoji => {
-            const countEl = document.getElementById(`count-${emoji}`);
-            if (countEl) countEl.textContent = data[emoji] || 0;
+      const imgDocId = getImageDocId(imagePath);
+
+      if (activeReactionsUnsubscribe) activeReactionsUnsubscribe();
+      if (activeCommentsUnsubscribe) activeCommentsUnsubscribe();
+      if (commentFloatingInterval) clearInterval(commentFloatingInterval);
+      
+      userCurrentReaction = null;
+      currentImageComments = [];
+      isInitialCommentsStaggeredDone = false;
+      updateReactionButtonsUI();
+
+      try {
+        const userVoteDoc = doc(db, 'Feria2026_Images', imgDocId, 'Voters', auth.currentUser.uid);
+        const voteSnap = await getDoc(userVoteDoc);
+        if (voteSnap.exists()) {
+          userCurrentReaction = voteSnap.data().emoji;
+          updateReactionButtonsUI();
+        }
+      } catch (e) {}
+
+      const reactionsRef = doc(db, 'Feria2026_Images', imgDocId);
+      activeReactionsUnsubscribe = onSnapshot(reactionsRef, (snapshot) => {
+        const data = snapshot.exists() ? snapshot.data() : {};
+        ['😍', '😂', '🤡', '😱', '🤌'].forEach(emoji => {
+          const countEl = document.getElementById(`count-${emoji}`);
+          const badgeEl = document.getElementById(`badge-${emoji}`);
+          if (countEl && badgeEl) {
+            const oldVal = countEl.textContent;
+            const newVal = (data[emoji] || 0).toString();
+            if (oldVal !== newVal) {
+              countEl.textContent = newVal;
+              badgeEl.classList.remove('animate-pop');
+              void badgeEl.offsetWidth; 
+              badgeEl.classList.add('animate-pop');
+            }
+          }
+        });
+      }, (err) => {});
+
+      const commentsColRef = collection(db, 'Feria2026_Images', imgDocId, 'Comentarios');
+      const q = query(commentsColRef, orderBy('timestamp', 'asc'));
+      
+      let isFirstSnapshot = true;
+      activeCommentsUnsubscribe = onSnapshot(q, (snapshot) => {
+        const commentsList = document.getElementById('commentsList');
+        const commentCountBadge = document.getElementById('commentCountBadge');
+        if (!commentsList) return;
+
+        if (commentCountBadge) commentCountBadge.textContent = snapshot.docs.length.toString();
+        currentImageComments = snapshot.docs.map(d => d.data().text);
+
+        if (snapshot.docs.length === 0) {
+          commentsList.innerHTML = '<div class="h-full flex flex-col items-center justify-center text-white/40 text-xs font-light py-6"><span class="text-2xl mb-1 opacity-50">✍️</span>Sé el primero en criticar.</div>';
+          isFirstSnapshot = false;
+          return;
+        }
+
+        if (isFirstSnapshot) {
+          commentsList.innerHTML = '';
+          snapshot.docs.forEach((docSnap, index) => {
+            const c = docSnap.data();
+            appendCommentToList(commentsList, c);
+            setTimeout(() => { spawnMovingDanmaku(c.text); }, index * 1000);
+          });
+          isInitialCommentsStaggeredDone = true;
+        } else {
+          snapshot.docChanges().forEach((change) => {
+            if (change.type === 'added' && isInitialCommentsStaggeredDone) {
+              const c = change.doc.data();
+              if (commentsList.innerHTML.includes('Sé el primero')) commentsList.innerHTML = '';
+              appendCommentToList(commentsList, c);
+              spawnMovingDanmaku(c.text);
+            }
           });
         }
-      }, (err) => {
-         if (err.code === 'permission-denied') {
-            showError("Faltan permisos en Firestore (Cambia Rules a true)");
-         }
+        isFirstSnapshot = false;
+      }, (err) => {});
+
+      commentFloatingInterval = setInterval(() => {
+        if (currentImageComments.length > 0) {
+          const randomComment = currentImageComments[Math.floor(Math.random() * currentImageComments.length)];
+          spawnMovingDanmaku(randomComment);
+        }
+      }, 6000);
+    }
+
+    function appendCommentToList(container, c) {
+      const item = document.createElement('div');
+      item.className = 'bg-white/5 border border-white/10 rounded-2xl p-3 flex flex-col gap-1 animate-slide-up-fade shadow-sm';
+      
+      const text = document.createElement('p');
+      text.className = 'text-xs sm:text-sm text-slate-100 font-light leading-snug break-words';
+      text.textContent = c.text || '';
+
+      const time = document.createElement('span');
+      time.className = 'text-[9px] font-display text-orange-300/70 self-end uppercase tracking-wider';
+      time.textContent = (c.timestamp && c.timestamp.toDate) 
+        ? new Date(c.timestamp.toDate()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
+        : 'AHORA';
+
+      item.appendChild(text); item.appendChild(time);
+      container.appendChild(item);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function updateReactionButtonsUI() {
+      ['😍', '😂', '🤡', '😱', '🤌'].forEach(emoji => {
+        const btn = document.getElementById(`btn-${emoji}`);
+        if (!btn) return;
+        if (userCurrentReaction === emoji) {
+          btn.classList.add('bg-orange-500/30', 'border', 'border-orange-400/60', 'scale-105');
+        } else {
+          btn.classList.remove('bg-orange-500/30', 'border', 'border-orange-400/60', 'scale-105');
+        }
       });
     }
 
-    window.handleReactionClick = async function(emoji) {
-      const countEl = document.getElementById(`count-${emoji}`);
-      if (countEl) {
-        countEl.textContent = parseInt(countEl.textContent || '0') + 1;
+    function spawnMovingDanmaku(text) {
+      if (!floatingLayer) return;
+      const bubble = document.createElement('div');
+      bubble.className = 'floating-comment-bubble';
+      bubble.textContent = text;
+      
+      const startX = 10 + Math.random() * 65; 
+      const startY = 68 + Math.random() * 20; 
+      
+      bubble.style.left = `${startX}%`;
+      bubble.style.top = `${startY}%`;
+      
+      floatingLayer.appendChild(bubble);
+      setTimeout(() => { if (bubble.parentNode) bubble.remove(); }, 8000);
+    }
+
+    window.handleReactionClick = async function(emoji, designJokeName) {
+      window.resetHudActivity();
+      const btn = document.getElementById(`btn-${emoji}`);
+      const particleCount = 6 + Math.floor(Math.random() * 5);
+      const rect = btn.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top;
+
+      for (let i = 0; i < particleCount; i++) {
+        const p = document.createElement('div');
+        p.textContent = emoji;
+        p.className = 'fixed z-[70] pointer-events-none select-none drop-shadow-md';
+        p.style.fontSize = `${16 + Math.random() * 12}px`;
+        p.style.left = `${centerX - 10}px`; 
+        p.style.top = `${centerY - 10}px`;
+        document.body.appendChild(p);
+
+        const angle = -Math.PI / 2 + (Math.random() * 1.2 - 0.6);
+        const velocity = 40 + Math.random() * 90;
+        const endX = centerX + Math.cos(angle) * velocity;
+        const endY = centerY - (120 + Math.random() * 100); 
+
+        p.animate([
+          { transform: 'translate(0, 0) scale(0.4) rotate(0deg)', opacity: 1 },
+          { transform: `translate(${endX - centerX}px, ${endY - centerY}px) scale(1.3) rotate(${Math.random() * 90 - 45}deg)`, opacity: 0.85, offset: 0.6 },
+          { transform: `translate(${(endX - centerX) * 1.3}px, ${(endY - centerY) - 60}px) scale(0.7) rotate(${Math.random() * 180}deg)`, opacity: 0 }
+        ], { duration: 900 + Math.random() * 400, easing: 'ease-out' }).onfinish = () => p.remove();
       }
 
-      const el = document.createElement('div');
-      el.textContent = emoji;
-      el.className = 'fixed text-3xl sm:text-4xl z-50 pointer-events-none drop-shadow-lg';
-      const startX = window.innerWidth / 2 + (Math.random() * 80 - 40);
-      const startY = window.innerHeight - 80;
-      el.style.left = `${startX}px`; el.style.top = `${startY}px`;
-      el.style.transition = 'all 1.2s cubic-bezier(0.25, 1, 0.5, 1)';
-      el.style.transform = 'translate(-50%, -50%) scale(0.5)';
-      el.style.opacity = '1';
-      document.body.appendChild(el);
+      btn.classList.add('scale-90');
+      setTimeout(() => btn.classList.remove('scale-90'), 120);
 
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          el.style.left = `${startX + (Math.random() * 100 - 50)}px`;
-          el.style.top = `${startY - 200 - Math.random() * 100}px`;
-          el.style.transform = `translate(-50%, -50%) scale(1.5) rotate(${Math.random() * 40 - 20}deg)`;
-          el.style.opacity = '0';
-        });
+      // Efecto Blur Rápido
+      if (bgCanvas) {
+        bgCanvas.style.filter = 'blur(10px) brightness(0.7) saturate(1.2)';
+        setTimeout(() => { bgCanvas.style.filter = 'blur(50px) brightness(0.3) saturate(1.5)'; }, 1000);
+      }
+
+      if (!db || !auth || !auth.currentUser || !state.currentImagePath) return;
+      const imgDocId = getImageDocId(state.currentImagePath);
+      const reactionsRef = doc(db, 'Feria2026_Images', imgDocId);
+      const userVoteDoc = doc(db, 'Feria2026_Images', imgDocId, 'Voters', auth.currentUser.uid);
+
+      let payload = {};
+      const previousReaction = userCurrentReaction;
+
+      if (previousReaction === emoji) {
+        showJokeBadgeAnimation(emoji, designJokeName);
+        return;
+      }
+
+      if (previousReaction) {
+        payload[previousReaction] = window.firebaseIncrement ? window.firebaseIncrement(-1) : -1;
+        payload[emoji] = window.firebaseIncrement ? window.firebaseIncrement(1) : 1;
+      } else {
+        payload[emoji] = window.firebaseIncrement ? window.firebaseIncrement(1) : 1;
+      }
+
+      userCurrentReaction = emoji;
+      updateReactionButtonsUI();
+      showJokeBadgeAnimation(emoji, designJokeName);
+
+      try {
+        await setDoc(reactionsRef, payload, { merge: true });
+        await setDoc(userVoteDoc, { emoji: emoji, timestamp: serverTimestamp() });
+      } catch (err) {}
+    };
+
+    function showJokeBadgeAnimation(emoji, jokeName) {
+      const jokeBadge = document.createElement('div');
+      jokeBadge.className = 'fixed z-[80] pointer-events-none flex flex-col items-center justify-center w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2';
+      jokeBadge.innerHTML = `
+        <span class="text-[80px] sm:text-[110px] filter drop-shadow-[0_0_40px_rgba(255,85,0,0.8)] mb-[-20px] z-10 animate-bounce">${emoji}</span>
+        <span class="font-display bg-[#030712]/90 backdrop-blur-2xl border border-orange-500/40 text-white px-6 py-3 rounded-[24px] text-xl sm:text-2xl font-black tracking-wider uppercase shadow-[0_0_30px_rgba(255,85,0,0.4)] transform -rotate-1">${jokeName}</span>
+      `;
+      document.body.appendChild(jokeBadge);
+
+      jokeBadge.animate([
+        { transform: 'translate(-50%, -30%) scale(0.6)', opacity: 0 },
+        { transform: 'translate(-50%, -50%) scale(1.04) rotate(1deg)', opacity: 1, offset: 0.15 },
+        { transform: 'translate(-50%, -50%) scale(1) rotate(0deg)', opacity: 1, offset: 0.25 },
+        { transform: 'translate(-50%, -50%) scale(1) rotate(0deg)', opacity: 1, offset: 0.75 },
+        { transform: 'translate(-50%, -60%) scale(0.9)', opacity: 0 }
+      ], { duration: 1800, easing: 'cubic-bezier(0.25, 1, 0.5, 1)' }).onfinish = () => jokeBadge.remove();
+    }
+
+    window.firebaseIncrement = (val) => val; 
+    import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(mod => { window.firebaseIncrement = mod.increment; });
+
+    window.toggleCommentsPopup = function() {
+      window.resetHudActivity();
+      const popup = document.getElementById('commentsPopup');
+      const toggleBtn = document.getElementById('toggleChatBtn');
+      if (!popup || !toggleBtn) return;
+
+      isChatOpen = !isChatOpen;
+
+      if (isChatOpen) {
+        popup.classList.remove('pointer-events-none', 'scale-y-0', 'opacity-0', 'h-0');
+        popup.classList.add('scale-y-100', 'opacity-100', 'h-[320px]');
+        toggleBtn.classList.add('bg-orange-500/50', 'border-orange-400');
+        setTimeout(() => { document.getElementById('commentText')?.focus(); }, 300);
+      } else {
+        popup.classList.add('scale-y-0', 'opacity-0', 'h-0', 'pointer-events-none');
+        popup.classList.remove('scale-y-100', 'opacity-100', 'h-[320px]');
+        toggleBtn.classList.remove('bg-orange-500/50', 'border-orange-400');
+        window.resetHudActivity();
+      }
+    };
+
+    function filterProfanity(text) {
+      const badWords = ['mierda', 'puta', 'puto', 'verga', 'pene', 'culo', 'estupido', 'estúpido', 'idiota', 'marica', 'zorra'];
+      let cleanText = text;
+      badWords.forEach(word => {
+        const regex = new RegExp(`\\b${word}\\b`, 'gi');
+        cleanText = cleanText.replace(regex, '🤬');
       });
-      setTimeout(() => el.remove(), 1200);
+      return cleanText;
+    }
+
+    window.handleCommentSubmit = async function(e) {
+      e.preventDefault();
+      const textInput = document.getElementById('commentText');
+      const rawText = textInput?.value.trim();
+      if (!rawText || !state.currentImagePath) return;
+
+      const cleanText = filterProfanity(rawText);
+      textInput.value = '';
 
       if (db && auth && auth.currentUser) {
         try {
-          const reactionsDocRef = doc(db, 'Feria2026', 'Reacciones');
-          await setDoc(reactionsDocRef, { [emoji]: increment(1) }, { merge: true });
-        } catch (err) {
-           if (err.code === 'permission-denied') {
-              showError("Faltan permisos en Firestore (Cambia Rules a true)");
-           }
-        }
+          const imgDocId = getImageDocId(state.currentImagePath);
+          const commentsColRef = collection(db, 'Feria2026_Images', imgDocId, 'Comentarios');
+          await addDoc(commentsColRef, { text: cleanText, timestamp: serverTimestamp(), uid: auth.currentUser.uid });
+        } catch (err) {}
       }
     };
 
     async function fetchAllGitHubImages(owner, repo, branch) {
       let collectedFiles = [];
       try {
-        const treeUrl = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`;
-        const response = await fetch(treeUrl);
+        const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`);
         if (response.ok) {
           const data = await response.json();
-          if (data.tree && Array.isArray(data.tree)) {
-            collectedFiles = data.tree.filter(item => {
-              if (item.type !== 'blob') return false;
-              const ext = '.' + item.path.split('.').pop().toLowerCase();
-              return VALID_EXTENSIONS.includes(ext);
-            });
-          }
+          if (data.tree) collectedFiles = data.tree.filter(i => i.type === 'blob' && VALID_EXTENSIONS.includes('.' + i.path.split('.').pop().toLowerCase()));
         }
       } catch (e) {}
       return collectedFiles;
@@ -294,77 +618,78 @@
 
     async function initGallery() {
       state.fileList = await fetchAllGitHubImages(state.owner, state.repo, state.branch);
-      if (state.fileList.length > 0) { 
-        await assignAndLoadUniqueImage(); 
-      } else { 
-        showError("No se encontraron imágenes en el repositorio de GitHub.");
-        dismissInitialLoader(); 
-      }
+      if (state.fileList.length > 0) { await assignAndLoadUniqueImage(); } 
+      else { dismissInitialLoader(); }
     }
 
     async function assignAndLoadUniqueImage() {
-      let assignedIndex = 0;
+      let index = Math.floor(Math.random() * state.fileList.length);
       if (db && auth && auth.currentUser) {
         try {
           const counterRef = doc(db, 'Feria2026', 'Visitantes');
           const docSnap = await getDoc(counterRef);
-          let currentCount = 0;
-          if (docSnap.exists()) { currentCount = docSnap.data().count || 0; }
-          assignedIndex = currentCount % state.fileList.length;
+          let currentCount = docSnap.exists() ? docSnap.data().count || 0 : 0;
+          index = currentCount % state.fileList.length;
           await setDoc(counterRef, { count: currentCount + 1 }, { merge: true });
-        } catch (e) { 
-          assignedIndex = Math.floor(Math.random() * state.fileList.length); 
-        }
-      } else {
-        assignedIndex = Math.floor(Math.random() * state.fileList.length);
+        } catch (e) { }
       }
-      displayImageByIndex(assignedIndex);
+      displayImageByIndex(index);
     }
 
     function displayImageByIndex(index) {
       if (index < 0 || index >= state.fileList.length) return;
       const file = state.fileList[index];
-      const img = new Image();
-      img.crossOrigin = "Anonymous";
+      state.currentImagePath = file.path;
 
-      img.onload = () => {
-        state.errorCount = 0;
-        renderImage(img);
-        dismissInitialLoader();
-      };
+      setupRealtimeListeners(file.path);
+
+      const rawUrl = `https://raw.githubusercontent.com/${state.owner}/${state.repo}/${state.branch}/${file.path.split('/').map(encodeURIComponent).join('/')}`;
       
-      img.onerror = () => {
-        state.errorCount++;
-        if (state.errorCount < 3) { 
-          displayImageByIndex((index + 1) % state.fileList.length); 
-        } else { 
-          dismissInitialLoader(); 
-        }
-      };
-
-      const encodedPath = file.path.split('/').map(encodeURIComponent).join('/');
-      img.src = `https://raw.githubusercontent.com/${state.owner}/${state.repo}/${state.branch}/${encodedPath}`;
+      fetch(rawUrl)
+        .then(res => res.blob())
+        .then(blob => {
+          const objectURL = URL.createObjectURL(blob);
+          const img = new Image();
+          img.onload = () => {
+            state.errorCount = 0;
+            renderImage(img);
+            URL.revokeObjectURL(objectURL); // Nivel 1 Seguridad: Se destruye enseguida
+            dismissInitialLoader();
+          };
+          img.onerror = () => {
+            state.errorCount++;
+            if (state.errorCount < 3) displayImageByIndex((index + 1) % state.fileList.length);
+            else dismissInitialLoader(); 
+          };
+          img.src = objectURL;
+        })
+        .catch(() => dismissInitialLoader());
     }
 
     function resizeCanvas() {
-      const width = window.innerWidth; const height = window.innerHeight; const dpr = window.devicePixelRatio || 1;
-      mainCanvas.width = width * dpr; mainCanvas.height = height * dpr;
-      bgCanvas.width = width * dpr; bgCanvas.height = height * dpr;
+      const w = window.innerWidth; const h = window.innerHeight; const dpr = window.devicePixelRatio || 1;
+      mainCanvas.width = w * dpr; mainCanvas.height = h * dpr;
+      bgCanvas.width = w * dpr; bgCanvas.height = h * dpr;
       mainCtx.scale(dpr, dpr); bgCtx.scale(dpr, dpr);
+      
+      // Si la imagen ya cargó, se redibuja al cambiar de tamaño para no perderla
+      if(state.currentImagePath && isGalleryReady) {
+          assignAndLoadUniqueImage(); 
+      }
     }
 
     function renderImage(img) {
       const w = window.innerWidth; const h = window.innerHeight;
       mainCtx.clearRect(0, 0, w, h); bgCtx.clearRect(0, 0, w, h);
-      const imgW = img.naturalWidth || img.width; const imgH = img.naturalHeight || img.height;
-      const imgRatio = imgW / imgH; const screenRatio = w / h;
+      const imgRatio = (img.naturalWidth || img.width) / (img.naturalHeight || img.height); 
+      const screenRatio = w / h;
 
-      let bgDrawW, bgDrawH;
-      if (screenRatio > imgRatio) { bgDrawW = w; bgDrawH = w / imgRatio; } else { bgDrawH = h; bgDrawW = h * imgRatio; }
-      bgCtx.drawImage(img, (w - bgDrawW) / 2, (h - bgDrawH) / 2, bgDrawW, bgDrawH);
+      let bgW = screenRatio > imgRatio ? w : h * imgRatio;
+      let bgH = screenRatio > imgRatio ? w / imgRatio : h;
+      bgCtx.drawImage(img, (w - bgW) / 2, (h - bgH) / 2, bgW, bgH);
 
-      let drawW, drawH;
-      if (imgRatio > screenRatio) { drawW = w; drawH = w / imgRatio; } else { drawH = h; drawW = h * imgRatio; }
+      let drawW = imgRatio > screenRatio ? w : h * imgRatio;
+      let drawH = imgRatio > screenRatio ? w / imgRatio : h;
       mainCtx.save();
       mainCtx.translate(w / 2, h / 2); mainCtx.imageSmoothingEnabled = true; mainCtx.imageSmoothingQuality = 'high';
       mainCtx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
@@ -375,26 +700,30 @@
     let isLoaderDismissing = false;
     
     function dismissInitialLoader() {
+      const initialLoader = document.getElementById('initialLoader');
       if (!initialLoader || isLoaderDismissing) return;
       isLoaderDismissing = true;
-      const elapsedTime = Date.now() - loaderStartTime;
-      const remainingTime = Math.max(0, 2500 - elapsedTime);
+      const remainingTime = Math.max(0, 2000 - (Date.now() - loaderStartTime));
 
       setTimeout(() => {
         initialLoader.classList.add('pointer-events-none');
-        let startTimestamp = null;
+        let start = null;
         function step(timestamp) {
-          if (!startTimestamp) startTimestamp = timestamp;
-          const elapsed = timestamp - startTimestamp;
-          let t = Math.min(elapsed / 1200, 1);
-          let easeT = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-          const circleRadius = easeT * 150; 
-          initialLoader.style.mask = `radial-gradient(circle, transparent ${circleRadius}%, black ${circleRadius + 1}%)`;
-          initialLoader.style.WebkitMask = `radial-gradient(circle, transparent ${circleRadius}%, black ${circleRadius + 1}%)`;
+          if (!start) start = timestamp;
+          const t = Math.min((timestamp - start) / 1000, 1);
+          const easeT = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+          const radius = easeT * 150; 
+          initialLoader.style.mask = `radial-gradient(circle, transparent ${radius}%, black ${radius + 1}%)`;
+          initialLoader.style.WebkitMask = `radial-gradient(circle, transparent ${radius}%, black ${radius + 1}%)`;
+          
           if (t < 1) requestAnimationFrame(step);
           else {
             initialLoader.style.display = 'none';
-            if (reactionBar) reactionBar.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+            window.isGalleryReady = true;
+            if (hudContainer) {
+              hudContainer.classList.remove('opacity-0', 'translate-y-16', 'pointer-events-none');
+              window.resetHudActivity();
+            }
           }
         }
         requestAnimationFrame(step);
