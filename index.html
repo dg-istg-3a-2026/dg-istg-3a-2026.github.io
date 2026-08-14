@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="es" class="h-full bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white">
 <head>
-  <!-- Google tag (gtag.js) -->
+   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y6LMRRHWH"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  gtag('config', 'G-0Y6LMRRHWH');
+  gtag('config', 'G-0Y6LMRRHWH');
 </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -170,10 +170,27 @@
       await initFirebaseAndApp();
     };
 
+    // AÑADE TU CONFIGURACIÓN DE FIREBASE AQUÍ PARA QUE FUNCIONE EN GITHUB PAGES
+    // Si lo dejas en null, las reacciones subirán visualmente pero no se guardarán para otros usuarios.
+    const MY_FIREBASE_CONFIG = {
+      apiKey: "AIzaSyDYbe0MMuPvpdJiYlvtcDec-MybKqCad9k",
+      authDomain: "web-feria-istg-2026.firebaseapp.com",
+      databaseURL: "https://web-feria-istg-2026-default-rtdb.firebaseio.com",
+      projectId: "web-feria-istg-2026",
+      storageBucket: "web-feria-istg-2026.firebasestorage.app",
+      messagingSenderId: "434583648721",
+      appId: "1:434583648721:web:a31a4ec9e99dc7faf8c8f0",
+      measurementId: "G-PKQQRYMBCB"
+    };
+
     async function initFirebaseAndApp() {
       try {
         appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const envConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        
+        // Usa la configuración del entorno (aquí en el editor) o tu configuración personal (en GitHub)
+        const firebaseConfig = envConfig || MY_FIREBASE_CONFIG;
+        
         if (firebaseConfig) {
           const app = initializeApp(firebaseConfig);
           auth = getAuth(app); db = getFirestore(app);
@@ -181,7 +198,7 @@
           else { await signInAnonymously(auth); }
           initReactionsListener();
         }
-      } catch (e) { /* Silenced */ }
+      } catch (e) { console.warn("Firebase inactivo. Modo local."); }
       await initGallery();
     }
 
@@ -200,6 +217,13 @@
     }
 
     window.handleReactionClick = async function(emoji) {
+      // 1. Actualización visual inmediata (Optimistic Update)
+      const countEl = document.getElementById(`count-${emoji}`);
+      if (countEl) {
+        countEl.textContent = parseInt(countEl.textContent || '0') + 1;
+      }
+
+      // 2. Efecto flotante
       const el = document.createElement('div');
       el.textContent = emoji;
       el.className = 'fixed text-3xl sm:text-4xl z-50 pointer-events-none drop-shadow-lg';
@@ -221,11 +245,14 @@
       });
       setTimeout(() => el.remove(), 1200);
 
+      // 3. Guardado en Base de Datos (Si está configurada)
       if (db && auth && auth.currentUser) {
         try {
           const reactionsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'reactions', 'global_counts');
           await setDoc(reactionsDocRef, { [emoji]: increment(1) }, { merge: true });
-        } catch (err) {}
+        } catch (err) {
+          console.error("Error al guardar en Firebase:", err);
+        }
       }
     };
 
