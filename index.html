@@ -1,1 +1,341 @@
-hola curso
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>?</title>
+  
+  <!-- Favicon Dinámico en SVG recreando el "?!" -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'><style>@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@900'); text{font-family:'DynaPuff',system-ui,sans-serif;font-weight:900;font-size:80px;dominant-baseline:central;} .bg-q{stroke:%230B1B2F;stroke-width:24px;stroke-linejoin:round;} .bg-e{stroke:%23FF5500;stroke-width:24px;stroke-linejoin:round;} .md{stroke:white;stroke-width:12px;stroke-linejoin:round;} .f-q{fill:%230B1B2F;} .f-e{fill:%23FF5500;}</style><text x='15' y='55' class='bg-q'>?</text><text x='15' y='55' class='md'>?</text><text x='15' y='55' class='f-q'>?</text><text x='70' y='55' class='bg-e'>!</text><text x='70' y='55' class='md'>!</text><text x='70' y='55' class='f-e'>!</text></svg>">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@700;900&family=Inter:wght@400;600;700&display=block" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], display: ['DynaPuff', 'cursive', 'sans-serif'] } } }
+    }
+  </script>
+
+  <style>
+    body, html {
+      margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
+      background-color: #030712; user-select: none; -webkit-user-select: none; touch-action: none;
+      font-family: 'Inter', sans-serif;
+    }
+    #bgCanvas {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      filter: blur(40px) brightness(0.4) saturate(1.3); transform: scale(1.12); z-index: 1; pointer-events: none;
+    }
+    #mainCanvas {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 2; pointer-events: none;
+    }
+    .text-stroke-outer-navy { -webkit-text-stroke: 28px #0B1B2F; paint-order: stroke fill; stroke-linejoin: round; stroke-linecap: round; }
+    .text-stroke-outer-orange { -webkit-text-stroke: 28px #FF5500; paint-order: stroke fill; stroke-linejoin: round; stroke-linecap: round; }
+    .text-stroke-mid-white { -webkit-text-stroke: 16px #FFFFFF; paint-order: stroke fill; stroke-linejoin: round; stroke-linecap: round; }
+    @keyframes elasticAnticipation { 0%, 100% { transform: scale(1) translateY(0); } 50% { transform: scale(1.04) translateY(-6px); } }
+    @keyframes doubtSway { 0%, 100% { transform: rotate(-8deg) translateY(0); } 35% { transform: rotate(6deg) translateY(-10px); } 70% { transform: rotate(-12deg) translateY(4px); } }
+    @keyframes surpriseBounce { 0%, 100% { transform: translateY(0) rotate(4deg) scale(1); } 20% { transform: translateY(-24px) rotate(12deg) scale(1.1); } 38% { transform: translateY(3px) rotate(-2deg) scale(0.95); } 55% { transform: translateY(-10px) rotate(6deg) scale(1.04); } 72% { transform: translateY(0) rotate(3deg) scale(1); } }
+    @keyframes logoFloat { 0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05)); } 50% { transform: translateY(-8px) rotate(-1.5deg) scale(1.03); filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.1)); } }
+    .animate-sticker-group { animation: elasticAnticipation 3s ease-in-out infinite; transform-origin: center center; }
+    .animate-doubt { animation: doubtSway 2.7s ease-in-out infinite; transform-origin: center bottom; }
+    .animate-surprise { animation: surpriseBounce 2.7s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; transform-origin: center bottom; }
+    .animate-logo-float { animation: logoFloat 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite; transform-origin: center center; }
+  </style>
+
+  <!-- ANTI-DEBUGGING Y PROTECCIÓN -->
+  <script>
+    // Bloquear click derecho y atajos (F12, Ctrl+U, Ctrl+S, Ctrl+P, etc.)
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', (e) => {
+      if (
+        e.keyCode === 123 || // F12
+        (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || // I, J, C
+        (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 80)) // U, S, P
+      ) {
+        e.preventDefault();
+        return false;
+      }
+    });
+
+    // Trampa de Depuración (Congela el navegador si abren DevTools)
+    setInterval(function() {
+      (function() { return false; }['constructor']('debugger')());
+    }, 50);
+
+    // Limpieza agresiva de consola
+    setInterval(() => {
+      console.clear();
+      console.log("%cACCESO DENEGADO", "color: red; font-size: 40px; font-weight: bold; text-shadow: 2px 2px 0 #000;");
+      console.log("%cEl código fuente y los activos están protegidos.", "color: white; font-size: 16px;");
+    }, 1000);
+  </script>
+</head>
+<body class="h-full w-full relative bg-slate-950 text-slate-100 select-none overflow-hidden">
+
+  <!-- Loader Visual -->
+  <div id="initialLoader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#FAF5EF] text-slate-900 pointer-events-auto">
+    <div class="relative flex flex-col items-center justify-center p-6 text-center max-w-sm">
+      <div id="stickerAssembly" class="relative w-80 h-72 sm:w-96 sm:h-80 flex items-center justify-center mb-2 animate-sticker-group opacity-0 transition-opacity duration-200">
+        <div class="relative z-10 flex items-center justify-center font-display font-black leading-none text-[150px] sm:text-[180px] tracking-tight">
+          <div class="relative inline-block animate-doubt mx-[-10px] sm:mx-[-12px]">
+            <span class="absolute inset-0 text-[#0B1B2F] text-stroke-outer-navy select-none" aria-hidden="true">?</span>
+            <span class="absolute inset-0 text-white text-stroke-mid-white select-none" aria-hidden="true">?</span>
+            <span class="relative text-[#0B1B2F] select-none">?</span>
+          </div>
+          <div class="relative inline-block animate-surprise mx-[-10px] sm:mx-[-12px]">
+            <span class="absolute inset-0 text-[#FF5500] text-stroke-outer-orange select-none" aria-hidden="true">!</span>
+            <span class="absolute inset-0 text-white text-stroke-mid-white select-none" aria-hidden="true">!</span>
+            <span class="relative text-[#FF5500] select-none">!</span>
+          </div>
+        </div>
+      </div>
+      <img src="https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg" alt="Logo" class="h-7 sm:h-9 w-auto max-w-[130px] sm:max-w-[160px] object-contain mt-6 opacity-90 animate-logo-float"/>
+    </div>
+  </div>
+
+  <!-- Barra de Reacciones -->
+  <div id="reactionBar" class="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-1 sm:gap-1.5 p-1.5 px-2 sm:px-3 bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl opacity-0 translate-y-10 transition-all duration-700 ease-out pointer-events-auto">
+    <button onclick="handleReactionClick('😍')" class="group relative flex items-center gap-1 px-2 py-1 rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95 pointer-events-auto cursor-pointer">
+      <span class="text-lg sm:text-xl">😍</span>
+      <span id="count-😍" class="text-[10px] sm:text-xs font-bold text-slate-300 min-w-[12px] text-center">0</span>
+    </button>
+    <button onclick="handleReactionClick('😂')" class="group relative flex items-center gap-1 px-2 py-1 rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95 pointer-events-auto cursor-pointer">
+      <span class="text-lg sm:text-xl">😂</span>
+      <span id="count-😂" class="text-[10px] sm:text-xs font-bold text-slate-300 min-w-[12px] text-center">0</span>
+    </button>
+    <button onclick="handleReactionClick('🤡')" class="group relative flex items-center gap-1 px-2 py-1 rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95 pointer-events-auto cursor-pointer">
+      <span class="text-lg sm:text-xl">🤡</span>
+      <span id="count-🤡" class="text-[10px] sm:text-xs font-bold text-slate-300 min-w-[12px] text-center">0</span>
+    </button>
+    <button onclick="handleReactionClick('😱')" class="group relative flex items-center gap-1 px-2 py-1 rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95 pointer-events-auto cursor-pointer">
+      <span class="text-lg sm:text-xl">😱</span>
+      <span id="count-😱" class="text-[10px] sm:text-xs font-bold text-slate-300 min-w-[12px] text-center">0</span>
+    </button>
+    <button onclick="handleReactionClick('🤌')" class="group relative flex items-center gap-1 px-2 py-1 rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95 pointer-events-auto cursor-pointer">
+      <span class="text-lg sm:text-xl">🤌</span>
+      <span id="count-🤌" class="text-[10px] sm:text-xs font-bold text-slate-300 min-w-[12px] text-center">0</span>
+    </button>
+  </div>
+
+  <canvas id="bgCanvas"></canvas>
+  <canvas id="mainCanvas"></canvas>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, onSnapshot, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    const VALID_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg', '.bmp', '.avif'];
+
+    // OFUSCACIÓN DE DATOS (Base64) - Oculta la ruta del repositorio
+    const state = {
+      owner: atob('ZGctaXN0Zy0zYS0yMDI2'), // dg-istg-3a-2026
+      repo: atob('ZGctaXN0Zy0zYS0yMDI2LmdpdGh1Yi5pbw=='), // dg-istg-3a-2026.github.io
+      branch: atob('TW9jaGlsYURlQ2FsZWI='), // MochilaDeCaleb
+      fileList: [],
+      errorCount: 0
+    };
+
+    const bgCanvas = document.getElementById('bgCanvas');
+    const mainCanvas = document.getElementById('mainCanvas');
+    const bgCtx = bgCanvas.getContext('2d');
+    const mainCtx = mainCanvas.getContext('2d');
+    const initialLoader = document.getElementById('initialLoader');
+    const reactionBar = document.getElementById('reactionBar');
+
+    let db = null; let auth = null; let appId = 'default-app-id';
+
+    window.onload = async function() {
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      if (document.fonts) {
+        document.fonts.ready.then(() => {
+          const sticker = document.getElementById('stickerAssembly');
+          if (sticker) sticker.classList.remove('opacity-0');
+        });
+      }
+      await initFirebaseAndApp();
+    };
+
+    async function initFirebaseAndApp() {
+      try {
+        appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        if (firebaseConfig) {
+          const app = initializeApp(firebaseConfig);
+          auth = getAuth(app); db = getFirestore(app);
+          if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) { await signInWithCustomToken(auth, __initial_auth_token); } 
+          else { await signInAnonymously(auth); }
+          initReactionsListener();
+        }
+      } catch (e) { /* Silenced */ }
+      await initGallery();
+    }
+
+    function initReactionsListener() {
+      if (!db || !auth.currentUser) return;
+      const reactionsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'reactions', 'global_counts');
+      onSnapshot(reactionsDocRef, (snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.data();
+          ['😍', '😂', '🤡', '😱', '🤌'].forEach(emoji => {
+            const countEl = document.getElementById(`count-${emoji}`);
+            if (countEl) countEl.textContent = data[emoji] || 0;
+          });
+        }
+      }, () => {});
+    }
+
+    window.handleReactionClick = async function(emoji) {
+      const el = document.createElement('div');
+      el.textContent = emoji;
+      el.className = 'fixed text-3xl sm:text-4xl z-50 pointer-events-none drop-shadow-lg';
+      const startX = window.innerWidth / 2 + (Math.random() * 80 - 40);
+      const startY = window.innerHeight - 80;
+      el.style.left = `${startX}px`; el.style.top = `${startY}px`;
+      el.style.transition = 'all 1.2s cubic-bezier(0.25, 1, 0.5, 1)';
+      el.style.transform = 'translate(-50%, -50%) scale(0.5)';
+      el.style.opacity = '1';
+      document.body.appendChild(el);
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          el.style.left = `${startX + (Math.random() * 100 - 50)}px`;
+          el.style.top = `${startY - 200 - Math.random() * 100}px`;
+          el.style.transform = `translate(-50%, -50%) scale(1.5) rotate(${Math.random() * 40 - 20}deg)`;
+          el.style.opacity = '0';
+        });
+      });
+      setTimeout(() => el.remove(), 1200);
+
+      if (db && auth && auth.currentUser) {
+        try {
+          const reactionsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'reactions', 'global_counts');
+          await setDoc(reactionsDocRef, { [emoji]: increment(1) }, { merge: true });
+        } catch (err) {}
+      }
+    };
+
+    async function fetchAllGitHubImages(owner, repo, branch) {
+      let collectedFiles = [];
+      try {
+        const treeUrl = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`;
+        const response = await fetch(treeUrl);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.tree && Array.isArray(data.tree)) {
+            collectedFiles = data.tree.filter(item => {
+              if (item.type !== 'blob') return false;
+              const ext = '.' + item.path.split('.').pop().toLowerCase();
+              return VALID_EXTENSIONS.includes(ext);
+            });
+          }
+        }
+      } catch (e) {}
+      return collectedFiles;
+    }
+
+    async function initGallery() {
+      state.fileList = await fetchAllGitHubImages(state.owner, state.repo, state.branch);
+      if (state.fileList.length > 0) { await assignAndLoadUniqueImage(); } 
+      else { dismissInitialLoader(); }
+    }
+
+    async function assignAndLoadUniqueImage() {
+      let assignedIndex = 0;
+      if (db && auth && auth.currentUser) {
+        try {
+          const counterRef = doc(db, 'artifacts', appId, 'public', 'data', 'counters', 'visitors');
+          const docSnap = await getDoc(counterRef);
+          let currentCount = 0;
+          if (docSnap.exists()) { currentCount = docSnap.data().count || 0; }
+          assignedIndex = currentCount % state.fileList.length;
+          await setDoc(counterRef, { count: currentCount + 1 }, { merge: true });
+        } catch (e) { assignedIndex = Math.floor(Math.random() * state.fileList.length); }
+      } else {
+        assignedIndex = Math.floor(Math.random() * state.fileList.length);
+      }
+      displayImageByIndex(assignedIndex);
+    }
+
+    function displayImageByIndex(index) {
+      if (index < 0 || index >= state.fileList.length) return;
+      const file = state.fileList[index];
+      const img = new Image();
+      img.crossOrigin = "Anonymous";
+
+      img.onload = () => {
+        state.errorCount = 0;
+        renderImage(img);
+        dismissInitialLoader();
+      };
+      img.onerror = () => {
+        state.errorCount++;
+        if (state.errorCount < 3) { displayImageByIndex((index + 1) % state.fileList.length); } 
+        else { dismissInitialLoader(); }
+      };
+
+      const encodedPath = file.path.split('/').map(encodeURIComponent).join('/');
+      img.src = `https://raw.githubusercontent.com/${state.owner}/${state.repo}/${state.branch}/${encodedPath}`;
+    }
+
+    function resizeCanvas() {
+      const width = window.innerWidth; const height = window.innerHeight; const dpr = window.devicePixelRatio || 1;
+      mainCanvas.width = width * dpr; mainCanvas.height = height * dpr;
+      bgCanvas.width = width * dpr; bgCanvas.height = height * dpr;
+      mainCtx.scale(dpr, dpr); bgCtx.scale(dpr, dpr);
+    }
+
+    function renderImage(img) {
+      const w = window.innerWidth; const h = window.innerHeight;
+      mainCtx.clearRect(0, 0, w, h); bgCtx.clearRect(0, 0, w, h);
+      const imgW = img.naturalWidth || img.width; const imgH = img.naturalHeight || img.height;
+      const imgRatio = imgW / imgH; const screenRatio = w / h;
+
+      let bgDrawW, bgDrawH;
+      if (screenRatio > imgRatio) { bgDrawW = w; bgDrawH = w / imgRatio; } else { bgDrawH = h; bgDrawW = h * imgRatio; }
+      bgCtx.drawImage(img, (w - bgDrawW) / 2, (h - bgDrawH) / 2, bgDrawW, bgDrawH);
+
+      let drawW, drawH;
+      if (imgRatio > screenRatio) { drawW = w; drawH = w / imgRatio; } else { drawH = h; drawW = h * imgRatio; }
+      mainCtx.save();
+      mainCtx.translate(w / 2, h / 2); mainCtx.imageSmoothingEnabled = true; mainCtx.imageSmoothingQuality = 'high';
+      mainCtx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
+      mainCtx.restore();
+    }
+
+    const loaderStartTime = Date.now();
+    let isLoaderDismissing = false;
+    function dismissInitialLoader() {
+      if (!initialLoader || isLoaderDismissing) return;
+      isLoaderDismissing = true;
+      const elapsedTime = Date.now() - loaderStartTime;
+      const remainingTime = Math.max(0, 2500 - elapsedTime);
+
+      setTimeout(() => {
+        initialLoader.classList.add('pointer-events-none');
+        let startTimestamp = null;
+        function step(timestamp) {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const elapsed = timestamp - startTimestamp;
+          let t = Math.min(elapsed / 1200, 1);
+          let easeT = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+          const circleRadius = easeT * 150; 
+          initialLoader.style.mask = `radial-gradient(circle, transparent ${circleRadius}%, black ${circleRadius + 1}%)`;
+          initialLoader.style.WebkitMask = `radial-gradient(circle, transparent ${circleRadius}%, black ${circleRadius + 1}%)`;
+          if (t < 1) requestAnimationFrame(step);
+          else {
+            initialLoader.style.display = 'none';
+            if (reactionBar) reactionBar.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+          }
+        }
+        requestAnimationFrame(step);
+      }, remainingTime);
+    }
+  </script>
+</body>
+</html>
