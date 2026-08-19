@@ -1,0 +1,20 @@
+name: Deploy to Firebase Hosting on Merge
+on:
+  push:
+    branches:
+      - main # Modifica a 'master' si usas esa rama
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      # Opcional: Descomenta estas líneas si usas TypeScript, Vite o React y necesitas compilar
+      # - run: npm ci && npm run build
+      
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: web-feria-istg-2026
+          channelId: live
