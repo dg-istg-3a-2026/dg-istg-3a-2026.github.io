@@ -1,2 +1,40 @@
-{ "hosting": { "public": "dist", "ignore": [ "firebase.json", "/.*", "/node_modules/" ], "rewrites": [ { "source": "", "destination": "/index.html" } ] } }
+name: Deploy to Firebase Hosting on push
 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+
+      - name: Install Firebase CLI
+        run: |
+          npm install -g firebase-tools
+
+      - name: Build (if package.json exists)
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+            npm run build
+          else
+            echo "No package.json, skipping build"
+          fi
+
+      - name: Deploy to Firebase Hosting
+        run: firebase deploy --only hosting --project web-feria-istg-2026
