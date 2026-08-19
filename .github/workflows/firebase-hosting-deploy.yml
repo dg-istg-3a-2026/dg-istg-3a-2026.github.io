@@ -52,4 +52,4 @@ jobs:
           ls -la public || true
 
       - name: Deploy to Firebase Hosting
-        run: firebase deploy --only hosting --project web-feria-istg-2026
+        run: firebase deploy --only hosting --project web-feria-dg-istg-2026
