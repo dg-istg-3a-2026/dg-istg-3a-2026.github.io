@@ -42,7 +42,7 @@ jobs:
             echo "No package.json, skipping build"
           fi
 
-      - name: Debug: listar archivos relevantes
+      - name: "Debug: listar archivos relevantes"
         run: |
           echo "Contenido raíz:"
           ls -la
