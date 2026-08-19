@@ -10,8 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout main
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -24,17 +27,29 @@ jobs:
           credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 
       - name: Install Firebase CLI
-        run: |
-          npm install -g firebase-tools
+        run: npm install -g firebase-tools
 
       - name: Build (if package.json exists)
         run: |
           if [ -f package.json ]; then
             npm ci
             npm run build
+            # Si el build genera "build" en vez de "dist", copia/mueve a dist para Firebase
+            if [ -d build ] && [ ! -d dist ]; then
+              mv build dist || cp -r build dist
+            fi
           else
             echo "No package.json, skipping build"
           fi
+
+      - name: Debug: listar archivos relevantes
+        run: |
+          echo "Contenido raíz:"
+          ls -la
+          echo "Contenido 'dist' (si existe):"
+          ls -la dist || true
+          echo "Contenido 'public' (si existe):"
+          ls -la public || true
 
       - name: Deploy to Firebase Hosting
         run: firebase deploy --only hosting --project web-feria-istg-2026
