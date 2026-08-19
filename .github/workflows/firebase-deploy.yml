@@ -6,11 +6,11 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    steps:
+       steps:
       - uses: actions/checkout@v4
       
-      # Opcional: Descomenta estas líneas si usas TypeScript, Vite o React y necesitas compilar
-      # - run: npm ci && npm run build
+      # Instala las dependencias y compila tu proyecto antes de subirlo
+      - run: npm ci && npm run build
       
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
