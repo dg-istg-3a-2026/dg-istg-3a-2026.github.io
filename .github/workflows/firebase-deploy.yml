@@ -1,15 +1,7 @@
-name: Deploy to Firebase Hosting on Merge
-on:
-  push:
-    branches:
-      - main # Modifica a 'master' si usas esa rama
-jobs:
-  build_and_deploy:
-    runs-on: ubuntu-latest
-       steps:
+    steps:
       - uses: actions/checkout@v4
       
-      # Instala las dependencias y compila tu proyecto antes de subirlo
+      # VITAL para React: instala dependencias de forma limpia y compila la app
       - run: npm ci && npm run build
       
       - uses: FirebaseExtended/action-hosting-deploy@v0
