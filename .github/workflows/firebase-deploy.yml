@@ -1,12 +1,16 @@
-    steps:
-      - uses: actions/checkout@v4
-      
-      # VITAL para React: instala dependencias de forma limpia y compila la app
-      - run: npm ci && npm run build
-      
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-          projectId: web-feria-istg-2026
-          channelId: live
+{
+  "hosting": {
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
