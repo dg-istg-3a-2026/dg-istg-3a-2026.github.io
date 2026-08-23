@@ -111,36 +111,6 @@
       z-index: 0;
     }
     
-    /* Motion Graphic Cinematic Float 3D */
-    .floating-comment-bubble {
-      position: absolute;
-      z-index: 35;
-      pointer-events: none;
-      background: rgba(10, 15, 30, 0.9);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 85, 0, 0.35);
-      border-radius: 20px;
-      padding: 10px 20px;
-      color: #f8fafc;
-      font-weight: 400;
-      font-size: 13px;
-      box-shadow: 0 15px 35px -5px rgba(255, 85, 0, 0.25);
-      animation: cinematicFloat 9s cubic-bezier(0.25, 1, 0.3, 1) forwards;
-      max-width: 300px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      will-change: transform, opacity, filter;
-    }
-
-    @keyframes cinematicFloat {
-      0% { opacity: 0; transform: translate3d(30px, 30px, -40px) scale(0.85) rotateX(15deg); filter: blur(6px); }
-      15% { opacity: 1; transform: translate3d(0, 0, 0) scale(1) rotateX(0deg); filter: blur(0px); }
-      75% { opacity: 1; transform: translate3d(-10px, -70px, 0) scale(1) rotateX(0deg); filter: blur(0px); }
-      100% { opacity: 0; transform: translate3d(-20px, -100px, 30px) scale(1.05) rotateX(-10deg); filter: blur(8px); }
-    }
-
     /* Loader Keyframes */
     .text-stroke-outer-navy { -webkit-text-stroke: 28px #0B1B2F; paint-order: stroke fill; stroke-linejoin: round; stroke-linecap: round; }
     .text-stroke-outer-orange { -webkit-text-stroke: 28px #FF5500; paint-order: stroke fill; stroke-linejoin: round; stroke-linecap: round; }
@@ -151,13 +121,6 @@
     .animate-sticker-group { animation: elasticAnticipation 3s ease-in-out infinite; transform-origin: center center; }
     .animate-doubt { animation: doubtSway 2.7s ease-in-out infinite; transform-origin: center bottom; }
     .animate-surprise { animation: surpriseBounce 2.7s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; transform-origin: center bottom; }
-
-    ::view-transition-old(chat-popup),
-    ::view-transition-new(chat-popup) {
-      animation-duration: 0.25s;
-      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    #commentsPopup { view-transition-name: chat-popup; }
   </style>
 
   <script>
@@ -171,13 +134,9 @@
 
     window.isGalleryReady = false;
     window.hudHovered = false;
-    window.isChatOpen = false;
   </script>
 </head>
 <body class="h-full w-full relative select-none overflow-hidden text-slate-100 font-sans">
-
-  <!-- Cinematic Floating Comments Layer (Pointer Events None) -->
-  <div id="floatingCommentsLayer" class="absolute inset-0 z-[35] pointer-events-none overflow-hidden"></div>
 
   <!-- Non-Interactive Encrypted Canvas Layers -->
   <canvas id="bgCanvas" class="pointer-events-none"></canvas>
@@ -210,22 +169,6 @@
   <!-- Interactive HUD Container -->
   <div id="hud-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2.5 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 translate-y-16 pointer-events-none w-full max-w-sm sm:max-w-md px-4" onmouseenter="window.keepHudActive()" onmouseleave="window.startHudIdleTimer()">
     
-    <!-- Minimalist Floating Comment Box -->
-    <div id="commentsPopup" class="w-full transition-all duration-400 ease-[cubic-bezier(0.34,1.56,0.64,1)] scale-95 opacity-0 h-0 pointer-events-none mb-0 origin-bottom">
-      <form id="commentForm" onsubmit="window.handleCommentSubmit(event)" class="w-full relative group">
-        <div class="absolute -inset-0.5 bg-gradient-to-r from-orange-500/0 via-orange-500/40 to-orange-500/0 rounded-[24px] blur-md opacity-0 group-focus-within:opacity-100 transition duration-700 pointer-events-none"></div>
-        <div class="relative flex items-center gap-2 glass-panel rounded-[24px] p-2 transition-all focus-within:border-orange-500/60 focus-within:bg-black/60 shadow-2xl border border-white/15">
-          <input type="text" id="commentText" placeholder="Escribe crítica constructiva..." required maxlength="150" autocomplete="off"
-            class="flex-1 bg-transparent text-sm font-light text-slate-100 placeholder-white/40 px-3 py-1 outline-none">
-          <button type="submit" class="p-2.5 bg-orange-500 hover:bg-orange-400 text-white rounded-[18px] shadow-[0_0_15px_rgba(255,85,0,0.4)] transition-transform active:scale-90 flex items-center justify-center cursor-pointer pointer-events-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-            </svg>
-          </button>
-        </div>
-      </form>
-    </div>
-
     <!-- Dock Style Reaction Bar -->
     <div id="reactionDock" class="relative flex items-center gap-1.5 p-2 pointer-events-auto w-max mx-auto transition-all duration-300">
       
@@ -250,16 +193,6 @@
           </button>
         `).join(''));
       </script>
-
-      <!-- Divider -->
-      <div class="w-[1px] h-7 bg-white/20 mx-1 rounded-full relative z-10"></div>
-
-      <!-- Comment Toggle Button (No badge circle) -->
-      <button onclick="window.toggleCommentsPopup()" id="toggleChatBtn" class="group relative z-10 flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-[18px] bg-orange-500/20 hover:bg-orange-500/40 border border-orange-400/30 text-orange-200 transition-all duration-300 hover:-translate-y-1 active:scale-90 focus:outline-none cursor-pointer pointer-events-auto">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition-transform duration-300 group-hover:scale-110 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-        </svg>
-      </button>
     </div>
   </div>
 
@@ -280,16 +213,12 @@
     };
 
     let userCurrentReaction = null;
-    let outstandingCommentsPool = [];  
-    let danmakuIndex = 0;
-    let commentFloatingInterval = null;
 
     const bgCanvas = document.getElementById('bgCanvas');
     const mainCanvas = document.getElementById('mainCanvas');
     const bgCtx = bgCanvas.getContext('2d');
     const mainCtx = mainCanvas.getContext('2d');
     const hudContainer = document.getElementById('hud-container');
-    const floatingLayer = document.getElementById('floatingCommentsLayer');
 
     let db = null; let auth = null;
 
@@ -381,7 +310,7 @@
       
       clearTimeout(hudActivityTimer);
       hudActivityTimer = setTimeout(() => {
-        if (!window.isChatOpen && !window.hudHovered) {
+        if (!window.hudHovered) {
           hudContainer.classList.add('opacity-30');
         }
       }, 4000);
@@ -417,7 +346,6 @@
     function getImageDocId(path) { return btoa(path).replace(/[/+=]/g, '_'); }
 
     let activeReactionsUnsubscribe = null;
-    let activeCommentsUnsubscribe = null;
     let previousReactionsState = {};
     let isFirstReactionsLoad = true;
     let localReactionPendingEmoji = null;
@@ -459,12 +387,8 @@
       const imgDocId = getImageDocId(imagePath);
 
       if (activeReactionsUnsubscribe) activeReactionsUnsubscribe();
-      if (activeCommentsUnsubscribe) activeCommentsUnsubscribe();
-      if (commentFloatingInterval) clearInterval(commentFloatingInterval);
       
       userCurrentReaction = null;
-      outstandingCommentsPool = [];
-      danmakuIndex = 0;
       previousReactionsState = {};
       isFirstReactionsLoad = true;
       updateReactionButtonsUI();
@@ -516,51 +440,6 @@
         localReactionPendingEmoji = null;
         isFirstReactionsLoad = false;
       }, (err) => {});
-
-      const commentsColRef = collection(db, 'Feria2026_Images', imgDocId, 'Comentarios');
-      const q = query(commentsColRef, orderBy('timestamp', 'asc'));
-      
-      let isFirstCommentLoad = true;
-      activeCommentsUnsubscribe = onSnapshot(q, (snapshot) => {
-        const userGroups = {};
-        snapshot.docs.forEach(docSnap => {
-          const data = docSnap.data();
-          const uid = data.uid || 'anonymous';
-          if (!userGroups[uid] || data.text.length > userGroups[uid].text.length) {
-            userGroups[uid] = data.text;
-          }
-        });
-
-        let newPool = Object.values(userGroups);
-        outstandingCommentsPool = newPool.sort(() => Math.random() - 0.5);
-
-        if (isFirstCommentLoad) {
-           isFirstCommentLoad = false;
-        } else {
-           snapshot.docChanges().forEach((change) => {
-             if (change.type === 'added') {
-               // Trigger real-time comment notification
-               window.showGlobalToast("Nuevo comentario en el lienzo", "💬");
-               const newText = change.doc.data().text;
-               if (!outstandingCommentsPool.includes(newText)) outstandingCommentsPool.push(newText);
-               
-               // Mostrar el comentario flotando inmediatamente en pantalla
-               spawnCinematicDanmaku(newText);
-             }
-           });
-        }
-      }, (err) => {});
-
-      commentFloatingInterval = setInterval(() => {
-        if (outstandingCommentsPool.length > 0) {
-          spawnCinematicDanmaku(outstandingCommentsPool[danmakuIndex]);
-          danmakuIndex++;
-          if (danmakuIndex >= outstandingCommentsPool.length) {
-            danmakuIndex = 0;
-            outstandingCommentsPool = outstandingCommentsPool.sort(() => Math.random() - 0.5);
-          }
-        }
-      }, 4500);
     }
 
     function updateReactionButtonsUI() {
@@ -577,22 +456,6 @@
           badgeEl.classList.remove('bg-orange-500', 'text-white', 'border-orange-300/50');
         }
       });
-    }
-
-    function spawnCinematicDanmaku(text) {
-      if (!floatingLayer) return;
-      const bubble = document.createElement('div');
-      bubble.className = 'floating-comment-bubble';
-      bubble.innerHTML = `<span class="text-orange-400 mr-2 opacity-80 text-xs font-display">★ DESTACADO</span><br/>${text}`;
-      
-      const startX = 5 + Math.random() * 70; 
-      const startY = 55 + Math.random() * 25; 
-      
-      bubble.style.left = `${startX}%`;
-      bubble.style.top = `${startY}%`;
-      
-      floatingLayer.appendChild(bubble);
-      setTimeout(() => { if (bubble.parentNode) bubble.remove(); }, 9200);
     }
 
     window.handleReactionClick = async function(emoji, designJokeName) {
@@ -702,62 +565,6 @@
 
     window.firebaseIncrement = (val) => val; 
     import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(mod => { window.firebaseIncrement = mod.increment; });
-
-    window.toggleCommentsPopup = function() {
-      if (document.startViewTransition) { document.startViewTransition(() => executeChatToggle()); } 
-      else { executeChatToggle(); }
-    };
-
-    function executeChatToggle() {
-      window.triggerHaptic([10]);
-      window.resetHudActivity();
-      const popup = document.getElementById('commentsPopup');
-      const toggleBtn = document.getElementById('toggleChatBtn');
-      if (!popup || !toggleBtn) return;
-
-      window.isChatOpen = !window.isChatOpen;
-
-      if (window.isChatOpen) {
-        popup.classList.remove('pointer-events-none', 'scale-95', 'opacity-0', 'h-0', 'mb-0');
-        popup.classList.add('scale-100', 'opacity-100', 'h-[60px]', 'mb-2');
-        toggleBtn.classList.add('bg-orange-500/50', 'border-orange-400');
-        setTimeout(() => { document.getElementById('commentText')?.focus(); }, 300);
-      } else {
-        popup.classList.add('scale-95', 'opacity-0', 'h-0', 'pointer-events-none', 'mb-0');
-        popup.classList.remove('scale-100', 'opacity-100', 'h-[60px]', 'mb-2');
-        toggleBtn.classList.remove('bg-orange-500/50', 'border-orange-400');
-        window.resetHudActivity();
-      }
-    }
-
-    function filterProfanity(text) {
-      const badWords = ['mierda', 'puta', 'puto', 'pendejo', 'imbecil', 'idiota', 'estupido', 'carajo', 'verga', 'cojudo'];
-      let filtered = text;
-      badWords.forEach(word => {
-        const regex = new RegExp(`\\b${word}\\b`, 'gi');
-        filtered = filtered.replace(regex, '🤬');
-      });
-      return filtered;
-    }
-
-    window.handleCommentSubmit = async function(e) {
-      e.preventDefault();
-      const textInput = document.getElementById('commentText');
-      let text = textInput?.value.trim();
-      if (!text || !state.currentImagePath) return;
-
-      text = filterProfanity(text);
-      textInput.value = '';
-
-      if (db && auth && auth.currentUser) {
-        try {
-          const imgDocId = getImageDocId(state.currentImagePath);
-          const commentsColRef = collection(db, 'Feria2026_Images', imgDocId, 'Comentarios');
-          await addDoc(commentsColRef, { text: text, timestamp: serverTimestamp(), uid: auth.currentUser.uid });
-          window.toggleCommentsPopup();
-        } catch (err) {}
-      }
-    };
 
     async function fetchAllGitHubImages(owner, repo, branch) {
       let collectedFiles = [];
