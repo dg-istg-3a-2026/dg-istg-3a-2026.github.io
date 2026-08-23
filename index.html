@@ -12,8 +12,26 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>?!</title>
   
+  <!-- SEO & Sharing Optimization -->
+  <title>?!</title>
+  <meta name="description" content="?! - Proyecto PIS. Exposición interactiva y colaborativa de los estudiantes de 3A de Diseño Gráfico, Instituto Superior Tecnológico Guayaquil (ISTG) - 2026.">
+  <meta name="keywords" content="Diseño Gráfico, ISTG, Guayaquil, PIS, Proyecto, Arte, Galería, 2026, ?!, Reacciones">
+  <meta name="author" content="Estudiantes 3A Diseño Gráfico ISTG">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="?! - Proyecto PIS Diseño Gráfico">
+  <meta property="og:description" content="Explora y reacciona a la galería interactiva de los estudiantes de 3A de Diseño Gráfico del ISTG, 2026.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg">
+  <meta property="og:site_name" content="?!">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="?! - Espacio de Kiro">
+  <meta name="twitter:description" content="Proyecto interactivo de Diseño Gráfico. ¡Deja tus reacciones!">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg">
+
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'><style>@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@900'); text{font-family:'DynaPuff',system-ui,sans-serif;font-weight:900;font-size:80px;dominant-baseline:central;} .bg-q{stroke:%230B1B2F;stroke-width:24px;stroke-linejoin:round;} .bg-e{stroke:%23FF5500;stroke-width:24px;stroke-linejoin:round;} .md{stroke:white;stroke-width:12px;stroke-linejoin:round;} .f-q{fill:%230B1B2F;} .f-e{fill:%23FF5500;}</style><text x='15' y='55' class='bg-q'>?</text><text x='15' y='55' class='md'>?</text><text x='15' y='55' class='f-q'>?</text><text x='70' y='55' class='bg-e'>!</text><text x='70' y='55' class='md'>!</text><text x='70' y='55' class='f-e'>!</text></svg>">
   
   <script src="https://cdn.tailwindcss.com"></script>
@@ -181,6 +199,9 @@
     </div>
   </div>
 
+  <!-- Global Toast Notifications Container (Minimalist Pop-ups) -->
+  <div id="toastContainer" class="fixed top-24 right-4 sm:right-6 z-[100] flex flex-col gap-3 pointer-events-none w-max max-w-[220px] items-end"></div>
+
   <!-- Interactive HUD Container -->
   <div id="hud-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2.5 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 translate-y-16 pointer-events-none w-full max-w-sm sm:max-w-md px-4" onmouseenter="window.keepHudActive()" onmouseleave="window.startHudIdleTimer()">
     
@@ -235,12 +256,6 @@
         </svg>
       </button>
     </div>
-
-    <!-- Live Comment Toast Notification -->
-    <div id="newCommentToast" class="flex items-center gap-2 px-4 py-1.5 bg-black/80 backdrop-blur-md border border-orange-500/30 rounded-full text-[10px] sm:text-xs font-light text-orange-100 shadow-lg transform translate-y-8 opacity-0 transition-all duration-500 pointer-events-none relative z-0">
-      <span class="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse"></span>
-      <span id="toastMessage">Alguien está comentando...</span>
-    </div>
   </div>
 
   <script type="module">
@@ -281,6 +296,34 @@
       storageBucket: "web-feria-istg-2026.firebasestorage.app",
       messagingSenderId: "434583648721",
       appId: "1:434583648721:web:a31a4ec9e99dc7faf8c8f0"
+    };
+
+    // Global Toast Notification System (Minimalist Pop-up)
+    window.showGlobalToast = function(message, icon) {
+      const container = document.getElementById('toastContainer');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      toast.className = 'flex items-center gap-2.5 px-3.5 py-2 bg-[#0B1B2F]/80 backdrop-blur-md border border-orange-500/30 rounded-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-xs text-white transform translate-x-full opacity-0 transition-all duration-500 ease-out will-change-transform';
+      toast.innerHTML = `
+        <span class="text-base drop-shadow-md animate-pulse">${icon}</span>
+        <span class="font-light tracking-wide text-orange-50">${message}</span>
+      `;
+
+      container.appendChild(toast);
+
+      // Animate In
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-x-full', 'opacity-0');
+        toast.classList.add('translate-x-0', 'opacity-100');
+      });
+
+      // Animate Out and Remove
+      setTimeout(() => {
+        toast.classList.remove('translate-x-0', 'opacity-100');
+        toast.classList.add('translate-x-12', 'opacity-0');
+        setTimeout(() => toast.remove(), 500);
+      }, 4000);
     };
 
     // Haptic Feedback Engine
@@ -339,34 +382,6 @@
       }, 4000);
     };
 
-    // Toast Phrasings
-    const toastPhrases = [
-      "Alguien critica en capas...",
-      "Tensión tipográfica detectada...",
-      "Un vector acaba de opinar...",
-      "Se guardó como 'final_final.pdf'...",
-      "Debate sobre Pantone en curso...",
-      "Alguien está usando la pluma..."
-    ];
-    let toastTimeout = null;
-
-    window.showNewCommentToast = function() {
-      if (window.isChatOpen) return;
-      const toast = document.getElementById('newCommentToast');
-      const msg = document.getElementById('toastMessage');
-      if (!toast || !msg) return;
-
-      msg.textContent = toastPhrases[Math.floor(Math.random() * toastPhrases.length)];
-      toast.classList.remove('translate-y-8', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
-
-      clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => {
-        toast.classList.remove('translate-y-0', 'opacity-100');
-        toast.classList.add('translate-y-8', 'opacity-0');
-      }, 4000);
-    };
-
     window.onload = async function() {
       resizeCanvas(); window.addEventListener('resize', resizeCanvas, { passive: true });
       
@@ -398,6 +413,9 @@
 
     let activeReactionsUnsubscribe = null;
     let activeCommentsUnsubscribe = null;
+    let previousReactionsState = {};
+    let isFirstReactionsLoad = true;
+    let localReactionPendingEmoji = null;
 
     async function setupRealtimeListeners(imagePath) {
       if (!db || !auth.currentUser) return;
@@ -410,6 +428,8 @@
       userCurrentReaction = null;
       outstandingCommentsPool = [];
       danmakuIndex = 0;
+      previousReactionsState = {};
+      isFirstReactionsLoad = true;
       updateReactionButtonsUI();
 
       try {
@@ -424,26 +444,45 @@
       const reactionsRef = doc(db, 'Feria2026_Images', imgDocId);
       activeReactionsUnsubscribe = onSnapshot(reactionsRef, (snapshot) => {
         const data = snapshot.exists() ? snapshot.data() : {};
+        
         ['😍', '😂', '🤡', '😱', '🤌'].forEach(emoji => {
           const countEl = document.getElementById(`count-${emoji}`);
           const badgeEl = document.getElementById(`badge-${emoji}`);
+          
+          const newValNum = data[emoji] || 0;
+          const oldValNum = previousReactionsState[emoji] || 0;
+
+          // Real-time notification logic
+          if (!isFirstReactionsLoad && newValNum > oldValNum) {
+            // Only show toast if it's not the user's immediate local click, 
+            // to make it feel like "someone else" is interacting network-wide.
+            if (localReactionPendingEmoji !== emoji) {
+              window.showGlobalToast("Nueva reacción", emoji);
+            }
+          }
+
           if (countEl && badgeEl) {
-            const oldVal = countEl.textContent;
-            const newVal = (data[emoji] || 0).toString();
-            if (oldVal !== newVal) {
-              countEl.textContent = newVal;
+            const oldValText = countEl.textContent;
+            const newValText = newValNum.toString();
+            if (oldValText !== newValText) {
+              countEl.textContent = newValText;
               badgeEl.classList.remove('animate-pop');
               void badgeEl.offsetWidth; 
               badgeEl.classList.add('animate-pop');
             }
           }
+          previousReactionsState[emoji] = newValNum;
         });
+        
+        // Reset the local pending flag after processing a snapshot
+        localReactionPendingEmoji = null;
+        isFirstReactionsLoad = false;
       }, (err) => {});
 
       const commentsColRef = collection(db, 'Feria2026_Images', imgDocId, 'Comentarios');
       const q = query(commentsColRef, orderBy('timestamp', 'asc'));
       
-      let isFirstLoad = true;
+      let isFirstCommentLoad = true;
       activeCommentsUnsubscribe = onSnapshot(q, (snapshot) => {
         const userGroups = {};
         snapshot.docs.forEach(docSnap => {
@@ -457,12 +496,13 @@
         let newPool = Object.values(userGroups);
         outstandingCommentsPool = newPool.sort(() => Math.random() - 0.5);
 
-        if (isFirstLoad) {
-           isFirstLoad = false;
+        if (isFirstCommentLoad) {
+           isFirstCommentLoad = false;
         } else {
            snapshot.docChanges().forEach((change) => {
              if (change.type === 'added') {
-               window.showNewCommentToast();
+               // Trigger real-time comment notification
+               window.showGlobalToast("Nuevo comentario en el lienzo", "💬");
                const newText = change.doc.data().text;
                if (!outstandingCommentsPool.includes(newText)) outstandingCommentsPool.push(newText);
              }
@@ -567,6 +607,7 @@
       payload[emoji] = window.firebaseIncrement ? window.firebaseIncrement(1) : 1;
 
       userCurrentReaction = emoji;
+      localReactionPendingEmoji = emoji; // Mark this so we don't pop a toast for our own action
       updateReactionButtonsUI();
       showJokeBadgeAnimation(emoji, designJokeName);
 
@@ -601,7 +642,7 @@
       jokeBadge.className = 'fixed z-[80] pointer-events-none flex flex-col items-center justify-center w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 will-change-transform';
       jokeBadge.innerHTML = `
         <span class="text-[80px] sm:text-[110px] filter drop-shadow-[0_0_40px_rgba(255,85,0,0.8)] mb-[-20px] z-10 animate-bounce">${emoji}</span>
-        <span class="font-display bg-black/85 backdrop-blur-2xl border-2 border-orange-500/40 text-orange-100 px-6 py-3 rounded-[24px] text-xl sm:text-2xl font-black tracking-wider uppercase shadow-[0_25px_60px_-15px_rgba(255,85,0,0.6)] transform -rotate-1">Quedé ${jokeName}</span>
+        <span class="font-display bg-black/85 backdrop-blur-2xl border-2 border-orange-500/40 text-orange-100 px-6 py-3 rounded-[24px] text-xl sm:text-2xl font-black tracking-wider uppercase shadow-[0_25px_60px_-15px_rgba(255,85,0,0.6)] transform -rotate-1 text-center leading-none">Quedé<br><span class="text-lg text-white/80">${jokeName}</span></span>
       `;
       document.body.appendChild(jokeBadge);
 
