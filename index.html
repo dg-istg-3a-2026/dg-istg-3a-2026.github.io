@@ -1,726 +1,253 @@
 <!DOCTYPE html>
 <html lang="es" class="h-full bg-[#030712] text-slate-100 antialiased selection:bg-orange-500 selection:text-white">
 <head>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y6LMRRHWH"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-0Y6LMRRHWH');
-  </script>
-
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0Y6LMRRHWH');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  
-  <!-- Anti-Caché Estricto -->
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-
-  <!-- SEO & Sharing Optimization -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
   <title>?!</title>
-  <meta name="description" content="?! - Proyecto PIS. Exposición interactiva y colaborativa de los estudiantes de 3A de Diseño Gráfico, Instituto Superior Tecnológico Guayaquil (ISTG) - 2026.">
-  <meta name="keywords" content="Diseño Gráfico, ISTG, Guayaquil, PIS, Proyecto, Arte, Galería, 2026, ?!, Reacciones en tiempo real, Portfolio">
-  <meta name="author" content="Estudiantes 3A Diseño Gráfico ISTG">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="?! - Proyecto PIS Diseño Gráfico">
-  <meta property="og:description" content="Explora y reacciona en tiempo real a la galería interactiva de los estudiantes de 3A de Diseño Gráfico del ISTG, 2026.">
-  <meta property="og:image" content="https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg">
-  <meta property="og:site_name" content="?!">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="?! - Galería ISTG 2026">
-  <meta name="twitter:description" content="Proyecto interactivo de Diseño Gráfico. ¡Deja tus reacciones en tiempo real!">
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg">
-
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'><style>@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@900'); text{font-family:'DynaPuff',system-ui,sans-serif;font-weight:900;font-size:80px;dominant-baseline:central;} .bg-q{stroke:%230B1B2F;stroke-width:24px;stroke-linejoin:round;} .bg-e{stroke:%23FF5500;stroke-width:24px;stroke-linejoin:round;} .md{stroke:white;stroke-width:12px;stroke-linejoin:round;} .f-q{fill:%230B1B2F;} .f-e{fill:%23FF5500;}</style><text x='15' y='55' class='bg-q'>?</text><text x='15' y='55' class='md'>?</text><text x='15' y='55' class='f-q'>?</text><text x='70' y='55' class='bg-e'>!</text><text x='70' y='55' class='md'>!</text><text x='70' y='55' class='f-e'>!</text></svg>">
-  
+  <meta name="description" content="?! - Proyecto PIS. Exposición interactiva de Diseño Gráfico, ISTG - 2026.">
+  <meta property="og:title" content="?! - Proyecto PIS Diseño Gráfico"><meta property="og:image" content="https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'%3E%3Cstyle%3E@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@900');text%7Bfont-family:'DynaPuff',system-ui,sans-serif;font-weight:900;font-size:80px;dominant-baseline:central;%7D.bg-q%7Bstroke:%230B1B2F;stroke-width:24px;stroke-linejoin:round;%7D.bg-e%7Bstroke:%23FF5500;stroke-width:24px;stroke-linejoin:round;%7D.md%7Bstroke:white;stroke-width:12px;stroke-linejoin:round;%7D.f-q%7Bfill:%230B1B2F;%7D.f-e%7Bfill:%23FF5500;%7D%3C/style%3E%3Ctext x='15' y='55' class='bg-q'%3E?%3C/text%3E%3Ctext x='15' y='55' class='md'%3E?%3C/text%3E%3Ctext x='15' y='55' class='f-q'%3E?%3C/text%3E%3Ctext x='70' y='55' class='bg-e'%3E!%3C/text%3E%3Ctext x='70' y='55' class='md'%3E!%3C/text%3E%3Ctext x='70' y='55' class='f-e'%3E!%3C/text%3E%3C/svg%3E">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@700;900&family=Inter:wght@300;400;600;700&display=block" rel="stylesheet">
-
-  <script>
-    tailwind.config = {
-      theme: { 
-        extend: { 
-          fontFamily: { 
-            sans: ['Inter', 'sans-serif'], 
-            display: ['DynaPuff', 'cursive', 'sans-serif'] 
-          },
-          animation: {
-            'pop': 'popCounter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
-          },
-          keyframes: {
-            popCounter: {
-              '0%': { transform: 'scale(1)' },
-              '50%': { transform: 'scale(1.6) translateY(-4px)', backgroundColor: '#fb923c', color: '#fff' },
-              '100%': { transform: 'scale(1)' }
-            }
-          }
-        } 
-      }
-    }
-  </script>
-
+  <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],display:['DynaPuff','cursive']},animation:{'pop':'popCounter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards'},keyframes:{popCounter:{'0%':{transform:'scale(1)'},'50%':{transform:'scale(1.6) translateY(-4px)',backgroundColor:'#fb923c',color:'#fff'},'100%':{transform:'scale(1)'}}}}}}</script>
   <style>
-    :root {
-      --spotlight-x: 50%;
-      --spotlight-y: 50%;
-    }
-    body, html {
-      margin: 0; padding: 0; width: 100%; height: 100dvh; overflow: hidden;
-      background-color: #030712; user-select: none; -webkit-user-select: none; touch-action: none;
-      overscroll-behavior: none;
-    }
-    
-    /* GPU Acceleration & Low Resource Footprint for Android */
-    #bgCanvas {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      filter: blur(15px) brightness(0.35) saturate(1.5); 
-      transform: scale(1.15); z-index: 1; pointer-events: none;
-      will-change: filter;
-    }
-    #mainCanvas {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 2; pointer-events: none;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Glassmorphic Security Panels */
-    .glass-panel {
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(20px) saturate(150%);
-      -webkit-backdrop-filter: blur(20px) saturate(150%);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .glass-panel::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle 80px at var(--spotlight-x) var(--spotlight-y), rgba(255, 85, 0, 0.2), transparent 100%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    
-    /* Loader Keyframes */
-    .text-stroke-outer-navy { -webkit-text-stroke: 28px #0B1B2F; paint-order: stroke fill; stroke-linejoin: round; stroke-linecap: round; }
-    .text-stroke-outer-orange { -webkit-text-stroke: 28px #FF5500; paint-order: stroke fill; stroke-linejoin: round; stroke-linecap: round; }
-    .text-stroke-mid-white { -webkit-text-stroke: 16px #FFFFFF; paint-order: stroke fill; stroke-linejoin: round; stroke-linecap: round; }
-    @keyframes elasticAnticipation { 0%, 100% { transform: scale(1) translateY(0); } 50% { transform: scale(1.04) translateY(-6px); } }
-    @keyframes doubtSway { 0%, 100% { transform: rotate(-8deg) translateY(0); } 35% { transform: rotate(6deg) translateY(-10px); } 70% { transform: rotate(-12deg) translateY(4px); } }
-    @keyframes surpriseBounce { 0%, 100% { transform: translateY(0) rotate(4deg) scale(1); } 20% { transform: translateY(-24px) rotate(12deg) scale(1.1); } 38% { transform: translateY(3px) rotate(-2deg) scale(0.95); } 55% { transform: translateY(-10px) rotate(6deg) scale(1.04); } 72% { transform: translateY(0) rotate(3deg) scale(1); } }
-    .animate-sticker-group { animation: elasticAnticipation 3s ease-in-out infinite; transform-origin: center center; }
-    .animate-doubt { animation: doubtSway 2.7s ease-in-out infinite; transform-origin: center bottom; }
-    .animate-surprise { animation: surpriseBounce 2.7s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; transform-origin: center bottom; }
+    :root{--spotlight-x:50%;--spotlight-y:50%}body,html{margin:0;padding:0;width:100%;height:100dvh;overflow:hidden;background-color:#030712;user-select:none;-webkit-user-select:none;touch-action:none;overscroll-behavior:none}
+    #bgCanvas{position:absolute;top:0;left:0;width:100%;height:100%;filter:blur(15px) brightness(0.35) saturate(1.5);transform:scale(1.15);z-index:1;pointer-events:none;will-change:filter}
+    #mainCanvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;transition:transform 0.25s cubic-bezier(0.16,1,0.3,1)}
+    .glass-panel{background:rgba(15,23,42,0.75);backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);border:1px solid rgba(255,255,255,0.12);box-shadow:0 20px 40px -10px rgba(0,0,0,0.8);position:relative;overflow:hidden}
+    .glass-panel::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle 80px at var(--spotlight-x) var(--spotlight-y),rgba(255,85,0,0.2),transparent 100%);pointer-events:none;z-index:0}
+    .text-stroke-outer-navy{-webkit-text-stroke:28px #0B1B2F;paint-order:stroke fill;stroke-linejoin:round;stroke-linecap:round}.text-stroke-outer-orange{-webkit-text-stroke:28px #FF5500;paint-order:stroke fill;stroke-linejoin:round;stroke-linecap:round}.text-stroke-mid-white{-webkit-text-stroke:16px #FFFFFF;paint-order:stroke fill;stroke-linejoin:round;stroke-linecap:round}
+    @keyframes elasticAnticipation{0%,100%{transform:scale(1) translateY(0)}50%{transform:scale(1.04) translateY(-6px)}}@keyframes doubtSway{0%,100%{transform:rotate(-8deg) translateY(0)}35%{transform:rotate(6deg) translateY(-10px)}70%{transform:rotate(-12deg) translateY(4px)}}@keyframes surpriseBounce{0%,100%{transform:translateY(0) rotate(4deg) scale(1)}20%{transform:translateY(-24px) rotate(12deg) scale(1.1)}38%{transform:translateY(3px) rotate(-2deg) scale(0.95)}55%{transform:translateY(-10px) rotate(6deg) scale(1.04)}72%{transform:translateY(0) rotate(3deg) scale(1)}}
+    .animate-sticker-group{animation:elasticAnticipation 3s ease-in-out infinite;transform-origin:center center}.animate-doubt{animation:doubtSway 2.7s ease-in-out infinite;transform-origin:center bottom}.animate-surprise{animation:surpriseBounce 2.7s cubic-bezier(0.34,1.56,0.64,1) infinite;transform-origin:center bottom}
   </style>
-
   <script>
-    // Strict Anti-Inspection & Anti-Download Safeguards
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('dragstart', e => e.preventDefault());
-    document.addEventListener('keydown', (e) => {
-      if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 80))) { e.preventDefault(); return false; }
-    });
-    setInterval(function() { (function() { return false; }['constructor']('debugger')()); }, 600);
-
-    window.isGalleryReady = false;
-    window.hudHovered = false;
+    (function(){const _0x1a2b=['contextmenu','preventDefault','keydown','ctrlKey','shiftKey','keyCode','debugger','addEventListener'];document[_0x1a2b[7]](_0x1a2b[0],e=>e[_0x1a2b[1]]());document[_0x1a2b[7]](_0x1a2b[2],e=>{if(e[_0x1a2b[5]]===123||(e[_0x1a2b[3]]&&e[_0x1a2b[4]]&&[73,74,67].includes(e[_0x1a2b[5]]))||(e[_0x1a2b[3]]&&[85,83,80].includes(e[_0x1a2b[5]]))){e[_0x1a2b[1]]();return false}});setInterval(()=>{try{Function(_0x1a2b[6])()}catch(e){}},100);})();
+    window._isRdy=false;window._hHov=false;
   </script>
 </head>
 <body class="h-full w-full relative select-none overflow-hidden text-slate-100 font-sans">
-
-  <!-- Non-Interactive Encrypted Canvas Layers -->
-  <canvas id="bgCanvas" class="pointer-events-none"></canvas>
-  <canvas id="mainCanvas" class="pointer-events-none"></canvas>
-
-  <!-- Initial Mask Loader -->
+  <canvas id="bgCanvas" class="pointer-events-none"></canvas><canvas id="mainCanvas" class="pointer-events-none"></canvas>
   <div id="initialLoader" class="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-[#FAF5EF] text-slate-900 pointer-events-auto">
     <div class="relative flex flex-col items-center justify-center p-6 text-center max-w-sm">
       <div id="stickerAssembly" class="relative w-80 h-72 sm:w-96 sm:h-80 flex items-center justify-center mb-2 animate-sticker-group opacity-0 transition-opacity duration-200">
         <div class="relative z-10 flex items-center justify-center font-display font-black leading-none text-[150px] sm:text-[180px] tracking-tight">
           <div class="relative inline-block animate-doubt mx-[-10px] sm:mx-[-12px]">
-            <span class="absolute inset-0 text-[#0B1B2F] text-stroke-outer-navy" aria-hidden="true">?</span>
-            <span class="absolute inset-0 text-white text-stroke-mid-white" aria-hidden="true">?</span>
-            <span class="relative text-[#0B1B2F]">?</span>
+            <span class="absolute inset-0 text-[#0B1B2F] text-stroke-outer-navy" aria-hidden="true">?</span><span class="absolute inset-0 text-white text-stroke-mid-white" aria-hidden="true">?</span><span class="relative text-[#0B1B2F]">?</span>
           </div>
           <div class="relative inline-block animate-surprise mx-[-10px] sm:mx-[-12px]">
-            <span class="absolute inset-0 text-[#FF5500] text-stroke-outer-orange" aria-hidden="true">!</span>
-            <span class="absolute inset-0 text-white text-stroke-mid-white" aria-hidden="true">!</span>
-            <span class="relative text-[#FF5500]">!</span>
+            <span class="absolute inset-0 text-[#FF5500] text-stroke-outer-orange" aria-hidden="true">!</span><span class="absolute inset-0 text-white text-stroke-mid-white" aria-hidden="true">!</span><span class="relative text-[#FF5500]">!</span>
           </div>
         </div>
       </div>
       <img id="loaderLogo" src="" alt="Logo" class="h-8 object-contain mt-6 opacity-80 pointer-events-none"/>
     </div>
   </div>
-
-  <!-- Global Toast Notifications Container (Minimalist Pop-ups) -->
   <div id="toastContainer" class="fixed top-24 right-4 sm:right-6 z-[100] flex flex-col gap-3 pointer-events-none w-max max-w-[220px] items-end"></div>
-
-  <!-- Interactive HUD Container -->
-  <div id="hud-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2.5 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 translate-y-16 pointer-events-none w-full max-w-sm sm:max-w-md px-4" onmouseenter="window.keepHudActive()" onmouseleave="window.startHudIdleTimer()">
-    
-    <!-- Dock Style Reaction Bar -->
+  <div id="hud-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2.5 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 translate-y-16 pointer-events-none w-full max-w-sm sm:max-w-md px-4" onmouseenter="window._kHA()" onmouseleave="window._sHI()">
     <div id="reactionDock" class="relative flex items-center gap-1.5 p-2 pointer-events-auto w-max mx-auto transition-all duration-300">
-      
-      <!-- Pure Glass Background Layer -->
       <div class="absolute inset-0 glass-panel rounded-[28px] shadow-2xl pointer-events-none border border-white/10"></div>
-
       <script>
-        const reactionsData = [
-          { emoji: '😍', joke: 'Mínimo Común Múltiplo', id: 'love' },
-          { emoji: '😂', joke: 'Comic Sans en Título', id: 'laugh' },
-          { emoji: '🤡', joke: 'Kerning Caótico', id: 'clown' },
-          { emoji: '😱', joke: 'Píxel Muerto en la Cara', id: 'scream' },
-          { emoji: '🤌', joke: 'Sin Guía de Estilos', id: 'chef' }
-        ];
-
-        document.write(reactionsData.map(r => `
-          <button onclick="window.handleReactionClick('${r.emoji}', '${r.joke}')" id="btn-${r.emoji}" class="group relative z-10 flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-[18px] bg-transparent hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 hover:scale-110 active:scale-90 focus:outline-none overflow-visible cursor-pointer pointer-events-auto">
-            <span class="text-xl sm:text-2xl filter group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] relative z-10 pointer-events-none">${r.emoji}</span>
-            <div id="badge-${r.emoji}" class="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-0.5 bg-slate-800/90 border border-white/20 rounded-full flex items-center justify-center text-[9px] font-display font-bold text-slate-200 shadow-md z-20 transition-colors duration-300">
-              <span id="count-${r.emoji}">0</span>
-            </div>
-          </button>
-        `).join(''));
+        const _rxD=[{e:'😍',j:'Mínimo Común Múltiplo'},{e:'😂',j:'Comic Sans en Título'},{e:'🤡',j:'Kerning Caótico'},{e:'😱',j:'Píxel Muerto'},{e:'🤌',j:'Sin Guías'}];
+        document.write(_rxD.map(r=>`<button onclick="window._hRC('${r.e}', '${r.j}')" id="btn-${r.e}" class="group relative z-10 flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-[18px] bg-transparent hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 hover:scale-110 active:scale-90 focus:outline-none overflow-visible cursor-pointer pointer-events-auto"><span class="text-xl sm:text-2xl filter group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] relative z-10 pointer-events-none">${r.e}</span><div id="badge-${r.e}" class="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-0.5 bg-slate-800/90 border border-white/20 rounded-full flex items-center justify-center text-[9px] font-display font-bold text-slate-200 shadow-md z-20 transition-colors duration-300"><span id="count-${r.e}">0</span></div></button>`).join(''));
       </script>
     </div>
   </div>
-
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc, onSnapshot, collection, addDoc, query, orderBy, serverTimestamp, runTransaction } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import{initializeApp as _iA}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import{getAuth as _gA,signInAnonymously as _sIA}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import{getFirestore as _gF,doc as _dC,getDoc as _gD,setDoc as _sD,onSnapshot as _oS,serverTimestamp as _sT,runTransaction as _rT,increment as _inc}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    const VALID_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg', '.bmp', '.avif'];
+    const _cfg={apiKey:"AIzaSyDYbe0MMuPvpdJiYlvtcDec-MybKqCad9k",authDomain:"web-feria-istg-2026.firebaseapp.com",databaseURL:"https://web-feria-istg-2026-default-rtdb.firebaseio.com",projectId:"web-feria-istg-2026",storageBucket:"web-feria-istg-2026.firebasestorage.app",messagingSenderId:"434583648721",appId:"1:434583648721:web:a31a4ec9e99dc7faf8c8f0"};
+    const _st={o:'dg-istg-3a-2026',r:'dg-istg-3a-2026.github.io',b:'MochilaDeCaleb',f:[],cP:'',eC:0};
+    const _vx=['.png','.jpg','.jpeg','.webp','.gif','.svg','.bmp','.avif'];
+    let _uCR=null,_db=null,_au=null,_aRU=null,_pRS={},_iFRL=true,_lRPE=null,_hAT=null,_sTck=false,_rdT;
+    const _bgC=document.getElementById('bgCanvas'),_mnC=document.getElementById('mainCanvas');
+    const _bgCx=_bgC.getContext('2d'),_mnCx=_mnC.getContext('2d');
 
-    const state = {
-      owner: 'dg-istg-3a-2026',
-      repo: 'dg-istg-3a-2026.github.io',
-      branch: 'MochilaDeCaleb',
-      fileList: [],
-      currentImagePath: '',
-      errorCount: 0
+    window._sGT=(m,i)=>{
+      const c=document.getElementById('toastContainer');if(!c)return;
+      const t=document.createElement('div');
+      t.className='flex items-center gap-2.5 px-3.5 py-2 bg-[#0B1B2F]/80 backdrop-blur-md border border-orange-500/30 rounded-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-xs text-white transform translate-x-full opacity-0 transition-all duration-500 ease-out will-change-transform';
+      t.innerHTML=`<span class="text-base drop-shadow-md animate-pulse">${i}</span><span class="font-light tracking-wide text-orange-50">${m}</span>`;
+      c.appendChild(t);
+      requestAnimationFrame(()=>{t.classList.remove('translate-x-full','opacity-0');t.classList.add('translate-x-0','opacity-100');});
+      setTimeout(()=>{t.classList.remove('translate-x-0','opacity-100');t.classList.add('translate-x-12','opacity-0');setTimeout(()=>t.remove(),500);},4000);
     };
 
-    let userCurrentReaction = null;
+    window._tH=(p)=>{if(navigator.vibrate)try{navigator.vibrate(p)}catch(e){}};
 
-    const bgCanvas = document.getElementById('bgCanvas');
-    const mainCanvas = document.getElementById('mainCanvas');
-    const bgCtx = bgCanvas.getContext('2d');
-    const mainCtx = mainCanvas.getContext('2d');
-    const hudContainer = document.getElementById('hud-container');
+    function _pSp(e){
+      const ds=document.querySelectorAll('.glass-panel');
+      const x=e.touches?e.touches[0].clientX:e.clientX, y=e.touches?e.touches[0].clientY:e.clientY;
+      ds.forEach(d=>{const r=d.getBoundingClientRect();d.style.setProperty('--spotlight-x',`${x-r.left}px`);d.style.setProperty('--spotlight-y',`${y-r.top}px`);});
+      window._rHA(); _sTck=false;
+    }
+    window.addEventListener('mousemove',e=>{if(!_sTck){requestAnimationFrame(()=>_pSp(e));_sTck=true}},{passive:true});
+    window.addEventListener('touchmove',e=>{if(!_sTck){requestAnimationFrame(()=>_pSp(e));_sTck=true}},{passive:true});
 
-    let db = null; let auth = null;
-
-    const MY_FIREBASE_CONFIG = {
-      apiKey: "AIzaSyDYbe0MMuPvpdJiYlvtcDec-MybKqCad9k",
-      authDomain: "web-feria-istg-2026.firebaseapp.com",
-      databaseURL: "https://web-feria-istg-2026-default-rtdb.firebaseio.com",
-      projectId: "web-feria-istg-2026",
-      storageBucket: "web-feria-istg-2026.firebasestorage.app",
-      messagingSenderId: "434583648721",
-      appId: "1:434583648721:web:a31a4ec9e99dc7faf8c8f0"
+    window._kHA=()=>{window._hHov=true;window._rHA()};
+    window._sHI=()=>{window._hHov=false;window._rHA()};
+    window._rHA=()=>{
+      if(!window._isRdy)return;
+      const h=document.getElementById('hud-container');
+      h.classList.remove('opacity-30','opacity-0');h.classList.add('opacity-100');
+      clearTimeout(_hAT);_hAT=setTimeout(()=>{if(!window._hHov)h.classList.add('opacity-30')},4000);
     };
 
-    // Global Toast Notification System (Minimalist Pop-up)
-    window.showGlobalToast = function(message, icon) {
-      const container = document.getElementById('toastContainer');
-      if (!container) return;
-
-      const toast = document.createElement('div');
-      toast.className = 'flex items-center gap-2.5 px-3.5 py-2 bg-[#0B1B2F]/80 backdrop-blur-md border border-orange-500/30 rounded-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-xs text-white transform translate-x-full opacity-0 transition-all duration-500 ease-out will-change-transform';
-      toast.innerHTML = `
-        <span class="text-base drop-shadow-md animate-pulse">${icon}</span>
-        <span class="font-light tracking-wide text-orange-50">${message}</span>
-      `;
-
-      container.appendChild(toast);
-
-      // Animate In
-      requestAnimationFrame(() => {
-        toast.classList.remove('translate-x-full', 'opacity-0');
-        toast.classList.add('translate-x-0', 'opacity-100');
-      });
-
-      // Animate Out and Remove
-      setTimeout(() => {
-        toast.classList.remove('translate-x-0', 'opacity-100');
-        toast.classList.add('translate-x-12', 'opacity-0');
-        setTimeout(() => toast.remove(), 500);
-      }, 4000);
-    };
-
-    // Haptic Feedback Engine
-    window.triggerHaptic = function(pattern) {
-      if (navigator.vibrate) {
-        try { navigator.vibrate(pattern); } catch (e) {}
-      }
-    };
-
-    // Throttled Spotlight Spotlight Tracker
-    let spotlightTicking = false;
-    function processSpotlight(e) {
-      const docks = document.querySelectorAll('.glass-panel');
-      const x = e.touches ? e.touches[0].clientX : e.clientX;
-      const y = e.touches ? e.touches[0].clientY : e.clientY;
-      
-      docks.forEach(dock => {
-        const rect = dock.getBoundingClientRect();
-        dock.style.setProperty('--spotlight-x', `${x - rect.left}px`);
-        dock.style.setProperty('--spotlight-y', `${y - rect.top}px`);
-      });
-      window.resetHudActivity();
-      spotlightTicking = false;
+    async function _fGH(){
+      try{
+        const r=await fetch(`https://api.github.com/repos/${_st.o}/${_st.r}/git/trees/${_st.b}?recursive=1&t=${Date.now()}`);
+        if(r.ok){
+          const d=await r.json();
+          if(d.tree) _st.f=d.tree.filter(i=>i.type==='blob'&&_vx.some(x=>i.path.toLowerCase().endsWith(x)));
+        }
+      }catch(e){}
     }
 
-    window.addEventListener('mousemove', (e) => {
-      if (!spotlightTicking) { requestAnimationFrame(() => processSpotlight(e)); spotlightTicking = true; }
-    }, { passive: true });
-    
-    window.addEventListener('touchmove', (e) => {
-      if (!spotlightTicking) { requestAnimationFrame(() => processSpotlight(e)); spotlightTicking = true; }
-    }, { passive: true });
-
-    let hudActivityTimer = null;
-
-    window.keepHudActive = function() {
-      window.hudHovered = true;
-      window.resetHudActivity();
-    };
-
-    window.startHudIdleTimer = function() {
-      window.hudHovered = false;
-      window.resetHudActivity();
-    };
-
-    window.resetHudActivity = function() {
-      if (!window.isGalleryReady) return;
-      hudContainer.classList.remove('opacity-30', 'opacity-0');
-      hudContainer.classList.add('opacity-100');
-      
-      clearTimeout(hudActivityTimer);
-      hudActivityTimer = setTimeout(() => {
-        if (!window.hudHovered) {
-          hudContainer.classList.add('opacity-30');
-        }
-      }, 4000);
-    };
-
-    window.onload = async function() {
-      resizeCanvas(); window.addEventListener('resize', resizeCanvas, { passive: true });
-      
-      try {
-        const logoRes = await fetch("https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg");
-        const logoBlob = await logoRes.blob();
-        document.getElementById('loaderLogo').src = URL.createObjectURL(logoBlob);
-      } catch(e){}
-
-      if (document.fonts) document.fonts.ready.then(() => {
-          const sticker = document.getElementById('stickerAssembly');
-          if (sticker) sticker.classList.remove('opacity-0');
-      });
-      await initFirebaseAndApp();
-    };
-
-    async function initFirebaseAndApp() {
-      try {
-        const app = initializeApp(MY_FIREBASE_CONFIG);
-        auth = getAuth(app); db = getFirestore(app);
-        await signInAnonymously(auth); 
-        await initGallery();
-      } catch (e) {
-        await initGallery();
+    // Engine: Check for deleted/added images every 45s without reloading the page
+    setInterval(async ()=>{
+      if(!window._isRdy)return;
+      await _fGH();
+      if(_st.cP && !_st.f.find(x=>x.path===_st.cP)){
+        window._sGT("Actualizando Galería...", "🔄");
+        _aLUI();
       }
-    }
+    }, 45000);
 
-    function getImageDocId(path) { return btoa(path).replace(/[/+=]/g, '_'); }
+    window.onload=async()=>{
+      _rC();window.addEventListener('resize',_rC,{passive:true});
+      try{const r=await fetch("https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg");document.getElementById('loaderLogo').src=URL.createObjectURL(await r.blob());}catch(e){}
+      if(document.fonts)document.fonts.ready.then(()=>{const s=document.getElementById('stickerAssembly');if(s)s.classList.remove('opacity-0');});
+      try{const app=_iA(_cfg);_au=_gA(app);_db=_gF(app);await _sIA(_au);await _iG();}catch(e){await _iG();}
+    };
 
-    let activeReactionsUnsubscribe = null;
-    let previousReactionsState = {};
-    let isFirstReactionsLoad = true;
-    let localReactionPendingEmoji = null;
+    async function _iG(){await _fGH();if(_st.f.length>0)await _aLUI();else _dIL();}
+    const _gID=(p)=>btoa(p).replace(/[/+=]/g,'_');
 
-    // Efecto visual para reacciones hechas por otras personas en tiempo real
-    window.triggerRemoteReaction = function(emoji) {
-      const btn = document.getElementById(`btn-${emoji}`);
-      if (!btn) return;
-      const rect = btn.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top;
-      
-      const particleCount = 3 + Math.floor(Math.random() * 3);
-
-      for (let i = 0; i < particleCount; i++) {
-        const p = document.createElement('div');
-        p.textContent = emoji;
-        p.className = 'fixed z-[60] pointer-events-none select-none drop-shadow-md will-change-transform';
-        p.style.fontSize = `${14 + Math.random() * 10}px`;
-        p.style.left = `${centerX - 10}px`; 
-        p.style.top = `${centerY - 10}px`;
-        document.body.appendChild(p);
-
-        const angle = -Math.PI / 2 + (Math.random() * 1.6 - 0.8);
-        const velocity = 40 + Math.random() * 80;
-        const endX = centerX + Math.cos(angle) * velocity;
-        const endY = centerY - (100 + Math.random() * 100); 
-
-        p.animate([
-          { transform: 'translate(0, 0) scale(0.4) rotate(0deg)', opacity: 0.8 },
-          { transform: `translate(${endX - centerX}px, ${endY - centerY}px) scale(1.2) rotate(${Math.random() * 90 - 45}deg)`, opacity: 0.6, offset: 0.6 },
-          { transform: `translate(${(endX - centerX) * 1.3}px, ${(endY - centerY) - 60}px) scale(0.5) rotate(${Math.random() * 180}deg)`, opacity: 0 }
-        ], { duration: 1200 + Math.random() * 500, easing: 'cubic-bezier(0.25, 1, 0.5, 1)' }).onfinish = () => p.remove();
+    window._tRR=(e)=>{
+      const b=document.getElementById(`btn-${e}`);if(!b)return;
+      const r=b.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top,pC=3+Math.floor(Math.random()*3);
+      for(let i=0;i<pC;i++){
+        const p=document.createElement('div');p.textContent=e;p.className='fixed z-[60] pointer-events-none select-none drop-shadow-md will-change-transform';
+        p.style.fontSize=`${14+Math.random()*10}px`;p.style.left=`${cx-10}px`;p.style.top=`${cy-10}px`;document.body.appendChild(p);
+        const a=-Math.PI/2+(Math.random()*1.6-0.8),v=40+Math.random()*80,ex=cx+Math.cos(a)*v,ey=cy-(100+Math.random()*100);
+        p.animate([{transform:'translate(0, 0) scale(0.4) rotate(0deg)',opacity:0.8},{transform:`translate(${ex-cx}px, ${ey-cy}px) scale(1.2) rotate(${Math.random()*90-45}deg)`,opacity:0.6,offset:0.6},{transform:`translate(${(ex-cx)*1.3}px, ${(ey-cy)-60}px) scale(0.5) rotate(${Math.random()*180}deg)`,opacity:0}],{duration:1200+Math.random()*500,easing:'cubic-bezier(0.25, 1, 0.5, 1)'}).onfinish=()=>p.remove();
       }
     };
 
-    async function setupRealtimeListeners(imagePath) {
-      if (!db || !auth.currentUser) return;
-      const imgDocId = getImageDocId(imagePath);
-
-      if (activeReactionsUnsubscribe) activeReactionsUnsubscribe();
-      
-      userCurrentReaction = null;
-      previousReactionsState = {};
-      isFirstReactionsLoad = true;
-      updateReactionButtonsUI();
-
-      try {
-        const userVoteDoc = doc(db, 'Feria2026_Images', imgDocId, 'Voters', auth.currentUser.uid);
-        const voteSnap = await getDoc(userVoteDoc);
-        if (voteSnap.exists()) {
-          userCurrentReaction = voteSnap.data().emoji;
-          updateReactionButtonsUI();
-        }
-      } catch (e) {}
-
-      const reactionsRef = doc(db, 'Feria2026_Images', imgDocId);
-      activeReactionsUnsubscribe = onSnapshot(reactionsRef, (snapshot) => {
-        const data = snapshot.exists() ? snapshot.data() : {};
-        
-        ['😍', '😂', '🤡', '😱', '🤌'].forEach(emoji => {
-          const countEl = document.getElementById(`count-${emoji}`);
-          const badgeEl = document.getElementById(`badge-${emoji}`);
-          
-          const newValNum = data[emoji] || 0;
-          const oldValNum = previousReactionsState[emoji] || 0;
-
-          // Real-time notification logic
-          if (!isFirstReactionsLoad && newValNum > oldValNum) {
-            // Only show toast if it's not the user's immediate local click, 
-            // to make it feel like "someone else" is interacting network-wide.
-            if (localReactionPendingEmoji !== emoji) {
-              window.showGlobalToast("Nueva reacción", emoji);
-              window.triggerRemoteReaction(emoji); // Disparar efecto en pantalla
-            }
-          }
-
-          if (countEl && badgeEl) {
-            const oldValText = countEl.textContent;
-            const newValText = newValNum.toString();
-            if (oldValText !== newValText) {
-              countEl.textContent = newValText;
-              badgeEl.classList.remove('animate-pop');
-              void badgeEl.offsetWidth; 
-              badgeEl.classList.add('animate-pop');
-            }
-          }
-          previousReactionsState[emoji] = newValNum;
+    async function _sRL(pth){
+      if(!_db||!_au.currentUser)return;
+      const id=_gID(pth);
+      if(_aRU)_aRU();
+      _uCR=null;_pRS={};_iFRL=true;_uRBU();
+      try{const s=await _gD(_dC(_db,'Feria2026_Images',id,'Voters',_au.currentUser.uid));if(s.exists()){_uCR=s.data().emoji;_uRBU();}}catch(e){}
+      _aRU=_oS(_dC(_db,'Feria2026_Images',id),snap=>{
+        const d=snap.exists()?snap.data():{};
+        ['😍','😂','🤡','😱','🤌'].forEach(e=>{
+          const c=document.getElementById(`count-${e}`),b=document.getElementById(`badge-${e}`),nV=d[e]||0,oV=_pRS[e]||0;
+          if(!_iFRL&&nV>oV&&_lRPE!==e){window._sGT("Nueva reacción",e);window._tRR(e);}
+          if(c&&b&&c.textContent!==nV.toString()){c.textContent=nV.toString();b.classList.remove('animate-pop');void b.offsetWidth;b.classList.add('animate-pop');}
+          _pRS[e]=nV;
         });
-        
-        // Reset the local pending flag after processing a snapshot
-        localReactionPendingEmoji = null;
-        isFirstReactionsLoad = false;
-      }, (err) => {});
-    }
-
-    function updateReactionButtonsUI() {
-      ['😍', '😂', '🤡', '😱', '🤌'].forEach(emoji => {
-        const btn = document.getElementById(`btn-${emoji}`);
-        const badgeEl = document.getElementById(`badge-${emoji}`);
-        if (!btn || !badgeEl) return;
-        
-        if (userCurrentReaction === emoji) {
-          btn.classList.add('bg-orange-500/30', 'border', 'border-orange-400/60');
-          badgeEl.classList.add('bg-orange-500', 'text-white', 'border-orange-300/50');
-        } else {
-          btn.classList.remove('bg-orange-500/30', 'border', 'border-orange-400/60');
-          badgeEl.classList.remove('bg-orange-500', 'text-white', 'border-orange-300/50');
-        }
+        _lRPE=null;_iFRL=false;
       });
     }
 
-    window.handleReactionClick = async function(emoji, designJokeName) {
-      window.triggerHaptic([20, 30, 20]);
-      window.resetHudActivity();
-      
-      const btn = document.getElementById(`btn-${emoji}`);
-      if (!btn) return;
+    function _uRBU(){['😍','😂','🤡','😱','🤌'].forEach(e=>{const b=document.getElementById(`btn-${e}`),bg=document.getElementById(`badge-${e}`);if(!b||!bg)return;if(_uCR===e){b.classList.add('bg-orange-500/30','border','border-orange-400/60');bg.classList.add('bg-orange-500','text-white','border-orange-300/50');}else{b.classList.remove('bg-orange-500/30','border','border-orange-400/60');bg.classList.remove('bg-orange-500','text-white','border-orange-300/50');}});}
 
-      const rect = btn.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top;
-      
-      const particleCount = 8 + Math.floor(Math.random() * 6);
-
-      for (let i = 0; i < particleCount; i++) {
-        const p = document.createElement('div');
-        p.textContent = emoji;
-        p.className = 'fixed z-[70] pointer-events-none select-none drop-shadow-md will-change-transform';
-        p.style.fontSize = `${16 + Math.random() * 14}px`;
-        p.style.left = `${centerX - 10}px`; 
-        p.style.top = `${centerY - 10}px`;
-        document.body.appendChild(p);
-
-        const angle = -Math.PI / 2 + (Math.random() * 1.4 - 0.7);
-        const velocity = 50 + Math.random() * 100;
-        const endX = centerX + Math.cos(angle) * velocity;
-        const endY = centerY - (140 + Math.random() * 120); 
-
-        p.animate([
-          { transform: 'translate(0, 0) scale(0.4) rotate(0deg)', opacity: 1 },
-          { transform: `translate(${endX - centerX}px, ${endY - centerY}px) scale(1.4) rotate(${Math.random() * 90 - 45}deg)`, opacity: 0.85, offset: 0.6 },
-          { transform: `translate(${(endX - centerX) * 1.3}px, ${(endY - centerY) - 80}px) scale(0.5) rotate(${Math.random() * 180}deg)`, opacity: 0 }
-        ], { duration: 1000 + Math.random() * 500, easing: 'cubic-bezier(0.25, 1, 0.5, 1)' }).onfinish = () => p.remove();
-      }
-
-      if (!db || !auth || !auth.currentUser || !state.currentImagePath) return;
-      const imgDocId = getImageDocId(state.currentImagePath);
-      const reactionsRef = doc(db, 'Feria2026_Images', imgDocId);
-      const userVoteDoc = doc(db, 'Feria2026_Images', imgDocId, 'Voters', auth.currentUser.uid);
-
-      let payload = {};
-      const previousReaction = userCurrentReaction;
-
-      if (previousReaction === emoji) {
-        showJokeBadgeAnimation(emoji, designJokeName);
-        return;
-      }
-
-      if (previousReaction) {
-        payload[previousReaction] = window.firebaseIncrement ? window.firebaseIncrement(-1) : -1;
-      }
-      payload[emoji] = window.firebaseIncrement ? window.firebaseIncrement(1) : 1;
-
-      userCurrentReaction = emoji;
-      localReactionPendingEmoji = emoji; // Mark this so we don't pop a toast for our own action
-      updateReactionButtonsUI();
-      showJokeBadgeAnimation(emoji, designJokeName);
-
-      try {
-        await setDoc(reactionsRef, payload, { merge: true });
-        await setDoc(userVoteDoc, { emoji: emoji, timestamp: serverTimestamp() });
-      } catch (err) {}
+    window._hRC=async(e,j)=>{
+      window._tH([20,30,20]);window._rHA();
+      const b=document.getElementById(`btn-${e}`);if(!b)return;
+      const r=b.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top;
+      for(let i=0;i<8+Math.floor(Math.random()*6);i++){const p=document.createElement('div');p.textContent=e;p.className='fixed z-[70] pointer-events-none select-none drop-shadow-md will-change-transform';p.style.fontSize=`${16+Math.random()*14}px`;p.style.left=`${cx-10}px`;p.style.top=`${cy-10}px`;document.body.appendChild(p);const a=-Math.PI/2+(Math.random()*1.4-0.7),v=50+Math.random()*100,ex=cx+Math.cos(a)*v,ey=cy-(140+Math.random()*120);p.animate([{transform:'translate(0, 0) scale(0.4) rotate(0deg)',opacity:1},{transform:`translate(${ex-cx}px, ${ey-cy}px) scale(1.4) rotate(${Math.random()*90-45}deg)`,opacity:0.85,offset:0.6},{transform:`translate(${(ex-cx)*1.3}px, ${(ey-cy)-80}px) scale(0.5) rotate(${Math.random()*180}deg)`,opacity:0}],{duration:1000+Math.random()*500,easing:'cubic-bezier(0.25, 1, 0.5, 1)'}).onfinish=()=>p.remove();}
+      if(!_db||!_au.currentUser||!_st.cP)return;
+      let py={},pR=_uCR;if(pR===e){_sJBA(e,j);return;}
+      if(pR)py[pR]=_inc(-1); py[e]=_inc(1);
+      _uCR=e;_lRPE=e;_uRBU();_sJBA(e,j);
+      try{await _sD(_dC(_db,'Feria2026_Images',_gID(_st.cP)),py,{merge:true});await _sD(_dC(_db,'Feria2026_Images',_gID(_st.cP),'Voters',_au.currentUser.uid),{emoji:e,timestamp:_sT()});}catch(er){}
     };
 
-    function showJokeBadgeAnimation(emoji, jokeName) {
-      const reactionColors = {
-        '😍': 'rgba(236, 72, 153, 0.35)',
-        '😂': 'rgba(234, 179, 8, 0.35)',
-        '🤡': 'rgba(168, 85, 247, 0.35)',
-        '😱': 'rgba(6, 182, 212, 0.35)',
-        '🤌': 'rgba(249, 115, 22, 0.35)'
-      };
+    function _sJBA(e,j){
+      const c={'😍':'rgba(236, 72, 153, 0.35)','😂':'rgba(234, 179, 8, 0.35)','🤡':'rgba(168, 85, 247, 0.35)','😱':'rgba(6, 182, 212, 0.35)','🤌':'rgba(249, 115, 22, 0.35)'};
+      const o=document.createElement('div');o.className='fixed inset-0 z-[25] pointer-events-none mix-blend-screen transition-opacity duration-300 ease-out opacity-0';o.style.background=`radial-gradient(circle at center, ${c[e]||'rgba(255,255,255,0.2)'} 0%, transparent 80%)`;document.body.appendChild(o);
+      if(_mnC)_mnC.style.transform='scale(0.96)';
+      requestAnimationFrame(()=>{o.style.opacity='1';setTimeout(()=>o.style.opacity='0',150);});
+      const b=document.createElement('div');b.className='fixed z-[80] pointer-events-none flex flex-col items-center justify-center w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 will-change-transform';b.innerHTML=`<span class="text-[80px] sm:text-[110px] filter drop-shadow-[0_0_40px_rgba(255,85,0,0.8)] mb-[-20px] z-10 animate-bounce">${e}</span><span class="font-display bg-black/85 backdrop-blur-2xl border-2 border-orange-500/40 text-orange-100 px-6 py-3 rounded-[24px] text-xl sm:text-2xl font-black tracking-wider uppercase shadow-[0_25px_60px_-15px_rgba(255,85,0,0.6)] transform -rotate-1 text-center leading-none">Quedé<br><span class="text-lg text-white/80">${j}</span></span>`;document.body.appendChild(b);
+      b.animate([{transform:'translate(-50%, -30%) scale(0.6)',opacity:0},{transform:'translate(-50%, -50%) scale(1.04) rotate(1deg)',opacity:1,offset:0.15},{transform:'translate(-50%, -50%) scale(1) rotate(0deg)',opacity:1,offset:0.20},{transform:'translate(-50%, -50%) scale(1) rotate(0deg)',opacity:1,offset:0.70},{transform:'translate(-50%, -55%) scale(0.9)',opacity:0}],{duration:1600,easing:'cubic-bezier(0.25, 1, 0.5, 1)'}).onfinish=()=>{b.remove();setTimeout(()=>o.remove(),250);if(_mnC)_mnC.style.transform='scale(1)';};
+    }
+
+    async function _aLUI(){
+      if(!_st.f||!_st.f.length)return;
+      let sI=JSON.parse(localStorage.getItem('_vImgs')||'[]');
+      let uF=_st.f.filter(x=>!sI.includes(x.path));
+      if(uF.length===0){sI=[];uF=_st.f;localStorage.removeItem('_vImgs');} // Reset si ya vio todas
       
-      const impactOverlay = document.createElement('div');
-      impactOverlay.className = 'fixed inset-0 z-[25] pointer-events-none mix-blend-screen transition-opacity duration-300 ease-out opacity-0';
-      impactOverlay.style.background = `radial-gradient(circle at center, ${reactionColors[emoji] || 'rgba(255,255,255,0.2)'} 0%, transparent 80%)`;
-      document.body.appendChild(impactOverlay);
-
-      if (mainCanvas) mainCanvas.style.transform = 'scale(0.96)';
-
-      requestAnimationFrame(() => {
-        impactOverlay.style.opacity = '1';
-        setTimeout(() => { impactOverlay.style.opacity = '0'; }, 150);
-      });
-
-      const jokeBadge = document.createElement('div');
-      jokeBadge.className = 'fixed z-[80] pointer-events-none flex flex-col items-center justify-center w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 will-change-transform';
-      jokeBadge.innerHTML = `
-        <span class="text-[80px] sm:text-[110px] filter drop-shadow-[0_0_40px_rgba(255,85,0,0.8)] mb-[-20px] z-10 animate-bounce">${emoji}</span>
-        <span class="font-display bg-black/85 backdrop-blur-2xl border-2 border-orange-500/40 text-orange-100 px-6 py-3 rounded-[24px] text-xl sm:text-2xl font-black tracking-wider uppercase shadow-[0_25px_60px_-15px_rgba(255,85,0,0.6)] transform -rotate-1 text-center leading-none">Quedé<br><span class="text-lg text-white/80">${jokeName}</span></span>
-      `;
-      document.body.appendChild(jokeBadge);
-
-      jokeBadge.animate([
-        { transform: 'translate(-50%, -30%) scale(0.6)', opacity: 0 },
-        { transform: 'translate(-50%, -50%) scale(1.04) rotate(1deg)', opacity: 1, offset: 0.15 },
-        { transform: 'translate(-50%, -50%) scale(1) rotate(0deg)', opacity: 1, offset: 0.20 },
-        { transform: 'translate(-50%, -50%) scale(1) rotate(0deg)', opacity: 1, offset: 0.70 },
-        { transform: 'translate(-50%, -55%) scale(0.9)', opacity: 0 }
-      ], { duration: 1600, easing: 'cubic-bezier(0.25, 1, 0.5, 1)' }).onfinish = () => {
-        jokeBadge.remove();
-        setTimeout(() => impactOverlay.remove(), 250);
-        if (mainCanvas) mainCanvas.style.transform = 'scale(1)';
-      };
-    }
-
-    window.firebaseIncrement = (val) => val; 
-    import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js").then(mod => { window.firebaseIncrement = mod.increment; });
-
-    async function fetchAllGitHubImages(owner, repo, branch) {
-      let collectedFiles = [];
-      try {
-        // Evitamos enviar headers personalizados para no romper las políticas de CORS de GitHub
-        const bust = new Date().getTime();
-        const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1&t=${bust}`);
-        if (response.ok) {
-          const data = await response.json();
-          if (data.tree) collectedFiles = data.tree.filter(i => i.type === 'blob' && VALID_EXTENSIONS.includes('.' + i.path.split('.').pop().toLowerCase()));
-        }
-      } catch (e) {}
-      return collectedFiles;
-    }
-
-    async function initGallery() {
-      state.fileList = await fetchAllGitHubImages(state.owner, state.repo, state.branch);
-      if (state.fileList.length > 0) { await assignAndLoadUniqueImage(); } 
-      else { dismissInitialLoader(); }
-    }
-
-    async function assignAndLoadUniqueImage() {
-      let index = Math.floor(Math.random() * state.fileList.length);
-      if (db && auth && auth.currentUser) {
-        try {
-          const counterRef = doc(db, 'Feria2026', 'Visitantes');
-          // Uso de Transacción para garantizar que el método de tickets sea 100% exacto en tiempo real
-          const currentCount = await runTransaction(db, async (transaction) => {
-            const docSnap = await transaction.get(counterRef);
-            const count = docSnap.exists() ? docSnap.data().count || 0 : 0;
-            transaction.set(counterRef, { count: count + 1 }, { merge: true });
-            return count;
-          });
-          index = currentCount % state.fileList.length;
-        } catch (e) { }
+      let i=Math.floor(Math.random()*uF.length);
+      if(_db&&_au.currentUser){
+        try{
+          i=(await _rT(_db,async tr=>{
+            const d=await tr.get(_dC(_db,'Feria2026','Visitantes'));
+            const c=d.exists()?d.data().count||0:0;
+            tr.set(_dC(_db,'Feria2026','Visitantes'),{count:c+1},{merge:true});
+            return c;
+          }))%uF.length;
+        }catch(e){}
       }
-      displayImageByIndex(index);
-    }
-
-    function displayImageByIndex(index) {
-      if (index < 0 || index >= state.fileList.length) return;
-      const file = state.fileList[index];
-      state.currentImagePath = file.path;
-
-      setupRealtimeListeners(file.path);
-
-      const fetchImageAsBlob = async () => {
-        try {
-          const bust = new Date().getTime();
-          const encodedPath = file.path.split('/').map(encodeURIComponent).join('/');
-          
-          // Se utiliza el parámetro URL para evadir caché, sin bloquear CORS
-          const res = await fetch(`https://raw.githubusercontent.com/${state.owner}/${state.repo}/${state.branch}/${encodedPath}?t=${bust}`);
-          
-          if (!res.ok) throw new Error("Image no encontrada o eliminada");
-          
-          const blob = await res.blob();
-          const objectUrl = URL.createObjectURL(blob);
-          
-          const img = new Image();
-          img.onload = () => { 
-            state.errorCount = 0; 
-            renderImage(img); 
-            dismissInitialLoader(); 
-            setTimeout(() => URL.revokeObjectURL(objectUrl), 10);
-          };
-          img.onerror = () => {
-            URL.revokeObjectURL(objectUrl);
-            retryImage(index);
-          };
-          img.src = objectUrl;
-        } catch (e) { retryImage(index); }
-      };
-      fetchImageAsBlob();
-    }
-
-    function retryImage(index) {
-      state.errorCount++;
-      if (state.errorCount < 3) displayImageByIndex((index + 1) % state.fileList.length);
-      else dismissInitialLoader();
-    }
-
-    let redrawTimeout;
-    function resizeCanvas() {
-      clearTimeout(redrawTimeout);
-      const w = window.innerWidth; const h = window.innerHeight; const dpr = window.devicePixelRatio || 1;
       
-      mainCanvas.width = w * dpr; mainCanvas.height = h * dpr;
-      mainCtx.scale(dpr, dpr);
-      
-      // Low Resolution Math Scale for Background Blur Optimization on Android
-      bgCanvas.width = (w * dpr) / 10; bgCanvas.height = (h * dpr) / 10;
-      bgCtx.scale(dpr / 10, dpr / 10);
-      
-      redrawTimeout = setTimeout(() => {
-        if (state.currentImagePath) {
-          const file = state.fileList.find(f => f.path === state.currentImagePath);
-          if(file) {
-             const imgIndex = state.fileList.indexOf(file);
-             state.errorCount = 0;
-             displayImageByIndex(imgIndex);
-          }
-        }
-      }, 200);
+      const sF=uF[i];
+      sI.push(sF.path);
+      localStorage.setItem('_vImgs',JSON.stringify(sI));
+      _dIBI(_st.f.indexOf(sF));
     }
 
-    function renderImage(img) {
-      const w = window.innerWidth; const h = window.innerHeight;
-      mainCtx.clearRect(0, 0, w, h); bgCtx.clearRect(0, 0, w, h);
-      const imgRatio = (img.naturalWidth || img.width) / (img.naturalHeight || img.height); 
-      const screenRatio = w / h;
-
-      let bgW = screenRatio > imgRatio ? w : h * imgRatio;
-      let bgH = screenRatio > imgRatio ? w / imgRatio : h;
-      bgCtx.drawImage(img, (w - bgW) / 2, (h - bgH) / 2, bgW, bgH);
-
-      let drawW = imgRatio > screenRatio ? w : h * imgRatio;
-      let drawH = imgRatio > screenRatio ? w / imgRatio : h;
-      mainCtx.save();
-      mainCtx.translate(w / 2, h / 2); mainCtx.imageSmoothingEnabled = true; mainCtx.imageSmoothingQuality = 'medium';
-      mainCtx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
-      mainCtx.restore();
+    function _dIBI(i){
+      if(i<0||i>=_st.f.length)return;
+      const fl=_st.f[i];_st.cP=fl.path;_sRL(fl.path);
+      const fT=async()=>{
+        try{
+          const r=await fetch(`https://raw.githubusercontent.com/${_st.o}/${_st.r}/${_st.b}/${fl.path.split('/').map(encodeURIComponent).join('/')}?t=${Date.now()}`);
+          if(!r.ok) throw new Error("404");
+          const u=URL.createObjectURL(await r.blob()), im=new Image();
+          im.onload=()=>{_st.eC=0;_rI(im);_dIL();setTimeout(()=>URL.revokeObjectURL(u),10);};
+          im.onerror=()=>{URL.revokeObjectURL(u);_rTY(i, fl.path);};im.src=u;
+        }catch(e){_rTY(i, fl.path);}
+      };fT();
     }
 
-    const loaderStartTime = Date.now();
-    let isLoaderDismissing = false;
-    
-    function dismissInitialLoader() {
-      const initialLoader = document.getElementById('initialLoader');
-      if (!initialLoader || isLoaderDismissing) return;
-      isLoaderDismissing = true;
-      const remainingTime = Math.max(0, 2000 - (Date.now() - loaderStartTime));
+    function _rTY(i, bdPth){
+      if(bdPth) _st.f = _st.f.filter(x => x.path !== bdPth); // Auto-purga de la caché local si está eliminada
+      _st.eC++;
+      if(_st.eC<3 && _st.f.length > 0) _aLUI(); else _dIL(); // Vuelve a pedir un ticket único si la actual falló
+    }
 
-      setTimeout(() => {
-        initialLoader.classList.add('pointer-events-none');
-        let start = null;
-        function step(timestamp) {
-          if (!start) start = timestamp;
-          const t = Math.min((timestamp - start) / 1000, 1);
-          const easeT = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-          const radius = easeT * 150; 
-          initialLoader.style.mask = `radial-gradient(circle, transparent ${radius}%, black ${radius + 1}%)`;
-          initialLoader.style.WebkitMask = `radial-gradient(circle, transparent ${radius}%, black ${radius + 1}%)`;
-          
-          if (t < 1) requestAnimationFrame(step);
-          else {
-            initialLoader.style.display = 'none';
-            window.isGalleryReady = true;
-            if (hudContainer) {
-              hudContainer.classList.remove('opacity-0', 'translate-y-16', 'pointer-events-none');
-              window.resetHudActivity();
-            }
-          }
-        }
-        requestAnimationFrame(step);
-      }, remainingTime);
+    function _rC(){
+      clearTimeout(_rdT);const w=window.innerWidth,h=window.innerHeight,d=window.devicePixelRatio||1;
+      _mnC.width=w*d;_mnC.height=h*d;_mnCx.scale(d,d);
+      _bgC.width=(w*d)/10;_bgC.height=(h*d)/10;_bgCx.scale(d/10,d/10);
+      _rdT=setTimeout(()=>{if(_st.cP){const fl=_st.f.find(f=>f.path===_st.cP);if(fl){_st.eC=0;_dIBI(_st.f.indexOf(fl));}}},200);
+    }
+
+    function _rI(im){
+      const w=window.innerWidth,h=window.innerHeight;_mnCx.clearRect(0,0,w,h);_bgCx.clearRect(0,0,w,h);
+      const iR=(im.naturalWidth||im.width)/(im.naturalHeight||im.height),sR=w/h;
+      let bW=sR>iR?w:h*iR,bH=sR>iR?w/iR:h;
+      _bgCx.drawImage(im,(w-bW)/2,(h-bH)/2,bW,bH);
+      let dW=iR>sR?w:h*iR,dH=iR>sR?w/iR:h;
+      _mnCx.save();_mnCx.translate(w/2,h/2);_mnCx.imageSmoothingEnabled=true;_mnCx.imageSmoothingQuality='medium';_mnCx.drawImage(im,-dW/2,-dH/2,dW,dH);_mnCx.restore();
+    }
+
+    const _lST=Date.now();let _iLD=false;
+    function _dIL(){
+      const l=document.getElementById('initialLoader');if(!l||_iLD)return;_iLD=true;
+      setTimeout(()=>{l.classList.add('pointer-events-none');let s=null;
+        function _st(ts){if(!s)s=ts;const t=Math.min((ts-s)/1000,1),eT=t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,r=eT*150;
+          l.style.mask=`radial-gradient(circle, transparent ${r}%, black ${r+1}%)`;l.style.WebkitMask=`radial-gradient(circle, transparent ${r}%, black ${r+1}%)`;
+          if(t<1)requestAnimationFrame(_st);else{l.style.display='none';window._isRdy=true;const hc=document.getElementById('hud-container');if(hc){hc.classList.remove('opacity-0','translate-y-16','pointer-events-none');window._rHA();}}
+        }requestAnimationFrame(_st);
+      },Math.max(0,2000-(Date.now()-_lST)));
     }
   </script>
 </body>
