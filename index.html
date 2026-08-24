@@ -3,19 +3,24 @@
 <head>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y6LMRRHWH"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0Y6LMRRHWH');</script>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
+  
   <title>?!</title>
   <meta name="description" content="?! - Proyecto PIS. Exposición interactiva de Diseño Gráfico, ISTG - 2026.">
   <meta property="og:title" content="?! - Proyecto PIS Diseño Gráfico"><meta property="og:image" content="https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'%3E%3Cstyle%3E@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@900');text%7Bfont-family:'DynaPuff',system-ui,sans-serif;font-weight:900;font-size:80px;dominant-baseline:central;%7D.bg-q%7Bstroke:%230B1B2F;stroke-width:24px;stroke-linejoin:round;%7D.bg-e%7Bstroke:%23FF5500;stroke-width:24px;stroke-linejoin:round;%7D.md%7Bstroke:white;stroke-width:12px;stroke-linejoin:round;%7D.f-q%7Bfill:%230B1B2F;%7D.f-e%7Bfill:%23FF5500;%7D%3C/style%3E%3Ctext x='15' y='55' class='bg-q'%3E?%3C/text%3E%3Ctext x='15' y='55' class='md'%3E?%3C/text%3E%3Ctext x='15' y='55' class='f-q'%3E?%3C/text%3E%3Ctext x='70' y='55' class='bg-e'%3E!%3C/text%3E%3Ctext x='70' y='55' class='md'%3E!%3C/text%3E%3Ctext x='70' y='55' class='f-e'%3E!%3C/text%3E%3C/svg%3E">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@700;900&family=Inter:wght@300;400;600;700&display=block" rel="stylesheet">
+  
   <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],display:['DynaPuff','cursive']},animation:{'pop':'popCounter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards'},keyframes:{popCounter:{'0%':{transform:'scale(1)'},'50%':{transform:'scale(1.6) translateY(-4px)',backgroundColor:'#fb923c',color:'#fff'},'100%':{transform:'scale(1)'}}}}}}</script>
   
   <style>
-    :root{--spotlight-x:50%;--spotlight-y:50%}body,html{margin:0;padding:0;width:100%;height:100dvh;overflow:hidden;background-color:#232453;user-select:none;-webkit-user-select:none;touch-action:none;overscroll-behavior:none}
+    :root{--spotlight-x:50%;--spotlight-y:50%}
+    body,html{margin:0;padding:0;width:100%;height:100dvh;overflow:hidden;background-color:#232453;user-select:none;-webkit-user-select:none;touch-action:none;overscroll-behavior:none}
     #mainCanvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;transition:transform 0.2s cubic-bezier(0.16,1,0.3,1);will-change:transform}
     .glass-panel{background:rgba(15,23,42,0.95);border:1px solid rgba(255,255,255,0.12);box-shadow:0 10px 30px -10px rgba(0,0,0,0.8);position:relative;overflow:hidden;transform:translateZ(0)}
     @media (min-width: 640px) { .glass-panel { backdrop-filter:blur(12px) saturate(150%);-webkit-backdrop-filter:blur(12px) saturate(150%); background:rgba(15,23,42,0.75); } }
@@ -27,7 +32,7 @@
 
   <script>
     (function(){const _0x1a2b=['contextmenu','preventDefault','keydown','ctrlKey','shiftKey','keyCode','debugger','addEventListener'];document[_0x1a2b[7]](_0x1a2b[0],e=>e[_0x1a2b[1]]());document[_0x1a2b[7]](_0x1a2b[2],e=>{if(e[_0x1a2b[5]]===123||(e[_0x1a2b[3]]&&e[_0x1a2b[4]]&&[73,74,67].includes(e[_0x1a2b[5]]))||(e[_0x1a2b[3]]&&[85,83,80].includes(e[_0x1a2b[5]]))){e[_0x1a2b[1]]();return false}});setInterval(()=>{try{Function(_0x1a2b[6])()}catch(e){}},800);})();
-    window._isRdy=false;window._hHov=false;
+    window._isRdy=false;window._hHov=false;window._shoutCooldown=false;
   </script>
 </head>
 
@@ -61,16 +66,18 @@
         document.write(_rxD.map(r=>`<button onclick="window._hRC('${r.e}', '${r.j}')" id="btn-${r.e}" class="group relative z-10 flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-[18px] bg-transparent hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 hover:scale-110 active:scale-90 focus:outline-none overflow-visible cursor-pointer pointer-events-auto"><span class="text-xl sm:text-2xl filter group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] relative z-10 pointer-events-none">${r.e}</span><div id="badge-${r.e}" class="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-0.5 bg-slate-800/90 border border-white/20 rounded-full flex items-center justify-center text-[9px] font-display font-bold text-slate-200 shadow-md z-20 transition-colors duration-300"><span id="count-${r.e}">0</span></div></button>`).join(''));
       </script>
       
+      <!-- Megáfono Optimizado para Touch -->
       <div class="w-px h-8 bg-white/20 mx-1 z-10"></div>
       <div class="relative z-10">
         <button id="btnMega" onclick="window._tglS()" class="flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-[18px] bg-blue-500/20 border border-blue-400/30 hover:bg-blue-500/40 transition-all duration-300 hover:-translate-y-2 hover:scale-110 active:scale-90 focus:outline-none cursor-pointer pointer-events-auto">
           <span class="text-xl sm:text-2xl">📢</span>
         </button>
-        <div id="shoutMenu" class="absolute bottom-full right-0 mb-4 bg-slate-900/95 backdrop-blur-xl border border-white/10 p-2 rounded-2xl shadow-2xl flex-col gap-1 w-max hidden pointer-events-auto origin-bottom z-[100]">
-          <button onclick="window._sndS('¡Tipografía God! 💅')" class="text-left px-4 py-2 rounded-xl text-sm font-semibold hover:bg-white/10 active:bg-white/20 transition-colors text-blue-100">¡Tipografía God! 💅</button>
-          <button onclick="window._sndS('Mucho texto 👀')" class="text-left px-4 py-2 rounded-xl text-sm font-semibold hover:bg-white/10 active:bg-white/20 transition-colors text-yellow-100">Mucho texto 👀</button>
-          <button onclick="window._sndS('¡Brutal el Layout! 🔥')" class="text-left px-4 py-2 rounded-xl text-sm font-semibold hover:bg-white/10 active:bg-white/20 transition-colors text-orange-100">¡Brutal el Layout! 🔥</button>
-          <button onclick="window._sndS('Arte puro ✨')" class="text-left px-4 py-2 rounded-xl text-sm font-semibold hover:bg-white/10 active:bg-white/20 transition-colors text-purple-100">Arte puro ✨</button>
+        <!-- Menú redimensionado para pulgares en móvil -->
+        <div id="shoutMenu" class="absolute bottom-full right-0 mb-4 bg-slate-900/95 backdrop-blur-xl border border-white/10 p-2 rounded-2xl shadow-2xl flex-col gap-1.5 w-max hidden pointer-events-auto origin-bottom z-[100]">
+          <button onclick="window._sndS('¡Tipografía God! 💅')" class="text-left px-5 py-3 rounded-xl text-base font-bold hover:bg-white/10 active:bg-white/20 transition-colors text-blue-100">¡Tipografía God! 💅</button>
+          <button onclick="window._sndS('Mucho texto 👀')" class="text-left px-5 py-3 rounded-xl text-base font-bold hover:bg-white/10 active:bg-white/20 transition-colors text-yellow-100">Mucho texto 👀</button>
+          <button onclick="window._sndS('¡Brutal el Layout! 🔥')" class="text-left px-5 py-3 rounded-xl text-base font-bold hover:bg-white/10 active:bg-white/20 transition-colors text-orange-100">¡Brutal el Layout! 🔥</button>
+          <button onclick="window._sndS('Arte puro ✨')" class="text-left px-5 py-3 rounded-xl text-base font-bold hover:bg-white/10 active:bg-white/20 transition-colors text-purple-100">Arte puro ✨</button>
         </div>
       </div>
     </div>
@@ -78,13 +85,13 @@
 
   <script type="module">
     import{initializeApp as _iA}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import{getAuth as _gA,signInAnonymously as _sIA}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import{getFirestore as _gF,doc as _dC,getDoc as _gD,setDoc as _sD,onSnapshot as _oS,serverTimestamp as _sT,runTransaction as _rT,increment as _inc, collection as _cC, addDoc as _aD, query as _q, orderBy as _oB, limit as _lmt}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import{getAuth as _gA,signInAnonymously as _sIA,setPersistence as _sP,browserLocalPersistence as _bLP}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import{getFirestore as _gF,doc as _dC,getDoc as _gD,setDoc as _sD,onSnapshot as _oS,runTransaction as _rT,increment as _inc}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     const _cfg={apiKey:"AIzaSyDYbe0MMuPvpdJiYlvtcDec-MybKqCad9k",authDomain:"web-feria-istg-2026.firebaseapp.com",databaseURL:"https://web-feria-istg-2026-default-rtdb.firebaseio.com",projectId:"web-feria-istg-2026",storageBucket:"web-feria-istg-2026.firebasestorage.app",messagingSenderId:"434583648721",appId:"1:434583648721:web:a31a4ec9e99dc7faf8c8f0"};
     const _st={o:'dg-istg-3a-2026',r:'dg-istg-3a-2026.github.io',b:'MochilaDeCaleb',f:[],cP:'',eC:0};
     
-    let _uCR=null,_db=null,_au=null,_aRU=null,_pRS={},_iFRL=true,_lRPE=null,_hAT=null,_sTck=false,_rdT,_sCd=false;
+    let _uCR=null,_db=null,_au=null,_aRU=null,_pRS={},_iFRL=true,_lRPE=null,_hAT=null,_sTck=false,_rdT;
     const _mnC=document.getElementById('mainCanvas'), _mnCx=_mnC.getContext('2d');
 
     window._sGT=(m,i)=>{
@@ -125,46 +132,59 @@
 
     window._sndS=async(t)=>{
       window._tglS(); window._tH([20,30]);
-      if(_sCd) { window._sGT("Megáfono recargando...", "⏳"); return; }
+      if(window._shoutCooldown) { window._sGT("Megáfono recargando...", "⏳"); return; }
       if(!_db||!_au.currentUser) { window._sGT("Conectando, espera...", "🔌"); return; }
       
-      _sCd = true;
+      window._shoutCooldown = true;
       const bm = document.getElementById('btnMega');
       if(bm) { bm.style.opacity = '0.5'; bm.style.pointerEvents = 'none'; bm.style.filter = 'grayscale(1)'; }
       
-      try{ 
-        window._dDmk(t);
-        await _aD(_cC(_db,'GlobalShouts'),{txt:t,ts:_sT()}); 
-      }catch(e){
-        window._sGT("Error de permisos ❌", "❌"); 
+      try { 
+        // Renderizado Optimista Local (El que lo envía lo ve al instante sin latencia)
+        window._dDmk(t, true);
+        
+        // Guardado Global en Documento Único (Evita bloqueos de permisos de Colecciones Raíz)
+        await _sD(_dC(_db, 'Feria2026_Images', 'GLOBAL_SHOUTS'), {
+          lastShout: t,
+          ts: Date.now(),
+          uid: _au.currentUser.uid
+        }, { merge: true });
+        
+      } catch(e) {
+        window._sGT("Error de red ❌", "❌");
+        window._shoutCooldown = false;
+        if(bm) { bm.style.opacity = '1'; bm.style.pointerEvents = 'auto'; bm.style.filter = 'none'; }
+        return;
       }
       
       setTimeout(()=>{
-        _sCd = false;
+        window._shoutCooldown = false;
         if(bm) { bm.style.opacity = '1'; bm.style.pointerEvents = 'auto'; bm.style.filter = 'none'; }
         window._sGT("¡Megáfono listo!", "📢");
       }, 15000); 
     };
 
-    window._dDmk=(t)=>{
+    window._dDmk=(t, isLocal = false)=>{
       const d = document.createElement('div');
       d.textContent = t;
       const rY = 10 + Math.random() * 60; 
       const isM = window.innerWidth < 768;
       const rS = isM ? (20 + Math.random() * 8) : (32 + Math.random() * 16); 
-      d.className = 'fixed z-[100] font-display font-black whitespace-nowrap opacity-90 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] text-white pointer-events-none will-change-transform';
-      d.style.fontSize = `${rS}px`; d.style.top = `${rY}%`; d.style.left = `100%`; 
+      // Si el mensaje es local, sale en amarillo. Si es de otro usuario, blanco.
+      d.className = `fixed z-[100] font-display font-black whitespace-nowrap opacity-90 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] pointer-events-none will-change-transform ${isLocal ? 'text-yellow-300' : 'text-white'}`;
+      d.style.fontSize = `${rS}px`; d.style.top = `${rY}%`; 
+      d.style.left = `100vw`; // Forzado a 100vw para garantizar compatibilidad móvil extrema
       d.style.webkitTextStroke = isM ? '1px rgba(0,0,0,0.8)' : '2px rgba(0,0,0,0.8)';
       document.body.appendChild(d);
       
-      // Force Reflow on Mobile to ensure layout is updated before animating translation
-      const w = d.offsetWidth; 
-      const v = isM ? (4000 + Math.random() * 1500) : (6000 + Math.random() * 2000); 
-      
-      d.animate([
-        { transform: 'translate3d(0, 0, 0)' },
-        { transform: `translate3d(-${window.innerWidth + w + 100}px, 0, 0)` } 
-      ], { duration: v, easing: 'linear' }).onfinish = () => d.remove();
+      requestAnimationFrame(() => {
+        const w = d.offsetWidth; 
+        const v = isM ? (4000 + Math.random() * 1500) : (6000 + Math.random() * 2000); 
+        d.animate([
+          { transform: 'translate3d(0, 0, 0)' },
+          { transform: `translate3d(-${window.innerWidth + w + 100}px, 0, 0)` } 
+        ], { duration: v, easing: 'linear' }).onfinish = () => d.remove();
+      });
     };
 
     async function _fGH(){
@@ -184,6 +204,7 @@
       
       try{
         const app=_iA(_cfg);_au=_gA(app);_db=_gF(app);
+        await _sP(_au, _bLP);
         await Promise.all([_sIA(_au), _fGH()]); 
         await _iG();
       }catch(e){
@@ -194,18 +215,18 @@
 
     async function _iG(){
       if(_db) {
-        let _gSL = true;
-        // THE FIX: Restored GlobalShouts listener so everyone receives messages
-        _oS(_q(_cC(_db, 'GlobalShouts'), _oB('ts', 'desc'), _lmt(1)), snap => {
-          snap.docChanges().forEach(ch => {
-            if (ch.type === 'added') {
-              if(!_gSL && !ch.doc.metadata.hasPendingWrites) {
-                window._dDmk(ch.doc.data().txt);
-              }
+        let _lstTS = Date.now();
+        // Escucha Maestra Global - Tolerante a fallos, no necesita índices
+        _oS(_dC(_db, 'Feria2026_Images', 'GLOBAL_SHOUTS'), snap => {
+          if(snap.exists()) {
+            const data = snap.data();
+            // Solo dibujar si es más reciente y NO es nuestro (el nuestro ya se dibujó localmente optimista)
+            if(data.ts > _lstTS && data.uid !== _au.currentUser?.uid) {
+              window._dDmk(data.lastShout, false);
             }
-          });
-          _gSL = false;
-        });
+            _lstTS = Math.max(_lstTS, data.ts);
+          }
+        }, err => console.log("Listener silencioso protegido"));
       }
       if(_st.f.length>0)await _aLUI();else _dIL();
     }
@@ -227,8 +248,21 @@
       if(!_db||!_au.currentUser)return;
       const id=_gID(pth);
       if(_aRU)_aRU();
-      _uCR=null;_pRS={};_iFRL=true;_uRBU();
-      try{const s=await _gD(_dC(_db,'Feria2026_Images',id,'Voters',_au.currentUser.uid));if(s.exists()){_uCR=s.data().emoji;_uRBU();}}catch(e){}
+      
+      let lR=JSON.parse(localStorage.getItem('_f_rx')||'{}');
+      _uCR=lR[id]||null; 
+      
+      _pRS={};_iFRL=true;_uRBU();
+      try{
+        const s=await _gD(_dC(_db,'Feria2026_Images',id,'Voters',_au.currentUser.uid));
+        if(s.exists()){
+          _uCR=s.data().emoji;
+          lR[id]=_uCR;
+          localStorage.setItem('_f_rx',JSON.stringify(lR));
+          _uRBU();
+        }
+      }catch(e){}
+      
       _aRU=_oS(_dC(_db,'Feria2026_Images',id),snap=>{
         const d=snap.exists()?snap.data():{};
         ['😍','😂','🤡','😱','🤌'].forEach(e=>{
@@ -250,11 +284,23 @@
       const b=document.getElementById(`btn-${e}`);if(!b)return;
       const r=b.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top,isM=window.innerWidth<768,pC=isM?2:8+Math.floor(Math.random()*6);
       for(let i=0;i<pC;i++){const p=document.createElement('div');p.textContent=e;p.className='fixed z-[70] pointer-events-none select-none will-change-transform';p.style.fontSize=`${16+Math.random()*14}px`;p.style.left=`${cx-10}px`;p.style.top=`${cy-10}px`;document.body.appendChild(p);const a=-Math.PI/2+(Math.random()*1.4-0.7),v=50+Math.random()*100,ex=cx+Math.cos(a)*v,ey=cy-(isM?80:140+Math.random()*120);p.animate([{transform:'translate3d(0,0,0) scale(0.4)',opacity:1},{transform:`translate3d(${ex-cx}px, ${ey-cy}px, 0) scale(1.4)`,opacity:0.85,offset:0.6},{transform:`translate3d(${(ex-cx)*1.3}px, ${(ey-cy)-80}px, 0) scale(0.5)`,opacity:0}],{duration:isM?600:800+Math.random()*400,easing:'cubic-bezier(0.25, 1, 0.5, 1)'}).onfinish=()=>p.remove();}
+      
       if(!_db||!_au.currentUser||!_st.cP)return;
-      let py={},pR=_uCR;if(pR===e){_sJBA(e,j);return;}
+      
+      let id=_gID(_st.cP), lR=JSON.parse(localStorage.getItem('_f_rx')||'{}'), pR=_uCR||lR[id];
+      if(pR===e){_sJBA(e,j);return;}
+      
+      let py={};
       if(pR)py[pR]=_inc(-1); py[e]=_inc(1);
-      _uCR=e;_lRPE=e;_uRBU();_sJBA(e,j);
-      try{await _sD(_dC(_db,'Feria2026_Images',_gID(_st.cP)),py,{merge:true});await _sD(_dC(_db,'Feria2026_Images',_gID(_st.cP),'Voters',_au.currentUser.uid),{emoji:e,timestamp:_sT()});}catch(er){}
+      
+      _uCR=e;_lRPE=e;
+      lR[id]=e; localStorage.setItem('_f_rx',JSON.stringify(lR)); 
+      _uRBU();_sJBA(e,j);
+      
+      try{
+        await _sD(_dC(_db,'Feria2026_Images',id),py,{merge:true});
+        await _sD(_dC(_db,'Feria2026_Images',id,'Voters',_au.currentUser.uid),{emoji:e,ts:Date.now()});
+      }catch(er){}
     };
 
     function _sJBA(e,j){
