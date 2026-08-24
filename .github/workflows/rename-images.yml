@@ -5,8 +5,8 @@ on:
     branches:
       - MochilaDeCaleb
     paths:
-      - '**/images/**' # Detecta cualquier carpeta llamada 'images' en la rama
-      # Si tus imágenes están en la raíz o en otra ruta específica (ej. 'MochilaDeCaleb/images/**'), cámbiala aquí.
+      - '**/images/**'
+  workflow_dispatch: # Permite ejecutarlo manualmente desde la pestaña 'Actions'
 
 jobs:
   rename:
@@ -15,12 +15,12 @@ jobs:
       - name: Checkout del repositorio
         uses: actions/checkout@v4
         with:
-          ref: MochilaDeCaleb # Asegura que trabaje específicamente sobre tu rama
+          ref: MochilaDeCaleb
 
       - name: Renombrar y organizar imágenes
         run: |
-          # ⚠️ CAMBIA ESTA RUTA si la carpeta de tus imágenes tiene otro nombre o ubicación exacta 
-          # (Ejemplo: "ruta/a/tu/carpeta/images" o simplemente "." si están sueltas en la raíz)
+          # ⚠️ Cambia a "." si tus imágenes están sueltas en la raíz, 
+          # o pon el nombre de tu carpeta si están guardadas en una (ej. "images")
           TARGET_DIR="."
           
           if [ -d "$TARGET_DIR" ]; then
@@ -29,16 +29,22 @@ jobs:
             # Contador inicial
             i=1
             
-            # Renombramos a un nombre temporal para evitar conflictos de sobreescritura
+            # Primera pasada: mover a nombres temporales para evitar conflictos
             find . -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) | sort | while read -r file; do
+              # Evitar procesar archivos que ya empiecen con 'Image' o 'temp_img_'
+              filename=$(basename "$file")
+              if [[ "$filename" =~ ^(Image|temp_img_) ]]; then
+                continue
+              fi
+              
               ext="${file##*.}"
               ext=$(echo "$ext" | tr '[:upper:]' '[:lower:]')
-              new_name="../temp_img_$i.$ext"
+              new_name="temp_img_$i.$ext"
               mv "$file" "$new_name"
               i=$((i + 1))
             done
             
-            # Segunda pasada para asignar los nombres finales Image1, Image2... ordenados
+            # Segunda pasada: renombrar ordenadamente como Image1, Image2, Image3...
             j=1
             find . -maxdepth 1 -type f -name "temp_img_*" | sort -V | while read -r temp_file; do
               ext="${temp_file##*.}"
@@ -48,12 +54,12 @@ jobs:
             
             cd ..
           else
-            echo "La carpeta '$TARGET_DIR' no existe. Revisa la ruta."
+            echo "La carpeta '$TARGET_DIR' no existe."
           fi
 
       - name: Commit y Push de los cambios
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Automático: Renombrar imágenes a Image1, Image2..."
+          commit_message: "Automático: Renombrar imágenes existentes a Image1, Image2..."
           branch: MochilaDeCaleb
           create_branch: false
