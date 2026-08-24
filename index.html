@@ -23,6 +23,7 @@
     @keyframes elasticAnticipation{0%,100%{transform:scale(1) translateY(0)}50%{transform:scale(1.04) translateY(-6px)}}@keyframes doubtSway{0%,100%{transform:rotate(-8deg) translateY(0)}35%{transform:rotate(6deg) translateY(-10px)}70%{transform:rotate(-12deg) translateY(4px)}}@keyframes surpriseBounce{0%,100%{transform:translateY(0) rotate(4deg) scale(1)}20%{transform:translateY(-24px) rotate(12deg) scale(1.1)}38%{transform:translateY(3px) rotate(-2deg) scale(0.95)}55%{transform:translateY(-10px) rotate(6deg) scale(1.04)}72%{transform:translateY(0) rotate(3deg) scale(1)}}
     .animate-sticker-group{animation:elasticAnticipation 3s ease-in-out infinite;transform-origin:center center}.animate-doubt{animation:doubtSway 2.7s ease-in-out infinite;transform-origin:center bottom}.animate-surprise{animation:surpriseBounce 2.7s cubic-bezier(0.34,1.56,0.64,1) infinite;transform-origin:center bottom}
   </style>
+
   <script>
     (function(){const _0x1a2b=['contextmenu','preventDefault','keydown','ctrlKey','shiftKey','keyCode','debugger','addEventListener'];document[_0x1a2b[7]](_0x1a2b[0],e=>e[_0x1a2b[1]]());document[_0x1a2b[7]](_0x1a2b[2],e=>{if(e[_0x1a2b[5]]===123||(e[_0x1a2b[3]]&&e[_0x1a2b[4]]&&[73,74,67].includes(e[_0x1a2b[5]]))||(e[_0x1a2b[3]]&&[85,83,80].includes(e[_0x1a2b[5]]))){e[_0x1a2b[1]]();return false}});setInterval(()=>{try{Function(_0x1a2b[6])()}catch(e){}},800);})();
     window._isRdy=false;window._hHov=false;
@@ -80,18 +81,16 @@
     import{getAuth as _gA,signInAnonymously as _sIA}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import{getFirestore as _gF,doc as _dC,getDoc as _gD,setDoc as _sD,onSnapshot as _oS,serverTimestamp as _sT,runTransaction as _rT,increment as _inc,collection as _cC,addDoc as _aD,query as _q,orderBy as _oB,limit as _lmt}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    /* Variables Globales y Firebase Config */
     const _cfg={apiKey:"AIzaSyDYbe0MMuPvpdJiYlvtcDec-MybKqCad9k",authDomain:"web-feria-istg-2026.firebaseapp.com",databaseURL:"https://web-feria-istg-2026-default-rtdb.firebaseio.com",projectId:"web-feria-istg-2026",storageBucket:"web-feria-istg-2026.firebasestorage.app",messagingSenderId:"434583648721",appId:"1:434583648721:web:a31a4ec9e99dc7faf8c8f0"};
     const _st={o:'dg-istg-3a-2026',r:'dg-istg-3a-2026.github.io',b:'MochilaDeCaleb',f:[],cP:'',eC:0};
     
     let _uCR=null,_db=null,_au=null,_aRU=null,_pRS={},_iFRL=true,_lRPE=null,_hAT=null,_sTck=false,_rdT;
     const _mnC=document.getElementById('mainCanvas'), _mnCx=_mnC.getContext('2d');
 
-    /* Toast Global Helper */
     window._sGT=(m,i)=>{
       const c=document.getElementById('toastContainer');if(!c)return;
       const t=document.createElement('div');
-      t.className='flex items-center gap-2.5 px-3.5 py-2 bg-[#0B1B2F]/80 backdrop-blur-md border border-orange-500/30 rounded-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-xs text-white transform translate-x-full opacity-0 transition-all duration-500 ease-out will-change-transform';
+      t.className='flex items-center gap-2.5 px-3.5 py-2 bg-[#0B1B2F]/80 backdrop-blur-md border border-orange-500/30 rounded-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-xs text-white transform translate-x-full opacity-0 transition-all duration-500 ease-out will-change-transform z-[200] relative';
       t.innerHTML=`<span class="text-base drop-shadow-md animate-pulse">${i}</span><span class="font-light tracking-wide text-orange-50">${m}</span>`;
       c.appendChild(t);
       requestAnimationFrame(()=>{t.classList.remove('translate-x-full','opacity-0');t.classList.add('translate-x-0','opacity-100');});
@@ -100,7 +99,6 @@
 
     window._tH=(p)=>{if(navigator.vibrate)try{navigator.vibrate(p)}catch(e){}};
 
-    /* Interacciones con HUD */
     function _pSp(e){
       const ds=document.querySelectorAll('.glass-panel');
       const x=e.touches?e.touches[0].clientX:e.clientX, y=e.touches?e.touches[0].clientY:e.clientY;
@@ -108,7 +106,6 @@
       window._rHA(); _sTck=false;
     }
     window.addEventListener('mousemove',e=>{if(!_sTck){requestAnimationFrame(()=>_pSp(e));_sTck=true}},{passive:true});
-    window.addEventListener('touchmove',e=>{if(!_sTck){requestAnimationFrame(()=>_pSp(e));_sTck=true}},{passive:true});
 
     window._kHA=()=>{window._hHov=true;window._rHA()};
     window._sHI=()=>{window._hHov=false;window._rHA()};
@@ -130,13 +127,21 @@
     window._sndS=async(t)=>{
       window._tglS(); window._tH([20,30]);
       if(_sCd) { window._sGT("Megáfono recargando...", "⏳"); return; }
-      if(!_db||!_au.currentUser)return;
+      if(!_db||!_au.currentUser) { window._sGT("Conectando, espera...", "🔌"); return; }
       
       _sCd = true;
       const bm = document.getElementById('btnMega');
       if(bm) { bm.style.opacity = '0.5'; bm.style.pointerEvents = 'none'; bm.style.filter = 'grayscale(1)'; }
       
-      try{ await _aD(_cC(_db,'GlobalShouts'),{txt:t,ts:_sT()}); }catch(e){}
+      try{ 
+        // 1. Dibujamos al instante en la pantalla del usuario que envía
+        window._dDmk(t);
+        // 2. Enviamos al servidor usando el formato oficial para que todos los demás lo reciban
+        await _aD(_cC(_db,'GlobalShouts'),{txt:t,ts:_sT()}); 
+      }catch(e){
+        console.error(e);
+        window._sGT("Error de conexión", "❌"); 
+      }
       
       setTimeout(()=>{
         _sCd = false;
@@ -151,8 +156,9 @@
       const rY = 10 + Math.random() * 60; 
       const isM = window.innerWidth < 768;
       const rS = isM ? (20 + Math.random() * 8) : (32 + Math.random() * 16); 
-      d.className = 'fixed z-[45] font-display font-black whitespace-nowrap opacity-90 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] text-white pointer-events-none will-change-transform';
-      d.style.fontSize = `${rS}px`; d.style.top = `${rY}%`; d.style.right = `-100%`;
+      // Z-INDEX ELEVADO A 100 PARA QUE NO SE TAPE NUNCA
+      d.className = 'fixed z-[100] font-display font-black whitespace-nowrap opacity-90 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] text-white pointer-events-none will-change-transform';
+      d.style.fontSize = `${rS}px`; d.style.top = `${rY}%`; d.style.left = `100vw`; // Nace fuera a la derecha
       d.style.webkitTextStroke = isM ? '1px rgba(0,0,0,0.8)' : '2px rgba(0,0,0,0.8)';
       document.body.appendChild(d);
       
@@ -160,7 +166,7 @@
       
       d.animate([
         { transform: 'translate3d(0, 0, 0)' },
-        { transform: `translate3d(-${window.innerWidth * 1.5 + d.offsetWidth}px, 0, 0)` } 
+        { transform: `translate3d(-${window.innerWidth + d.offsetWidth + 100}px, 0, 0)` } // Vuela seguro
       ], { duration: v, easing: 'linear' }).onfinish = () => d.remove();
     };
 
@@ -193,9 +199,15 @@
     async function _iG(){
       if(_db) {
         let _gSL = true;
+        // ESCUCHA MAESTRA DE FIREBASE A TIEMPO REAL
         _oS(_q(_cC(_db, 'GlobalShouts'), _oB('ts', 'desc'), _lmt(1)), snap => {
           snap.docChanges().forEach(ch => {
-            if (ch.type === 'added' && !_gSL) window._dDmk(ch.doc.data().txt);
+            if (ch.type === 'added') {
+              // Si tiene pendingWrites, es nuestro propio mensaje, lo ignoramos porque ya se dibujó arriba
+              if(!_gSL && !ch.doc.metadata.hasPendingWrites) {
+                window._dDmk(ch.doc.data().txt);
+              }
+            }
           });
           _gSL = false;
         });
@@ -264,7 +276,7 @@
       if(!_st.f||!_st.f.length)return;
       let sI=JSON.parse(localStorage.getItem('_vImgs')||'[]');
       let uF=_st.f.filter(x=>!sI.includes(x.path));
-      if(uF.length===0){sI=[];uF=_st.f;localStorage.removeItem('_vImgs');} 
+      if(uF.length===0){sI=[];uF=_st.f;localStorage.removeItem('_vImgs');}
       
       let i=Math.floor(Math.random()*uF.length);
       if(_db&&_au.currentUser){
