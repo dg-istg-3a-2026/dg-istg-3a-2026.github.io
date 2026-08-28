@@ -10,6 +10,7 @@
   <meta name="description" content="?! - Proyecto PIS. Exposición interactiva de Diseño Gráfico, ISTG - 2026.">
   <meta property="og:title" content="?! - Proyecto PIS Diseño Gráfico"><meta property="og:image" content="https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'%3E%3Cstyle%3E@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@900');text%7Bfont-family:'DynaPuff',system-ui,sans-serif;font-weight:900;font-size:80px;dominant-baseline:central;%7D.bg-q%7Bstroke:%230B1B2F;stroke-width:24px;stroke-linejoin:round;%7D.bg-e%7Bstroke:%23FF5500;stroke-width:24px;stroke-linejoin:round;%7D.md%7Bstroke:white;stroke-width:12px;stroke-linejoin:round;%7D.f-q%7Bfill:%230B1B2F;%7D.f-e%7Bfill:%23FF5500;%7D%3C/style%3E%3Ctext x='15' y='55' class='bg-q'%3E?%3C/text%3E%3Ctext x='15' y='55' class='md'%3E?%3C/text%3E%3Ctext x='15' y='55' class='f-q'%3E?%3C/text%3E%3Ctext x='70' y='55' class='bg-e'%3E!%3C/text%3E%3Ctext x='70' y='55' class='md'%3E!%3C/text%3E%3Ctext x='70' y='55' class='f-e'%3E!%3C/text%3E%3C/svg%3E">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@700;900&family=Inter:wght@300;400;600;700&display=block" rel="stylesheet">
   <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],display:['DynaPuff','cursive']},animation:{'pop':'popCounter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards'},keyframes:{popCounter:{'0%':{transform:'scale(1)'},'50%':{transform:'scale(1.6) translateY(-4px)',backgroundColor:'#fb923c',color:'#fff'},'100%':{transform:'scale(1)'}}}}}}</script>
@@ -51,13 +52,47 @@
     </div>
   </div>
   
+  <!-- Logo Flotante Superior (Solo Móvil) -->
+  <div id="mobile-top-logo" class="fixed top-8 left-1/2 -translate-x-1/2 z-50 flex sm:hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 -translate-y-8 pointer-events-none">
+    <img src="https://raw.githubusercontent.com/dg-istg-3a-2026/dg-istg-3a-2026.github.io/298f7f8c07538b457b472c804629c755b8726eab/ISTGXDISE%C3%91OBLANCO.svg" alt="ISTG Diseño Gráfico" class="h-8 w-auto object-contain opacity-90 filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.8)]">
+  </div>
+
+  <!-- Redes Sociales ISTG (Flotante Arriba Derecha) -->
+  <div id="social-dock" class="fixed top-6 right-4 sm:top-8 sm:right-6 z-50 flex transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 -translate-y-8 pointer-events-none">
+    <div class="glass-panel p-1.5 rounded-[16px] flex items-center gap-1 sm:gap-1.5 pointer-events-auto border border-white/10 shadow-lg backdrop-blur-md">
+      <!-- Web -->
+      <a href="https://istg.edu.ec/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-[12px] bg-transparent hover:bg-blue-500/20 transition-all duration-300 text-white/70 hover:text-blue-400 hover:scale-110 active:scale-95 touch-manipulation" title="Sitio Web Oficial">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-md" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+      </a>
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/istg.ec" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-[12px] bg-transparent hover:bg-[#1877F2]/20 transition-all duration-300 text-white/70 hover:text-[#1877F2] hover:scale-110 active:scale-95 touch-manipulation" title="Facebook">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-md" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/istg.ec/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-[12px] bg-transparent hover:bg-[#E1306C]/20 transition-all duration-300 text-white/70 hover:text-[#E1306C] hover:scale-110 active:scale-95 touch-manipulation" title="Instagram">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-md" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+      </a>
+      <!-- X (Twitter) -->
+      <a href="https://x.com/istg_ec" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-[12px] bg-transparent hover:bg-white/10 transition-all duration-300 text-white/70 hover:text-white hover:scale-110 active:scale-95 touch-manipulation" title="X (Twitter)">
+        <svg class="w-4 h-4 sm:w-4 sm:h-4 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+      </a>
+    </div>
+  </div>
+
   <!-- Contenedor invisible para Notificaciones -->
   <div id="toastContainer" class="fixed top-24 right-4 sm:right-6 z-[100] flex flex-col gap-3 pointer-events-none w-max max-w-[220px] items-end"></div>
   
   <!-- HUD y Reacciones -->
-  <div id="hud-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2.5 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 translate-y-16 pointer-events-none w-full max-w-sm sm:max-w-md px-4" onmouseenter="window._kHA()" onmouseleave="window._sHI()">
-    <div id="reactionDock" class="relative flex items-center gap-1.5 p-2 pointer-events-auto w-max mx-auto transition-all duration-300">
+  <div id="hud-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2.5 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 translate-y-16 pointer-events-none w-full max-w-[98vw] sm:max-w-xl px-1 sm:px-4" onmouseenter="window._kHA()" onmouseleave="window._sHI()">
+    <div id="reactionDock" class="relative flex items-center gap-1 sm:gap-1.5 p-1.5 sm:p-2 pointer-events-auto w-max mx-auto transition-all duration-300">
       <div class="absolute inset-0 glass-panel rounded-[28px] shadow-2xl pointer-events-none border border-white/10"></div>
+      
+      <!-- Logo Institucional Integrado (Solo Desktop) -->
+      <div class="hidden sm:flex relative z-10 items-center pl-2 pr-1 pointer-events-none select-none">
+        <img src="https://raw.githubusercontent.com/dg-istg-3a-2026/dg-istg-3a-2026.github.io/298f7f8c07538b457b472c804629c755b8726eab/ISTGXDISE%C3%91OBLANCO.svg" alt="ISTG Diseño Gráfico" class="h-5 w-auto object-contain opacity-85 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+      </div>
+      
+      <div class="hidden sm:block w-px h-6 bg-white/20 mx-1 z-10"></div>
       
       <script>
         const _rxD=[{e:'😍',j:'Mínimo Común Múltiplo'},{e:'😂',j:'Comic Sans en Título'},{e:'🤡',j:'Kerning Caótico'},{e:'😱',j:'Píxel Muerto'},{e:'🤌',j:'Sin Guías'}];
@@ -385,7 +420,7 @@
       setTimeout(()=>{l.classList.add('pointer-events-none');let s=null;
         function _st(ts){if(!s)s=ts;const t=Math.min((ts-s)/1000,1),eT=t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,r=eT*150;
           l.style.mask=`radial-gradient(circle, transparent ${r}%, black ${r+1}%)`;l.style.WebkitMask=`radial-gradient(circle, transparent ${r}%, black ${r+1}%)`;
-          if(t<1)requestAnimationFrame(_st);else{l.style.display='none';window._isRdy=true;const hc=document.getElementById('hud-container');if(hc){hc.classList.remove('opacity-0','translate-y-16','pointer-events-none');window._rHA();}}
+          if(t<1)requestAnimationFrame(_st);else{l.style.display='none';window._isRdy=true;const hc=document.getElementById('hud-container');if(hc){hc.classList.remove('opacity-0','translate-y-16','pointer-events-none');window._rHA();}const ml=document.getElementById('mobile-top-logo');if(ml)ml.classList.remove('opacity-0','-translate-y-8');const sd=document.getElementById('social-dock');if(sd)sd.classList.remove('opacity-0','-translate-y-8');}
         }requestAnimationFrame(_st);
       },Math.max(0,1000-(Date.now()-_lST)));
     }
