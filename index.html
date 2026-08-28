@@ -1,14 +1,32 @@
 <!DOCTYPE html>
 <html lang="es" class="h-full bg-[#232453] text-slate-100 antialiased selection:bg-orange-500 selection:text-white">
 <head>
+  <!-- SCRIPT ANTI-CACHÉ: Cambia la versión ("2.0") cuando actualices tu host para forzar a todos los móviles a recargar la página limpia -->
+  <script>
+    (function(){
+      const VER = "2.0"; 
+      if(localStorage.getItem('_istg_v') !== VER){
+        localStorage.setItem('_istg_v', VER);
+        if(window.location.search.indexOf('v=') === -1){
+          window.location.replace(window.location.pathname + '?v=' + Date.now());
+        }
+      }
+    })();
+  </script>
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y6LMRRHWH"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0Y6LMRRHWH');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
+  
+  <!-- SEO Misterioso -->
   <title>?!</title>
-  <meta name="description" content="?! - Proyecto PIS. Exposición interactiva de Diseño Gráfico, ISTG - 2026.">
-  <meta property="og:title" content="?! - Proyecto PIS Diseño Gráfico"><meta property="og:image" content="https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg">
+  <meta name="description" content="?! - Galeria de Kiro">
+  <meta property="og:title" content="?! - Galeria de Kiro">
+  <meta property="og:description" content="?! - Galeria de Kiro">
+  <meta property="og:image" content="https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg">
+  
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'%3E%3Cstyle%3E@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@900');text%7Bfont-family:'DynaPuff',system-ui,sans-serif;font-weight:900;font-size:80px;dominant-baseline:central;%7D.bg-q%7Bstroke:%230B1B2F;stroke-width:24px;stroke-linejoin:round;%7D.bg-e%7Bstroke:%23FF5500;stroke-width:24px;stroke-linejoin:round;%7D.md%7Bstroke:white;stroke-width:12px;stroke-linejoin:round;%7D.f-q%7Bfill:%230B1B2F;%7D.f-e%7Bfill:%23FF5500;%7D%3C/style%3E%3Ctext x='15' y='55' class='bg-q'%3E?%3C/text%3E%3Ctext x='15' y='55' class='md'%3E?%3C/text%3E%3Ctext x='15' y='55' class='f-q'%3E?%3C/text%3E%3Ctext x='70' y='55' class='bg-e'%3E!%3C/text%3E%3Ctext x='70' y='55' class='md'%3E!%3C/text%3E%3Ctext x='70' y='55' class='f-e'%3E!%3C/text%3E%3C/svg%3E">
   
   <script src="https://cdn.tailwindcss.com"></script>
@@ -58,16 +76,16 @@
     
     <!-- Iconos minimalistas sin HUD -->
     <div class="flex items-center gap-4 pointer-events-auto mt-0.5">
-      <a href="https://istg.edu.ec/" target="_blank" rel="noopener noreferrer" class="p-1.5 text-white/70 hover:text-white transition-all active:scale-90" title="Sitio Web">
+      <a href="https://istg.edu.ec/" target="_blank" rel="noopener noreferrer" class="p-1.5 text-white/70 hover:text-white transition-all active:scale-90 touch-manipulation" title="Sitio Web">
         <svg class="w-4 h-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
       </a>
-      <a href="https://www.facebook.com/istg.ec" target="_blank" rel="noopener noreferrer" class="p-1.5 text-white/70 hover:text-[#1877F2] transition-all active:scale-90" title="Facebook">
+      <a href="https://www.facebook.com/istg.ec" target="_blank" rel="noopener noreferrer" class="p-1.5 text-white/70 hover:text-[#1877F2] transition-all active:scale-90 touch-manipulation" title="Facebook">
         <svg class="w-4 h-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
       </a>
-      <a href="https://www.instagram.com/istg.ec/" target="_blank" rel="noopener noreferrer" class="p-1.5 text-white/70 hover:text-[#E1306C] transition-all active:scale-90" title="Instagram">
+      <a href="https://www.instagram.com/istg.ec/" target="_blank" rel="noopener noreferrer" class="p-1.5 text-white/70 hover:text-[#E1306C] transition-all active:scale-90 touch-manipulation" title="Instagram">
         <svg class="w-4 h-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
       </a>
-      <a href="https://x.com/istg_ec" target="_blank" rel="noopener noreferrer" class="p-1.5 text-white/70 hover:text-white transition-all active:scale-90" title="X (Twitter)">
+      <a href="https://x.com/istg_ec" target="_blank" rel="noopener noreferrer" class="p-1.5 text-white/70 hover:text-white transition-all active:scale-90 touch-manipulation" title="X (Twitter)">
         <svg class="w-3.5 h-3.5 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" fill="currentColor" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
       </a>
     </div>
@@ -125,7 +143,7 @@
           <div id="mCd" class="absolute inset-0 bg-slate-900/90 flex items-center justify-center text-orange-500 font-black text-xl opacity-0 transition-opacity backdrop-blur-sm pointer-events-none z-20 font-display"></div>
         </button>
         
-        <!-- Menú de gritos (CSS transition segura para móviles) -->
+        <!-- Menú de gritos -->
         <div id="shoutMenu" class="absolute bottom-full right-0 mb-4 bg-slate-900/95 backdrop-blur-xl border border-white/10 p-2 rounded-2xl shadow-2xl flex-col gap-1 w-max pointer-events-auto origin-bottom z-[100] transition-all duration-200 scale-75 opacity-0 hidden">
         </div>
       </div>
@@ -143,7 +161,6 @@
     let _uCR=null,_db=null,_au=null,_aRU=null,_pRS={},_iFRL=true,_lRPE=null,_hAT=null,_sTck=false,_rdT,_cImg=null,_vRdy=false;
     const _mnC=document.getElementById('mainCanvas'), _mnCx=_mnC.getContext('2d');
 
-    // Manejador de notificaciones (Toasts)
     window._sGT=(m,i)=>{
       const c=document.getElementById('toastContainer');if(!c)return;
       const t=document.createElement('div');
@@ -156,7 +173,6 @@
 
     window._tH=(p)=>{if(navigator.vibrate)try{navigator.vibrate(p)}catch(e){}};
 
-    // Rastreo del dedo/ratón
     function _pSp(e){
       const ds=document.querySelectorAll('.glass-panel');
       const x=e.touches?e.touches[0].clientX:e.clientX, y=e.touches?e.touches[0].clientY:e.clientY;
@@ -174,69 +190,65 @@
       clearTimeout(_hAT);_hAT=setTimeout(()=>{if(!window._hHov&&document.getElementById('shoutMenu').classList.contains('hidden'))h.classList.add('opacity-30')},4000);
     };
 
-    // Sistema de Buffer para frases infinitas en 2do plano (Cero tiempos de carga)
-    window._phrasesBuffer = [
-      "Estudiar Diseño en el ISTG es W 🎨", "Matricúlate y farmea aura infinita 📈",
-      "POV: Eres el nuevo GOAT del ISTG 🐐", "El ISTG tiene el rizz del diseño 🔥",
-      "Skibidi vectores, ven a estudiar aquí 🐺", "Deja de ser NPC, únete al ISTG 🗿",
-      "Carrera de Diseño goza de prime absoluto ✨", "Mewing mientras me matriculo en Diseño 🤫🧏‍♂️"
+    // 50 Frases estáticas enfocadas en ISTG, Diseño y Gen Z
+    window._pPool = [
+      "El ISTG es el verdadero prime del diseño ✨", "Ratio al que no estudie en el ISTG 💀",
+      "Estudiar diseño aquí = Aura infinita 📈", "POV: Eres el GOAT del Illustrator en ISTG 🐐",
+      "Mi PC es NPC, pero mi talento es de ISTG 🤖", "Skibidi vectores, el ISTG es la meta 🐺",
+      "Mewing extremo mientras apruebo tipografía 🤫🧏‍♂️", "Dejen que el ISTG cocine nuevos talentos 🔥",
+      "Ese portafolio tiene un W rizz brutal 🗿", "Matricúlate y deja de ser un NPC 📉",
+      "El ISTG carrea toda la industria gráfica 🎮", "CMYK mode: activando el prime en ISTG 🖨️",
+      "Un W masivo estudiar diseño aquí fr fr 🧢", "Sin cap, los de diseño somos insanos 👻",
+      "Aura +999 al vectorizar a la primera 🤌", "El jefe final es la imprenta, ayuda ⚔️",
+      "Sus el que use Comic Sans, report 📮", "Evento canónico: tu primer render crasheado 🕷️",
+      "Bro de verdad pensó que Canva era diseño 💀", "Los profes del ISTG tienen W rizz 📚",
+      "Skibidi toilet no sabe de teoría del color 🎨", "Farmeando aura en el taller de diseño ⚡",
+      "Soy un Sigma del Photoshop, cero cap 🐺", "POV: Descubres que el ISTG es god 🌟",
+      "Mi salud mental crasheó con el Premiere 🎬", "Diseño gráfico is bussin en el ISTG 🚌",
+      "El ISTG te quita lo espantaviejas 🗿", "Aesthetic 100% solo en el ISTG ✨",
+      "El verdadero brainrot es no agrupar capas 🧠", "W instituto, W carrera, W futuro 🚀",
+      "Matricúlate y conviértete en el boss final 🕹️", "Tu diseño anterior daba cringe, ven al ISTG 😬",
+      "El ISTG repartiendo factos sobre vectores 🗣️", "Mewing para tener mandíbula de Illustrator 🤫",
+      "Cero lag mental al diseñar en el ISTG 🧠", "Este flyer tiene 10000 de aura ✨",
+      "Ratio a las otras carreras, Diseño es god 📈", "Los NPCs guardan en JPG, los Sigmas en SVG 🗿",
+      "El ISTG te saca del flop absoluto 📉", "Glow up masivo estudiando en el ISTG 💅",
+      "Bro usa Word para logos... skull emoji 💀", "El ISTG es el meta actual, no cap 🧢",
+      "Vectores insanos, rizz impecable, puro ISTG 🔥", "Este logo tiene main character energy ✨",
+      "No seas un normie, estudia en el ISTG 🤓", "Aura oscura si no pones sangría al archivo 🩸",
+      "De chill estudiando diseño en el ISTG 🤙", "El ISTG te da el buff que necesitas ⚔️",
+      "Puro cine diseñar en las aulas del ISTG 🚬", "GG WP a los que no entraron al ISTG 🎮"
     ];
-    window._isFetchingP = false;
 
-    window._fetchPhrases = async () => {
-        if(window._isFetchingP) return;
-        window._isFetchingP = true;
-        try {
-            const apiKey = ""; // Canvas inyecta esto automáticamente
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-            const payload = {
-                contents: [{ parts: [{ text: "Genera 8 frases MUY cortas (máximo 8 palabras) en español, con humor 'brainrot' / Gen Z (slang moderno: W, aura, sigma, skibidi, NPC, POV, mewing, rizz, GOAT, prime, etc.) combinadas con Diseño Gráfico (CMYK, vectores, renders). El OBJETIVO PRINCIPAL es INVITAR Y CONVENCER a los visitantes a MATRICULARSE Y ESTUDIAR en el ISTG. Haz que el ISTG suene como la mejor opción del mundo. NUNCA uses la palabra P.I.S ni PIS." }] }],
-                generationConfig: {
-                    responseMimeType: "application/json",
-                    responseSchema: { type: "ARRAY", items: { type: "STRING" } }
-                },
-                systemInstruction: { parts: [{ text: "Eres un estudiante de diseño gráfico hiperactivo de la Generación Z. Hablas puro slang de internet y tu misión es ser embajador del ISTG, convenciendo a todos de que se matriculen en la carrera de diseño." }] }
-            };
-            const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-            const result = await response.json();
-            if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts) {
-                const newPhrases = JSON.parse(result.candidates[0].content.parts[0].text);
-                window._phrasesBuffer.push(...newPhrases); // Rellenar la reserva
-            }
-        } catch(e) { console.error("Fallo al pre-cargar frases", e); }
-        window._isFetchingP = false;
-    };
+    // Variables de Tickets e Historial por Imagen
+    window._imgTk = 3; 
+    window._imgPhrases = [];
 
-    // Apertura del Menú - Instante y con recarga silenciosa
+    // Apertura del Menú (3 Opciones Únicas y Header de tickets)
     window._tglS=()=>{
       window._tH([10]); 
       const m = document.getElementById('shoutMenu');
       if(m.classList.contains('hidden')) {
           
-          // Si por alguna razón nos quedamos sin frases, ponemos unas de emergencia publicitarias
-          if(window._phrasesBuffer.length < 4) {
-              window._phrasesBuffer.push("Unete al ISTG, es tremendo W 🚀", "Diseño en ISTG = Aura infinita 🎨", "Matricúlate y sal de la matrix 🕶️", "El ISTG te quita lo NPC 🤖");
+          if(window._imgTk <= 0) {
+              // Sin tickets para la imagen actual
+              m.innerHTML = `<div class="px-4 py-4 text-center text-red-400 font-bold text-sm w-full touch-manipulation">¡Agotaste tu aura en esta obra! 📢<br><span class="text-xs text-white/60 font-medium mt-1 block">Espera a la siguiente imagen 🗿</span></div>`;
+          } else {
+              // Cabecera Minimalista 0/3 con colores del diseño
+              const header = `<div class="px-3 py-1.5 mb-1 text-[10px] text-white/50 font-black text-center tracking-widest uppercase border-b border-white/10 bg-black/20 rounded-t-lg flex justify-between items-center"><span>USOS:</span><span class="text-orange-400 bg-orange-400/10 px-1.5 py-0.5 rounded-md border border-orange-400/20 font-mono font-bold">${window._imgTk}/3</span></div>`;
+              const colors = ['text-blue-100', 'text-yellow-100', 'text-orange-100'];
+              
+              const btns = window._imgPhrases.map((p, i) => 
+                `<button type="button" onclick="window._sndS('${p.replace(/'/g, "\\'")}')" class="text-left px-4 py-3 sm:py-2 rounded-xl text-base sm:text-sm font-semibold hover:bg-white/10 active:bg-white/20 transition-colors ${colors[i]} w-full touch-manipulation">${p}</button>`
+              ).join('');
+              
+              m.innerHTML = header + btns;
           }
-
-          // Tomar las primeras 4 frases de la reserva (y quitarlas de ahí)
-          const selected = window._phrasesBuffer.splice(0, 4);
-          const colors = ['text-blue-100', 'text-yellow-100', 'text-orange-100', 'text-purple-100'];
-          
-          m.innerHTML = selected.map((p, i) => 
-            `<button type="button" onclick="window._sndS('${p.replace(/'/g, "\\'")}')" class="text-left px-4 py-3 sm:py-2 rounded-xl text-base sm:text-sm font-semibold hover:bg-white/10 active:bg-white/20 transition-colors ${colors[i % 4]} w-full touch-manipulation">${p}</button>`
-          ).join('');
 
           m.classList.remove('hidden');
           m.classList.add('flex');
           void m.offsetWidth; 
           m.classList.remove('scale-75', 'opacity-0');
           m.classList.add('scale-100', 'opacity-100');
-
-          // Si la reserva se está quedando vacía (menos de 8 frases), pedir más a Gemini en segundo plano
-          if(window._phrasesBuffer.length <= 8) {
-              window._fetchPhrases();
-          }
-
       } else {
           m.classList.remove('scale-100', 'opacity-100');
           m.classList.add('scale-75', 'opacity-0');
@@ -250,43 +262,42 @@
       window._rHA();
     };
 
-    // --- Motor de Megáfono: Renderizado Optimista y Subcolecciones ---
     const _seenShouts = new Set();
     let _isShtCld = false;
 
     window._sndS=async(t)=>{
-      // Cierra el menú al tocar
       window._tglS(); 
       window._tH([20,30]);
+      
+      const id = _gID(_st.cP);
+      // Chequeo de tickets
+      if(window._imgTk <= 0) { window._sGT("Sin aura para esta obra", "🎟️"); return; }
 
       if(_isShtCld) return;
       if(!_db||!_au.currentUser){ window._sGT("Conectando...", "🔌"); return; }
       _isShtCld = true;
+      
+      // Restar ticket a la imagen actual
+      window._imgTk--;
+      localStorage.setItem(`_tk_${id}`, window._imgTk.toString());
 
       const bm = document.getElementById('btnMega');
       const mc = document.getElementById('mCd');
       if(bm) bm.style.pointerEvents = 'none';
       if(mc) { mc.style.opacity = '1'; mc.innerText = '6'; }
 
-      // 1. Generar ID único para este mensaje
       const mId = Date.now().toString(36) + Math.random().toString(36).substring(2);
       _seenShouts.add(mId);
-
-      // 2. Renderizado Optimista: ¡Dibujar instantáneamente en este celular!
       window._dDmk(t);
 
-      // 3. Enviar a Firebase oculto en la subcolección para evadir reglas restrictivas
       try{ 
         await _sD(_dC(_db, 'Feria2026_Images', 'GLOBAL_SHOUTS', 'Mensajes', mId), { 
             txt: t, 
             ts: _sT(),
             id: mId
         }); 
-      }catch(e){
-        console.error(e);
-      }
+      }catch(e){ console.error(e); }
 
-      // 4. Cooldown UI local
       let d = 6;
       const cdI = setInterval(() => {
         d--; if(mc) mc.innerText = d;
@@ -298,7 +309,7 @@
       }, 1000);
     };
 
-    // Motor Gráfico de Textos Flotantes (Danmaku Píxel Perfecto para Móvil)
+    // Motor Gráfico de Textos Flotantes con sombra sólida octuple (Sin grietas)
     window._dDmk=(t)=>{
       const d = document.createElement('div');
       d.textContent = t;
@@ -310,11 +321,14 @@
       d.style.fontSize = `${rS}px`; 
       d.style.top = `${rY}%`; 
       
-      // Aplicar text-shadow sólido para eliminar las grietas del texto
+      // Reparación de borde: 8 sombras duras garantizan que el pixel art no se rompa nunca.
       const sW = isM ? 1.5 : 2.5;
-      d.style.textShadow = `-${sW}px -${sW}px 0 #000, ${sW}px -${sW}px 0 #000, -${sW}px ${sW}px 0 #000, ${sW}px ${sW}px 0 #000`;
+      d.style.textShadow = `
+        -${sW}px -${sW}px 0 #000, 0 -${sW}px 0 #000, ${sW}px -${sW}px 0 #000,
+        ${sW}px 0 0 #000, ${sW}px ${sW}px 0 #000, 0 ${sW}px 0 #000,
+        -${sW}px ${sW}px 0 #000, -${sW}px 0 0 #000
+      `;
       
-      // Inicia fuera de la pantalla basado en el ancho real en píxeles del celular
       const startX = window.innerWidth;
       d.style.transform = `translate3d(${startX}px, 0, 0)`;
       document.body.appendChild(d);
@@ -322,8 +336,6 @@
       requestAnimationFrame(() => {
         const w = d.offsetWidth; 
         const v = isM ? (4000 + Math.random() * 1500) : (6000 + Math.random() * 2000); 
-        
-        // Empuja con fuerza a través de todo el ancho + su propio tamaño
         d.animate([
           { transform: `translate3d(${startX}px, 0, 0)` },
           { transform: `translate3d(-${w + 100}px, 0, 0)` } 
@@ -331,7 +343,6 @@
       });
     };
 
-    // Descarga la lista maestra de GitHub
     async function _fGH(){
       try {
         const r = await fetch(`https://raw.githubusercontent.com/${_st.o}/${_st.r}/${_st.b}/galeria.json?t=${Date.now()}`);
@@ -344,7 +355,6 @@
 
     window.onload=async()=>{
       _rC();window.addEventListener('resize',_rC,{passive:true});
-      window._fetchPhrases(); // Iniciar la precarga de frases apenas abre la web
       try{const r=await fetch("https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg");document.getElementById('loaderLogo').src=URL.createObjectURL(await r.blob());}catch(e){}
       if(document.fonts)document.fonts.ready.then(()=>{const s=document.getElementById('stickerAssembly');if(s)s.classList.remove('opacity-0');});
       
@@ -361,15 +371,13 @@
     async function _iG(){
       if(_db) {
         let _gSL = true;
-        // Escáner de Chat Global en Tiempo real (Patrón Inmune WhatsApp)
         _oS(_q(_cC(_db, 'Feria2026_Images', 'GLOBAL_SHOUTS', 'Mensajes'), _oB('ts', 'desc'), _lmt(1)), snap => {
           snap.docChanges().forEach(ch => {
             if (ch.type === 'added') {
               const data = ch.doc.data();
-              // Si no es la carga inicial y el mensaje tiene un ID que este celular no ha dibujado aún...
               if(!_gSL && data.id && !_seenShouts.has(data.id)) {
                 _seenShouts.add(data.id);
-                window._dDmk(data.txt); // ¡Dibújalo!
+                window._dDmk(data.txt);
               }
             }
           });
@@ -397,6 +405,28 @@
       const id=_gID(pth);
       if(_aRU)_aRU();
       _uCR=null;_pRS={};_iFRL=true;_vRdy=false;_uRBU();
+
+      // --- Lógica Estabilizada: 3 Tickets y 3 Frases Únicas por Imagen ---
+      window._imgTk = parseInt(localStorage.getItem(`_tk_${id}`));
+      if(isNaN(window._imgTk)) window._imgTk = 3; // Fallback anti-corrupción caché
+      
+      let imgPhrases = JSON.parse(localStorage.getItem(`_phr_${id}`) || '[]');
+      
+      if(imgPhrases.length < 3) {
+        let globalUsed = JSON.parse(localStorage.getItem('_g_uP') || '[]');
+        let avail = window._pPool.filter(x => !globalUsed.includes(x));
+        
+        if(avail.length < 3) { globalUsed = []; avail = window._pPool; } // Reinicia si se acaban las 50
+        
+        const sel = avail.sort(() => 0.5 - Math.random()).slice(0, 3);
+        imgPhrases = sel;
+        
+        globalUsed.push(...sel);
+        localStorage.setItem('_g_uP', JSON.stringify(globalUsed));
+        localStorage.setItem(`_phr_${id}`, JSON.stringify(imgPhrases));
+      }
+      window._imgPhrases = imgPhrases;
+      // ---------------------------------------------------------
       
       // Reseteo visual de los contadores al cambiar de imagen
       ['😍','😂','🤡','😱','🤌'].forEach(e=>{const c=document.getElementById(`count-${e}`);if(c)c.textContent='0';});
@@ -427,7 +457,7 @@
       if(!_db||!_au.currentUser||!_st.cP)return;
       let py={},pR=_uCR;if(pR===e){_sJBA(e,j);return;}
       
-      // OPTIMISTIC UI: Actualiza instantáneamente la pantalla local antes que Firebase
+      // UI Optimista (Instantánea sin depender de red)
       const cNew = document.getElementById(`count-${e}`);
       if(cNew) cNew.textContent = (parseInt(cNew.textContent) + 1).toString();
       if(pR) {
