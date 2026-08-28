@@ -174,38 +174,69 @@
       clearTimeout(_hAT);_hAT=setTimeout(()=>{if(!window._hHov&&document.getElementById('shoutMenu').classList.contains('hidden'))h.classList.add('opacity-30')},4000);
     };
 
-    // Apertura del Menú - Genera frases aleatorias y aplica transición
+    // Sistema de Buffer para frases infinitas en 2do plano (Cero tiempos de carga)
+    window._phrasesBuffer = [
+      "Estudiar Diseño en el ISTG es W 🎨", "Matricúlate y farmea aura infinita 📈",
+      "POV: Eres el nuevo GOAT del ISTG 🐐", "El ISTG tiene el rizz del diseño 🔥",
+      "Skibidi vectores, ven a estudiar aquí 🐺", "Deja de ser NPC, únete al ISTG 🗿",
+      "Carrera de Diseño goza de prime absoluto ✨", "Mewing mientras me matriculo en Diseño 🤫🧏‍♂️"
+    ];
+    window._isFetchingP = false;
+
+    window._fetchPhrases = async () => {
+        if(window._isFetchingP) return;
+        window._isFetchingP = true;
+        try {
+            const apiKey = ""; // Canvas inyecta esto automáticamente
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: "Genera 8 frases MUY cortas (máximo 8 palabras) en español, con humor 'brainrot' / Gen Z (slang moderno: W, aura, sigma, skibidi, NPC, POV, mewing, rizz, GOAT, prime, etc.) combinadas con Diseño Gráfico (CMYK, vectores, renders). El OBJETIVO PRINCIPAL es INVITAR Y CONVENCER a los visitantes a MATRICULARSE Y ESTUDIAR en el ISTG. Haz que el ISTG suene como la mejor opción del mundo. NUNCA uses la palabra P.I.S ni PIS." }] }],
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: { type: "ARRAY", items: { type: "STRING" } }
+                },
+                systemInstruction: { parts: [{ text: "Eres un estudiante de diseño gráfico hiperactivo de la Generación Z. Hablas puro slang de internet y tu misión es ser embajador del ISTG, convenciendo a todos de que se matriculen en la carrera de diseño." }] }
+            };
+            const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            const result = await response.json();
+            if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts) {
+                const newPhrases = JSON.parse(result.candidates[0].content.parts[0].text);
+                window._phrasesBuffer.push(...newPhrases); // Rellenar la reserva
+            }
+        } catch(e) { console.error("Fallo al pre-cargar frases", e); }
+        window._isFetchingP = false;
+    };
+
+    // Apertura del Menú - Instante y con recarga silenciosa
     window._tglS=()=>{
       window._tH([10]); 
       const m = document.getElementById('shoutMenu');
       if(m.classList.contains('hidden')) {
           
-          // Banco de frases sin menciones al PIS
-          const _zPhrases = [
-            "POV: Tu Illustrator crasheó en Ohio 💀", "-1000 de aura por usar Canva 📉", "El ISTG farmeando puro Sigma 🐺",
-            "Mewing mientras exporto en CMYK 🤫🧏‍♂️", "Ese diseño tiene W rizz 🗿", "Se cerró el PS... evento canónico 🕷️",
-            "Dejen que el de Diseño cocine 🔥", "Mi PC es un NPC renderizando 🤖", "Aura +9999 al guardar con Ctrl+S 📈",
-            "W diseño, L horas de sueño 😴", "Puro brainrot tipográfico en este lienzo 🎨", "Los del ISTG en su prime de diseño ✨",
-            "¿Exportado a 72dpi? Very sus 📮", "Ratio al que no agrupa sus capas 💀", "Skibidi vectores listos para exportar 🚽",
-            "Sobreviviendo a Diseño a base de RedBull 🔋", "Esa paleta de colores está bussin fr fr 🎨", "No cap, este render quedó clean 🧢",
-            "Mi salud mental: 404 Not Found 📉", "El verdadero jefe final es la imprenta 🖨️"
-          ];
-          
-          // Mezclar y elegir 4
-          const shuffled = [..._zPhrases].sort(() => 0.5 - Math.random());
-          const selected = shuffled.slice(0, 4);
+          // Si por alguna razón nos quedamos sin frases, ponemos unas de emergencia publicitarias
+          if(window._phrasesBuffer.length < 4) {
+              window._phrasesBuffer.push("Unete al ISTG, es tremendo W 🚀", "Diseño en ISTG = Aura infinita 🎨", "Matricúlate y sal de la matrix 🕶️", "El ISTG te quita lo NPC 🤖");
+          }
+
+          // Tomar las primeras 4 frases de la reserva (y quitarlas de ahí)
+          const selected = window._phrasesBuffer.splice(0, 4);
           const colors = ['text-blue-100', 'text-yellow-100', 'text-orange-100', 'text-purple-100'];
           
           m.innerHTML = selected.map((p, i) => 
-            `<button type="button" onclick="window._sndS('${p}')" class="text-left px-4 py-3 sm:py-2 rounded-xl text-base sm:text-sm font-semibold hover:bg-white/10 active:bg-white/20 transition-colors ${colors[i]} w-full touch-manipulation">${p}</button>`
+            `<button type="button" onclick="window._sndS('${p.replace(/'/g, "\\'")}')" class="text-left px-4 py-3 sm:py-2 rounded-xl text-base sm:text-sm font-semibold hover:bg-white/10 active:bg-white/20 transition-colors ${colors[i % 4]} w-full touch-manipulation">${p}</button>`
           ).join('');
 
           m.classList.remove('hidden');
           m.classList.add('flex');
-          // Forzar repintado para que la transición funcione
           void m.offsetWidth; 
           m.classList.remove('scale-75', 'opacity-0');
           m.classList.add('scale-100', 'opacity-100');
+
+          // Si la reserva se está quedando vacía (menos de 8 frases), pedir más a Gemini en segundo plano
+          if(window._phrasesBuffer.length <= 8) {
+              window._fetchPhrases();
+          }
+
       } else {
           m.classList.remove('scale-100', 'opacity-100');
           m.classList.add('scale-75', 'opacity-0');
@@ -313,6 +344,7 @@
 
     window.onload=async()=>{
       _rC();window.addEventListener('resize',_rC,{passive:true});
+      window._fetchPhrases(); // Iniciar la precarga de frases apenas abre la web
       try{const r=await fetch("https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg");document.getElementById('loaderLogo').src=URL.createObjectURL(await r.blob());}catch(e){}
       if(document.fonts)document.fonts.ready.then(()=>{const s=document.getElementById('stickerAssembly');if(s)s.classList.remove('opacity-0');});
       
