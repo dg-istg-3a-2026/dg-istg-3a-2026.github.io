@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="es" class="h-full bg-[#232453] text-slate-100 antialiased selection:bg-orange-500 selection:text-white">
 <head>
-  <!-- SCRIPT ANTI-CACHÉ: Cambiado a 2.1 como sugeriste. -->
+  <!-- SCRIPT ANTI-CACHÉ: Desactivado temporalmente porque rompe el entorno de Vista Previa -->
+  <!-- 
   <script>
     (function(){
       const VER = "2.1"; 
@@ -13,6 +14,7 @@
       }
     })();
   </script>
+  -->
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y6LMRRHWH"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0Y6LMRRHWH');</script>
@@ -535,16 +537,18 @@
       }, 100);
     }
 
-    // --- NUEVO RENDERIZADO PREMIUM DE LA IMAGEN (CANVAS) ---
     function _rI(im){
       const w=window.innerWidth, h=window.innerHeight;
       _mnCx.clearRect(0,0,w,h);
       
-      // Espaciado inteligente (Padding)
-      const pad = w < 768 ? 20 : 40;
-      const availW = w - pad * 2;
-      // Menos espacio disponible en altura en móviles para esquivar el menú inferior
-      const availH = h - pad * 2 - (w < 768 ? 60 : 0);
+      // Cálculo de áreas seguras (Safe Zones) para UI
+      const isM = w < 768;
+      const padX = isM ? 16 : 40;       // Padding lateral
+      const padTop = isM ? 60 : 30;     // Espacio superior (móvil vs PC)
+      const padBottom = isM ? 100 : 90; // Espacio inferior robusto para el HUD
+      
+      const availW = w - padX * 2;
+      const availH = h - padTop - padBottom;
       
       const iR = (im.naturalWidth || im.width) / (im.naturalHeight || im.height);
       const sR = availW / availH;
@@ -553,8 +557,8 @@
       let dH = iR > sR ? availW / iR : availH;
       
       _mnCx.save();
-      // Trasladar al centro visualmente correcto (desplazado un poco hacia arriba en celular)
-      _mnCx.translate(w/2, h/2 - (w < 768 ? 30 : 0));
+      // Centrar de manera impecable en el área libre calculada
+      _mnCx.translate(w/2, padTop + availH/2);
       
       // Habilitar máxima nitidez
       _mnCx.imageSmoothingEnabled = true;
