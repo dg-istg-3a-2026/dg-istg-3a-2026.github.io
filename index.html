@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="es" class="h-full bg-[#232453] text-slate-100 antialiased selection:bg-orange-500 selection:text-white">
 <head>
-  <!-- SCRIPT ANTI-CACHÉ: Cambia la versión ("2.0") cuando actualices tu host para forzar a todos los móviles a recargar la página limpia -->
+  <!-- SCRIPT ANTI-CACHÉ: Cambiado a 2.1 como sugeriste. -->
   <script>
     (function(){
-      const VER = "2.0"; 
+      const VER = "2.1"; 
       if(localStorage.getItem('_istg_v') !== VER){
         localStorage.setItem('_istg_v', VER);
         if(window.location.search.indexOf('v=') === -1){
-          window.location.replace(window.location.pathname + '?v=' + Date.now());
+          window.location.replace(window.location.pathname + '?v=' + VER);
         }
       }
     })();
@@ -17,7 +17,8 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y6LMRRHWH"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0Y6LMRRHWH');</script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <!-- Accesibilidad: Removido user-scalable=no y maximum-scale=1.0 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
   
   <title>?!</title>
@@ -28,23 +29,29 @@
   
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'%3E%3Cstyle%3E@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@900');text%7Bfont-family:'DynaPuff',system-ui,sans-serif;font-weight:900;font-size:80px;dominant-baseline:central;%7D.bg-q%7Bstroke:%230B1B2F;stroke-width:24px;stroke-linejoin:round;%7D.bg-e%7Bstroke:%23FF5500;stroke-width:24px;stroke-linejoin:round;%7D.md%7Bstroke:white;stroke-width:12px;stroke-linejoin:round;%7D.f-q%7Bfill:%230B1B2F;%7D.f-e%7Bfill:%23FF5500;%7D%3C/style%3E%3Ctext x='15' y='55' class='bg-q'%3E?%3C/text%3E%3Ctext x='15' y='55' class='md'%3E?%3C/text%3E%3Ctext x='15' y='55' class='f-q'%3E?%3C/text%3E%3Ctext x='70' y='55' class='bg-e'%3E!%3C/text%3E%3Ctext x='70' y='55' class='md'%3E!%3C/text%3E%3Ctext x='70' y='55' class='f-e'%3E!%3C/text%3E%3C/svg%3E">
   
+  <!-- PARA PRODUCCIÓN: Elimina el script de abajo y descomenta la etiqueta link con tu CSS compilado -->
+  <!-- <link rel="stylesheet" href="tu-tailwind-compilado.css"> -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@700;900&family=Inter:wght@300;400;600;700&display=block" rel="stylesheet">
   <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],display:['DynaPuff','cursive']},animation:{'pop':'popCounter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards'},keyframes:{popCounter:{'0%':{transform:'scale(1)'},'50%':{transform:'scale(1.6) translateY(-4px)',backgroundColor:'#fb923c',color:'#fff'},'100%':{transform:'scale(1)'}}}}}}</script>
   
   <style>
-    :root{--spotlight-x:50%;--spotlight-y:50%}body,html{margin:0;padding:0;width:100%;height:100dvh;overflow:hidden;background-color:#232453;user-select:none;-webkit-user-select:none;touch-action:none;overscroll-behavior:none}
-    #mainCanvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;transition:transform 0.2s cubic-bezier(0.16,1,0.3,1);will-change:transform}
+    :root{--spotlight-x:50%;--spotlight-y:50%}
+    /* Eliminado el touch-action:none general del body */
+    body,html{margin:0;padding:0;width:100%;height:100dvh;overflow:hidden;background-color:#232453;user-select:none;-webkit-user-select:none;}
+    /* Aplicado touch-action:none estrictamente al canvas. Eliminado will-change redundante. */
+    #mainCanvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;transition:transform 0.2s cubic-bezier(0.16,1,0.3,1);touch-action:none;}
     .glass-panel{background:rgba(15,23,42,0.95);border:1px solid rgba(255,255,255,0.12);box-shadow:0 10px 30px -10px rgba(0,0,0,0.8);position:relative;overflow:hidden;transform:translateZ(0)}
     @media (min-width: 640px) { .glass-panel { backdrop-filter:blur(12px) saturate(150%);-webkit-backdrop-filter:blur(12px) saturate(150%); background:rgba(15,23,42,0.75); } }
-    .glass-panel::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle 80px at var(--spotlight-x) var(--spotlight-y),rgba(255,85,0,0.2),transparent 100%);pointer-events:none;z-index:0;will-change:background}
+    /* Eliminado will-change innecesario */
+    .glass-panel::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle 80px at var(--spotlight-x) var(--spotlight-y),rgba(255,85,0,0.2),transparent 100%);pointer-events:none;z-index:0;}
     .text-stroke-outer-navy{-webkit-text-stroke:28px #0B1B2F;paint-order:stroke fill;stroke-linejoin:round;stroke-linecap:round}.text-stroke-outer-orange{-webkit-text-stroke:28px #FF5500;paint-order:stroke fill;stroke-linejoin:round;stroke-linecap:round}.text-stroke-mid-white{-webkit-text-stroke:16px #FFFFFF;paint-order:stroke fill;stroke-linejoin:round;stroke-linecap:round}
     @keyframes elasticAnticipation{0%,100%{transform:scale(1) translateY(0)}50%{transform:scale(1.04) translateY(-6px)}}@keyframes doubtSway{0%,100%{transform:rotate(-8deg) translateY(0)}35%{transform:rotate(6deg) translateY(-10px)}70%{transform:rotate(-12deg) translateY(4px)}}@keyframes surpriseBounce{0%,100%{transform:translateY(0) rotate(4deg) scale(1)}20%{transform:translateY(-24px) rotate(12deg) scale(1.1)}38%{transform:translateY(3px) rotate(-2deg) scale(0.95)}55%{transform:translateY(-10px) rotate(6deg) scale(1.04)}72%{transform:translateY(0) rotate(3deg) scale(1)}}
     .animate-sticker-group{animation:elasticAnticipation 3s ease-in-out infinite;transform-origin:center center}.animate-doubt{animation:doubtSway 2.7s ease-in-out infinite;transform-origin:center bottom}.animate-surprise{animation:surpriseBounce 2.7s cubic-bezier(0.34,1.56,0.64,1) infinite;transform-origin:center bottom}
   </style>
 
   <script>
-    (function(){const _0x1a2b=['contextmenu','preventDefault','keydown','ctrlKey','shiftKey','keyCode','debugger','addEventListener'];document[_0x1a2b[7]](_0x1a2b[0],e=>e[_0x1a2b[1]]());document[_0x1a2b[7]](_0x1a2b[2],e=>{if(e[_0x1a2b[5]]===123||(e[_0x1a2b[3]]&&e[_0x1a2b[4]]&&[73,74,67].includes(e[_0x1a2b[5]]))||(e[_0x1a2b[3]]&&[85,83,80].includes(e[_0x1a2b[5]]))){e[_0x1a2b[1]]();return false}});setInterval(()=>{try{Function(_0x1a2b[6])()}catch(e){}},800);})();
+    // Sistema anti-DevTools eliminado para mejorar rendimiento y no interferir con UX nativa.
     window._isRdy=false;window._hHov=false;
   </script>
 </head>
@@ -52,7 +59,6 @@
 <body class="h-full w-full relative select-none overflow-hidden text-slate-100 font-sans bg-[#232453]">
   <canvas id="mainCanvas" class="pointer-events-none"></canvas>
   
-  <!-- Pantalla de Carga Original Restaurada -->
   <div id="initialLoader" class="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-[#FAF5EF] text-slate-900 pointer-events-auto">
     <div class="relative flex flex-col items-center justify-center p-6 text-center max-w-sm">
       <div id="stickerAssembly" class="relative w-80 h-72 sm:w-96 sm:h-80 flex items-center justify-center mb-2 animate-sticker-group opacity-0 transition-opacity duration-200">
@@ -72,8 +78,6 @@
   <!-- Logo y Redes Flotantes (Solo Móvil) -->
   <div id="mobile-top-logo" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 sm:hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 -translate-y-8 w-full px-4 pointer-events-none">
     <img src="https://raw.githubusercontent.com/dg-istg-3a-2026/dg-istg-3a-2026.github.io/298f7f8c07538b457b472c804629c755b8726eab/ISTGXDISE%C3%91OBLANCO.svg" alt="ISTG Diseño Gráfico" class="h-6 w-auto object-contain opacity-90 filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.8)]">
-    
-    <!-- Iconos minimalistas sin HUD -->
     <div class="flex items-center gap-4 pointer-events-auto mt-0.5">
       <a href="https://istg.edu.ec/" target="_blank" rel="noopener noreferrer" class="p-1.5 text-white/70 hover:text-white transition-all active:scale-90 touch-manipulation" title="Sitio Web">
         <svg class="w-4 h-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
@@ -93,26 +97,21 @@
   <!-- Redes Sociales ISTG (Flotante Arriba Derecha - Solo Desktop) -->
   <div id="social-dock" class="fixed top-6 right-4 sm:top-8 sm:right-6 z-50 hidden sm:flex transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 -translate-y-8 pointer-events-none">
     <div class="glass-panel p-1.5 rounded-[16px] flex items-center gap-1 sm:gap-1.5 pointer-events-auto border border-white/10 shadow-lg backdrop-blur-md">
-      <!-- Web -->
       <a href="https://istg.edu.ec/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-[12px] bg-transparent hover:bg-blue-500/20 transition-all duration-300 text-white/70 hover:text-blue-400 hover:scale-110 active:scale-95 touch-manipulation" title="Sitio Web Oficial">
         <svg class="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-md" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
       </a>
-      <!-- Facebook -->
       <a href="https://www.facebook.com/istg.ec" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-[12px] bg-transparent hover:bg-[#1877F2]/20 transition-all duration-300 text-white/70 hover:text-[#1877F2] hover:scale-110 active:scale-95 touch-manipulation" title="Facebook">
         <svg class="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-md" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
       </a>
-      <!-- Instagram -->
       <a href="https://www.instagram.com/istg.ec/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-[12px] bg-transparent hover:bg-[#E1306C]/20 transition-all duration-300 text-white/70 hover:text-[#E1306C] hover:scale-110 active:scale-95 touch-manipulation" title="Instagram">
         <svg class="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-md" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
       </a>
-      <!-- X (Twitter) -->
       <a href="https://x.com/istg_ec" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-[12px] bg-transparent hover:bg-white/10 transition-all duration-300 text-white/70 hover:text-white hover:scale-110 active:scale-95 touch-manipulation" title="X (Twitter)">
         <svg class="w-4 h-4 sm:w-4 sm:h-4 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
       </a>
     </div>
   </div>
 
-  <!-- Contenedor invisible para Notificaciones -->
   <div id="toastContainer" class="fixed top-24 right-4 sm:right-6 z-[100] flex flex-col gap-3 pointer-events-none w-max max-w-[220px] items-end"></div>
   
   <!-- HUD y Reacciones -->
@@ -120,7 +119,6 @@
     <div id="reactionDock" class="relative flex items-center gap-1 sm:gap-1.5 p-1.5 sm:p-2 pointer-events-auto w-max mx-auto transition-all duration-300">
       <div class="absolute inset-0 glass-panel rounded-[28px] shadow-2xl pointer-events-none border border-white/10"></div>
       
-      <!-- Logo Institucional Integrado (Solo Desktop) -->
       <div class="hidden sm:flex relative z-10 items-center pl-2 pr-1 pointer-events-none select-none">
         <img src="https://raw.githubusercontent.com/dg-istg-3a-2026/dg-istg-3a-2026.github.io/298f7f8c07538b457b472c804629c755b8726eab/ISTGXDISE%C3%91OBLANCO.svg" alt="ISTG Diseño Gráfico" class="h-5 w-auto object-contain opacity-85 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
       </div>
@@ -134,15 +132,12 @@
       
       <div class="w-px h-8 bg-white/20 mx-1 z-10"></div>
       
-      <!-- Megáfono (Centrado perfecto en móvil) -->
       <div class="static sm:relative z-10">
         <button type="button" id="btnMega" onclick="window._tglS()" class="relative flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-[18px] bg-blue-500/20 border border-blue-400/30 hover:bg-blue-500/40 transition-all duration-300 hover:-translate-y-2 hover:scale-110 active:scale-90 focus:outline-none cursor-pointer pointer-events-auto overflow-hidden touch-manipulation">
           <span class="text-xl sm:text-2xl pointer-events-none">📢</span>
-          <!-- Cristal oscuro del Cooldown -->
           <div id="mCd" class="absolute inset-0 bg-slate-900/90 flex items-center justify-center text-orange-500 font-black text-xl opacity-0 transition-opacity backdrop-blur-sm pointer-events-none z-20 font-display"></div>
         </button>
         
-        <!-- Menú de gritos -->
         <div id="shoutMenu" class="absolute bottom-full left-1/2 -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-0 mb-3 sm:mb-4 bg-slate-900/95 backdrop-blur-xl border border-white/10 p-2 rounded-2xl shadow-2xl flex-col gap-1 w-[92vw] max-w-[320px] sm:w-max sm:max-w-none pointer-events-auto origin-bottom sm:origin-bottom-right z-[100] transition-all duration-200 scale-75 opacity-0 hidden">
         </div>
       </div>
@@ -157,6 +152,9 @@
     const _cfg={apiKey:"AIzaSyDYbe0MMuPvpdJiYlvtcDec-MybKqCad9k",authDomain:"web-feria-istg-2026.firebaseapp.com",databaseURL:"https://web-feria-istg-2026-default-rtdb.firebaseio.com",projectId:"web-feria-istg-2026",storageBucket:"web-feria-istg-2026.firebasestorage.app",messagingSenderId:"434583648721",appId:"1:434583648721:web:a31a4ec9e99dc7faf8c8f0"};
     const _st={o:'dg-istg-3a-2026',r:'dg-istg-3a-2026.github.io',b:'MochilaDeCaleb',f:[],cP:'',eC:0};
     
+    // Nueva variable global para chequear si Firebase está disponible
+    let _fbReady = false;
+
     let _uCR=null,_db=null,_au=null,_aRU=null,_pRS={},_iFRL=true,_lRPE=null,_hAT=null,_sTck=false,_rdT,_cImg=null,_vRdy=false;
     const _mnC=document.getElementById('mainCanvas'), _mnCx=_mnC.getContext('2d');
 
@@ -189,7 +187,6 @@
       clearTimeout(_hAT);_hAT=setTimeout(()=>{if(!window._hHov&&document.getElementById('shoutMenu').classList.contains('hidden'))h.classList.add('opacity-30')},4000);
     };
 
-    // 50 Frases estáticas enfocadas en ISTG, Diseño y Gen Z
     window._pPool = [
       "El ISTG es el verdadero prime del diseño ✨", "Ratio al que no estudie en el ISTG 💀",
       "Estudiar diseño aquí = Aura infinita 📈", "POV: Eres el GOAT del Illustrator en ISTG 🐐",
@@ -218,18 +215,14 @@
       "Puro cine diseñar en las aulas del ISTG 🚬", "GG WP a los que no entraron al ISTG 🎮"
     ];
 
-    // Variables de Tickets e Historial por Imagen
     window._imgTk = 3; 
     window._imgPhrases = [];
 
-    // Apertura del Menú (3 Opciones Únicas y Tickets)
     window._tglS=()=>{
       window._tH([10]); 
       const m = document.getElementById('shoutMenu');
       if(m.classList.contains('hidden')) {
-          
           if(window._imgTk <= 0) {
-              // Sin tickets para la imagen actual
               m.innerHTML = `<div class="px-4 py-4 text-center text-red-400 font-bold text-sm w-full touch-manipulation">¡Agotaste tu aura en esta obra! 📢<br><span class="text-xs text-white/60 font-medium mt-1 block">Espera a la siguiente imagen 🗿</span></div>`;
           } else {
               const header = `<div class="px-3 py-1.5 mb-1 text-[10px] text-white/50 font-black text-center tracking-widest uppercase border-b border-white/10 bg-black/20 rounded-t-lg flex justify-between items-center"><span>USOS:</span><span class="text-orange-400 bg-orange-400/20 px-1.5 py-0.5 rounded-md font-mono font-bold">${window._imgTk}/3</span></div>`;
@@ -238,7 +231,6 @@
                 `<button type="button" onclick="window._sndS('${p.replace(/'/g, "\\'")}')" class="text-left px-4 py-3 sm:py-2 rounded-xl text-base sm:text-sm font-semibold hover:bg-white/10 active:bg-white/20 transition-colors ${colors[i]} w-full touch-manipulation">${p}</button>`
               ).join('');
           }
-
           m.classList.remove('hidden');
           m.classList.add('flex');
           void m.offsetWidth; 
@@ -265,14 +257,13 @@
       window._tH([20,30]);
       
       const id = _gID(_st.cP);
-      // Chequeo de tickets
       if(window._imgTk <= 0) { window._sGT("Sin aura para esta obra", "🎟️"); return; }
-
       if(_isShtCld) return;
-      if(!_db||!_au.currentUser){ window._sGT("Conectando...", "🔌"); return; }
-      _isShtCld = true;
       
-      // Restar ticket a la imagen actual
+      // Chequeo explícito de Firebase
+      if(!_fbReady || !_au.currentUser){ window._sGT("Conexión inactiva", "🔌"); return; }
+      
+      _isShtCld = true;
       window._imgTk--;
       localStorage.setItem(`_tk_${id}`, window._imgTk.toString());
 
@@ -287,9 +278,7 @@
 
       try{ 
         await _sD(_dC(_db, 'Feria2026_Images', 'GLOBAL_SHOUTS', 'Mensajes', mId), { 
-            txt: t, 
-            ts: _sT(),
-            id: mId
+            txt: t, ts: _sT(), id: mId
         }); 
       }catch(e){ console.error(e); }
 
@@ -304,7 +293,6 @@
       }, 1000);
     };
 
-    // Motor Gráfico de Textos Flotantes con sombra sólida octuple (Sin grietas)
     window._dDmk=(t)=>{
       const d = document.createElement('div');
       d.textContent = t;
@@ -316,13 +304,8 @@
       d.style.fontSize = `${rS}px`; 
       d.style.top = `${rY}%`; 
       
-      // Reparación de borde: 8 sombras duras garantizan que el pixel art no se rompa nunca.
       const sW = isM ? 1.5 : 2.5;
-      d.style.textShadow = `
-        -${sW}px -${sW}px 0 #000, 0 -${sW}px 0 #000, ${sW}px -${sW}px 0 #000,
-        ${sW}px 0 0 #000, ${sW}px ${sW}px 0 #000, 0 ${sW}px 0 #000,
-        -${sW}px ${sW}px 0 #000, -${sW}px 0 0 #000
-      `;
+      d.style.textShadow = `-${sW}px -${sW}px 0 #000, 0 -${sW}px 0 #000, ${sW}px -${sW}px 0 #000, ${sW}px 0 0 #000, ${sW}px ${sW}px 0 #000, 0 ${sW}px 0 #000, -${sW}px ${sW}px 0 #000, -${sW}px 0 0 #000`;
       
       const startX = window.innerWidth;
       d.style.transform = `translate3d(${startX}px, 0, 0)`;
@@ -331,16 +314,14 @@
       requestAnimationFrame(() => {
         const w = d.offsetWidth; 
         const v = isM ? (4000 + Math.random() * 1500) : (6000 + Math.random() * 2000); 
-        d.animate([
-          { transform: `translate3d(${startX}px, 0, 0)` },
-          { transform: `translate3d(-${w + 100}px, 0, 0)` } 
-        ], { duration: v, easing: 'linear' }).onfinish = () => d.remove();
+        d.animate([{ transform: `translate3d(${startX}px, 0, 0)` }, { transform: `translate3d(-${w + 100}px, 0, 0)` }], { duration: v, easing: 'linear' }).onfinish = () => d.remove();
       });
     };
 
     async function _fGH(){
       try {
-        const r = await fetch(`https://raw.githubusercontent.com/${_st.o}/${_st.r}/${_st.b}/galeria.json?t=${Date.now()}`);
+        // Reservamos el control de caché mediante ?v=2.1
+        const r = await fetch(`https://raw.githubusercontent.com/${_st.o}/${_st.r}/${_st.b}/galeria.json?v=2.1`);
         if(r.ok) {
           const l = await r.json();
           _st.f = l.map(n => ({ path: n }));
@@ -350,21 +331,28 @@
 
     window.onload=async()=>{
       _rC();window.addEventListener('resize',_rC,{passive:true});
-      try{const r=await fetch("https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg");document.getElementById('loaderLogo').src=URL.createObjectURL(await r.blob());}catch(e){}
+      
+      // Asignación directa del SVG
+      const logoEl = document.getElementById('loaderLogo');
+      if(logoEl) logoEl.src = "https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg";
+      
       if(document.fonts)document.fonts.ready.then(()=>{const s=document.getElementById('stickerAssembly');if(s)s.classList.remove('opacity-0');});
       
       try{
         const app=_iA(_cfg);_au=_gA(app);_db=_gF(app);
-        await Promise.all([_sIA(_au), _fGH()]); 
+        await Promise.all([_sIA(_au), _fGH()]);
+        _fbReady = true; // Firebase está operativo
         await _iG();
       }catch(e){
+        console.warn("Iniciando en modo local (sin Firebase)");
+        _fbReady = false; 
         await _fGH();
         await _iG();
       }
     };
 
     async function _iG(){
-      if(_db) {
+      if(_fbReady && _db) {
         let _gSL = true;
         _oS(_q(_cC(_db, 'Feria2026_Images', 'GLOBAL_SHOUTS', 'Mensajes'), _oB('ts', 'desc'), _lmt(1)), snap => {
           snap.docChanges().forEach(ch => {
@@ -382,7 +370,8 @@
       if(_st.f.length>0)await _aLUI();else _dIL();
     }
     
-    const _gID=(p)=>btoa(p).replace(/[/+=]/g,'_');
+    // Solución al problema Unicode
+    const _gID = p => btoa(unescape(encodeURIComponent(p))).replace(/[\/+=]/g, '_');
 
     window._tRR=(e)=>{
       const b=document.getElementById(`btn-${e}`);if(!b)return;
@@ -396,14 +385,13 @@
     };
 
     async function _sRL(pth){
-      if(!_db||!_au.currentUser)return;
+      if(!_fbReady||!_au.currentUser)return;
       const id=_gID(pth);
       if(_aRU)_aRU();
       _uCR=null;_pRS={};_iFRL=true;_vRdy=false;_uRBU();
 
-      // --- Lógica Estabilizada: 3 Tickets y 3 Frases Únicas por Imagen ---
       window._imgTk = parseInt(localStorage.getItem(`_tk_${id}`));
-      if(isNaN(window._imgTk)) window._imgTk = 3; // Fallback anti-corrupción caché
+      if(isNaN(window._imgTk)) window._imgTk = 3; 
       
       let imgPhrases = JSON.parse(localStorage.getItem(`_phr_${id}`) || '[]');
       
@@ -411,7 +399,7 @@
         let globalUsed = JSON.parse(localStorage.getItem('_g_uP') || '[]');
         let avail = window._pPool.filter(x => !globalUsed.includes(x));
         
-        if(avail.length < 3) { globalUsed = []; avail = window._pPool; } // Reinicia si se acaban las 50
+        if(avail.length < 3) { globalUsed = []; avail = window._pPool; } 
         
         const sel = avail.sort(() => 0.5 - Math.random()).slice(0, 3);
         imgPhrases = sel;
@@ -421,9 +409,7 @@
         localStorage.setItem(`_phr_${id}`, JSON.stringify(imgPhrases));
       }
       window._imgPhrases = imgPhrases;
-      // ---------------------------------------------------------
       
-      // Reseteo visual de los contadores al cambiar de imagen
       ['😍','😂','🤡','😱','🤌'].forEach(e=>{const c=document.getElementById(`count-${e}`);if(c)c.textContent='0';});
 
       try{const s=await _gD(_dC(_db,'Feria2026_Images',id,'Voters',_au.currentUser.uid));if(s.exists()){_uCR=s.data().emoji;_uRBU();}}catch(e){}
@@ -444,15 +430,29 @@
 
     let _rCdn=false;
     window._hRC=async(e,j)=>{
-      if(_rCdn || !_vRdy)return;_rCdn=true;setTimeout(()=>_rCdn=false,300);
+      if(_rCdn || !_vRdy) return;
+      _rCdn=true; // Bloqueo de escritura mantenido hasta resolver
+      
       window._tH([15,20]);window._rHA();
       const b=document.getElementById(`btn-${e}`);if(!b)return;
       const r=b.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top,isM=window.innerWidth<768,pC=isM?2:8+Math.floor(Math.random()*6);
       for(let i=0;i<pC;i++){const p=document.createElement('div');p.textContent=e;p.className='fixed z-[70] pointer-events-none select-none will-change-transform';p.style.fontSize=`${16+Math.random()*14}px`;p.style.left=`${cx-10}px`;p.style.top=`${cy-10}px`;document.body.appendChild(p);const a=-Math.PI/2+(Math.random()*1.4-0.7),v=50+Math.random()*100,ex=cx+Math.cos(a)*v,ey=cy-(isM?80:140+Math.random()*120);p.animate([{transform:'translate3d(0,0,0) scale(0.4)',opacity:1},{transform:`translate3d(${ex-cx}px, ${ey-cy}px, 0) scale(1.4)`,opacity:0.85,offset:0.6},{transform:`translate3d(${(ex-cx)*1.3}px, ${(ey-cy)-80}px, 0) scale(0.5)`,opacity:0}],{duration:isM?600:800+Math.random()*400,easing:'cubic-bezier(0.25, 1, 0.5, 1)'}).onfinish=()=>p.remove();}
-      if(!_db||!_au.currentUser||!_st.cP)return;
-      let py={},pR=_uCR;if(pR===e){_sJBA(e,j);return;}
       
-      // UI Optimista (Instantánea sin depender de red)
+      // Validar si Firebase está disponible antes de procesar
+      if(!_fbReady||!_au.currentUser||!_st.cP){
+        _rCdn = false;
+        window._sGT("Modo sin conexión", "🔌");
+        return;
+      }
+      
+      let py={},pR=_uCR;
+      if(pR===e){
+        _sJBA(e,j);
+        _rCdn = false;
+        return;
+      }
+      
+      // UI Optimista
       const cNew = document.getElementById(`count-${e}`);
       if(cNew) cNew.textContent = (parseInt(cNew.textContent) + 1).toString();
       if(pR) {
@@ -462,7 +462,24 @@
 
       if(pR)py[pR]=_inc(-1); py[e]=_inc(1);
       _uCR=e;_lRPE=e;_uRBU();_sJBA(e,j);
-      try{await _sD(_dC(_db,'Feria2026_Images',_gID(_st.cP)),py,{merge:true});await _sD(_dC(_db,'Feria2026_Images',_gID(_st.cP),'Voters',_au.currentUser.uid),{emoji:e,timestamp:_sT()});}catch(er){}
+      
+      // Guardado con Rollback si falla
+      try {
+        await _sD(_dC(_db,'Feria2026_Images',_gID(_st.cP)),py,{merge:true});
+        await _sD(_dC(_db,'Feria2026_Images',_gID(_st.cP),'Voters',_au.currentUser.uid),{emoji:e,timestamp:_sT()});
+      } catch (er) {
+        console.error('Error guardando reacción:', er);
+        if(cNew) cNew.textContent = Math.max(0, parseInt(cNew.textContent) - 1).toString();
+        if(pR) {
+          const cOld = document.getElementById(`count-${pR}`);
+          if(cOld) cOld.textContent = (parseInt(cOld.textContent) + 1).toString();
+        }
+        _uCR = pR;
+        _uRBU();
+        window._sGT("No se pudo guardar la reacción", "⚠️");
+      } finally {
+        _rCdn = false; // Liberación garantizada
+      }
     };
 
     function _sJBA(e,j){
@@ -493,7 +510,8 @@
       const fl=_st.f[i];_st.cP=fl.path;_sRL(fl.path);
       const fT=async()=>{
         try{
-          const r=await fetch(`https://raw.githubusercontent.com/${_st.o}/${_st.r}/${_st.b}/${fl.path.split('/').map(encodeURIComponent).join('/')}?t=${Date.now()}`);
+          // Petición directa y almacenada en caché habitual del navegador sin el bust param ?t=
+          const r=await fetch(`https://raw.githubusercontent.com/${_st.o}/${_st.r}/${_st.b}/${fl.path.split('/').map(encodeURIComponent).join('/')}`);
           if(!r.ok) throw new Error("404");
           const u=URL.createObjectURL(await r.blob()), im=new Image();
           im.onload=()=>{_cImg=im; _st.eC=0;_rI(im);_dIL();setTimeout(()=>URL.revokeObjectURL(u),10);};
