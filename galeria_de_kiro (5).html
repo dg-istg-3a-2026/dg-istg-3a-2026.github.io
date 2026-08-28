@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-[#232453] text-slate-100 antialiased selection:bg-orange-500 selection:text-white">
+<head>
+  <!-- SCRIPT ANTI-CACHÉ: Cambiado a 2.1 como sugeriste. -->
+  <script>
+    (function(){
+      const VER = "2.1"; 
+      if(localStorage.getItem('_istg_v') !== VER){
+        localStorage.setItem('_istg_v', VER);
+        if(window.location.search.indexOf('v=') === -1){
+          window.location.replace(window.location.pathname + '?v=' + VER);
+        }
+      }
+    })();
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y6LMRRHWH"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0Y6LMRRHWH');</script>
+  <meta charset="UTF-8">
+  <!-- Accesibilidad: Removido user-scalable=no y maximum-scale=1.0 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
+  
+  <title>?!</title>
+  <meta name="description" content="?! - Galeria de Kiro">
+  <meta property="og:title" content="?! - Galeria de Kiro">
+  <meta property="og:description" content="?! - Galeria de Kiro">
+  <meta property="og:image" content="https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg">
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'%3E%3Cstyle%3E@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@900');text%7Bfont-family:'DynaPuff',system-ui,sans-serif;font-weight:900;font-size:80px;dominant-baseline:central;%7D.bg-q%7Bstroke:%230B1B2F;stroke-width:24px;stroke-linejoin:round;%7D.bg-e%7Bstroke:%23FF5500;stroke-width:24px;stroke-linejoin:round;%7D.md%7Bstroke:white;stroke-width:12px;stroke-linejoin:round;%7D.f-q%7Bfill:%230B1B2F;%7D.f-e%7Bfill:%23FF5500;%7D%3C/style%3E%3Ctext x='15' y='55' class='bg-q'%3E?%3C/text%3E%3Ctext x='15' y='55' class='md'%3E?%3C/text%3E%3Ctext x='15' y='55' class='f-q'%3E?%3C/text%3E%3Ctext x='70' y='55' class='bg-e'%3E!%3C/text%3E%3Ctext x='70' y='55' class='md'%3E!%3C/text%3E%3Ctext x='70' y='55' class='f-e'%3E!%3C/text%3E%3C/svg%3E">
+  
+  <!-- PARA PRODUCCIÓN: Elimina el script de abajo y descomenta la etiqueta link con tu CSS compilado -->
+  <!-- <link rel="stylesheet" href="tu-tailwind-compilado.css"> -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@700;900&family=Inter:wght@300;400;600;700&display=block" rel="stylesheet">
+  <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],display:['DynaPuff','cursive']},animation:{'pop':'popCounter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards'},keyframes:{popCounter:{'0%':{transform:'scale(1)'},'50%':{transform:'scale(1.6) translateY(-4px)',backgroundColor:'#fb923c',color:'#fff'},'100%':{transform:'scale(1)'}}}}}}</script>
+  
+  <style>
+    :root{--spotlight-x:50%;--spotlight-y:50%}
+    /* Eliminado el touch-action:none general del body */
+    body,html{margin:0;padding:0;width:100%;height:100dvh;overflow:hidden;background-color:#232453;user-select:none;-webkit-user-select:none;}
+    /* Aplicado touch-action:none estrictamente al canvas. Eliminado will-change redundante. */
+    #mainCanvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;transition:transform 0.2s cubic-bezier(0.16,1,0.3,1);touch-action:none;}
+    .glass-panel{background:rgba(15,23,42,0.95);border:1px solid rgba(255,255,255,0.12);box-shadow:0 10px 30px -10px rgba(0,0,0,0.8);position:relative;overflow:hidden;transform:translateZ(0)}
+    @media (min-width: 640px) { .glass-panel { backdrop-filter:blur(12px) saturate(150%);-webkit-backdrop-filter:blur(12px) saturate(150%); background:rgba(15,23,42,0.75); } }
+    /* Eliminado will-change innecesario */
+    .glass-panel::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle 80px at var(--spotlight-x) var(--spotlight-y),rgba(255,85,0,0.2),transparent 100%);pointer-events:none;z-index:0;}
+    .text-stroke-outer-navy{-webkit-text-stroke:28px #0B1B2F;paint-order:stroke fill;stroke-linejoin:round;stroke-linecap:round}.text-stroke-outer-orange{-webkit-text-stroke:28px #FF5500;paint-order:stroke fill;stroke-linejoin:round;stroke-linecap:round}.text-stroke-mid-white{-webkit-text-stroke:16px #FFFFFF;paint-order:stroke fill;stroke-linejoin:round;stroke-linecap:round}
+    @keyframes elasticAnticipation{0%,100%{transform:scale(1) translateY(0)}50%{transform:scale(1.04) translateY(-6px)}}@keyframes doubtSway{0%,100%{transform:rotate(-8deg) translateY(0)}35%{transform:rotate(6deg) translateY(-10px)}70%{transform:rotate(-12deg) translateY(4px)}}@keyframes surpriseBounce{0%,100%{transform:translateY(0) rotate(4deg) scale(1)}20%{transform:translateY(-24px) rotate(12deg) scale(1.1)}38%{transform:translateY(3px) rotate(-2deg) scale(0.95)}55%{transform:translateY(-10px) rotate(6deg) scale(1.04)}72%{transform:translateY(0) rotate(3deg) scale(1)}}
+    .animate-sticker-group{animation:elasticAnticipation 3s ease-in-out infinite;transform-origin:center center}.animate-doubt{animation:doubtSway 2.7s ease-in-out infinite;transform-origin:center bottom}.animate-surprise{animation:surpriseBounce 2.7s cubic-bezier(0.34,1.56,0.64,1) infinite;transform-origin:center bottom}
+  </style>
+
+  <script>
+    // Sistema anti-DevTools eliminado para mejorar rendimiento y no interferir con UX nativa.
+    window._isRdy=false;window._hHov=false;
+  </script>
+</head>
+
+<body class="h-full w-full relative select-none overflow-hidden text-slate-100 font-sans bg-[#232453]">
+  <canvas id="mainCanvas" class="pointer-events-none"></canvas>
+  
+  <div id="initialLoader" class="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-[#FAF5EF] text-slate-900 pointer-events-auto">
+    <div class="relative flex flex-col items-center justify-center p-6 text-center max-w-sm">
+      <div id="stickerAssembly" class="relative w-80 h-72 sm:w-96 sm:h-80 flex items-center justify-center mb-2 animate-sticker-group opacity-0 transition-opacity duration-200">
+        <div class="relative z-10 flex items-center justify-center font-display font-black leading-none text-[150px] sm:text-[180px] tracking-tight">
+          <div class="relative inline-block animate-doubt mx-[-10px] sm:mx-[-12px]">
+            <span class="absolute inset-0 text-[#0B1B2F] text-stroke-outer-navy" aria-hidden="true">?</span><span class="absolute inset-0 text-white text-stroke-mid-white" aria-hidden="true">?</span><span class="relative text-[#0B1B2F]">?</span>
+          </div>
+          <div class="relative inline-block animate-surprise mx-[-10px] sm:mx-[-12px]">
+            <span class="absolute inset-0 text-[#FF5500] text-stroke-outer-orange" aria-hidden="true">!</span><span class="absolute inset-0 text-white text-stroke-mid-white" aria-hidden="true">!</span><span class="relative text-[#FF5500]">!</span>
+          </div>
+        </div>
+      </div>
+      <img id="loaderLogo" src="" alt="Logo" class="h-8 object-contain mt-6 opacity-80 pointer-events-none"/>
+    </div>
+  </div>
+  
+  <!-- Logo y Redes Flotantes (Solo Móvil) -->
+  <div id="mobile-top-logo" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 sm:hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 -translate-y-8 w-full px-4 pointer-events-none">
+    <img src="https://raw.githubusercontent.com/dg-istg-3a-2026/dg-istg-3a-2026.github.io/298f7f8c07538b457b472c804629c755b8726eab/ISTGXDISE%C3%91OBLANCO.svg" alt="ISTG Diseño Gráfico" class="h-6 w-auto object-contain opacity-90 filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.8)]">
+    <div class="flex items-center gap-4 pointer-events-auto mt-0.5">
+      <a href="https://istg.edu.ec/" target="_blank" rel="noopener noreferrer" class="p-1.5 text-white/70 hover:text-white transition-all active:scale-90 touch-manipulation" title="Sitio Web">
+        <svg class="w-4 h-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+      </a>
+      <a href="https://www.facebook.com/istg.ec" target="_blank" rel="noopener noreferrer" class="p-1.5 text-white/70 hover:text-[#1877F2] transition-all active:scale-90 touch-manipulation" title="Facebook">
+        <svg class="w-4 h-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/istg.ec/" target="_blank" rel="noopener noreferrer" class="p-1.5 text-white/70 hover:text-[#E1306C] transition-all active:scale-90 touch-manipulation" title="Instagram">
+        <svg class="w-4 h-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+      </a>
+      <a href="https://x.com/istg_ec" target="_blank" rel="noopener noreferrer" class="p-1.5 text-white/70 hover:text-white transition-all active:scale-90 touch-manipulation" title="X (Twitter)">
+        <svg class="w-3.5 h-3.5 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" fill="currentColor" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Redes Sociales ISTG (Flotante Arriba Derecha - Solo Desktop) -->
+  <div id="social-dock" class="fixed top-6 right-4 sm:top-8 sm:right-6 z-50 hidden sm:flex transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 -translate-y-8 pointer-events-none">
+    <div class="glass-panel p-1.5 rounded-[16px] flex items-center gap-1 sm:gap-1.5 pointer-events-auto border border-white/10 shadow-lg backdrop-blur-md">
+      <a href="https://istg.edu.ec/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-[12px] bg-transparent hover:bg-blue-500/20 transition-all duration-300 text-white/70 hover:text-blue-400 hover:scale-110 active:scale-95 touch-manipulation" title="Sitio Web Oficial">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-md" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+      </a>
+      <a href="https://www.facebook.com/istg.ec" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-[12px] bg-transparent hover:bg-[#1877F2]/20 transition-all duration-300 text-white/70 hover:text-[#1877F2] hover:scale-110 active:scale-95 touch-manipulation" title="Facebook">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-md" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/istg.ec/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-[12px] bg-transparent hover:bg-[#E1306C]/20 transition-all duration-300 text-white/70 hover:text-[#E1306C] hover:scale-110 active:scale-95 touch-manipulation" title="Instagram">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-md" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+      </a>
+      <a href="https://x.com/istg_ec" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-[12px] bg-transparent hover:bg-white/10 transition-all duration-300 text-white/70 hover:text-white hover:scale-110 active:scale-95 touch-manipulation" title="X (Twitter)">
+        <svg class="w-4 h-4 sm:w-4 sm:h-4 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="fixed top-24 right-4 sm:right-6 z-[100] flex flex-col gap-3 pointer-events-none w-max max-w-[220px] items-end"></div>
+  
+  <!-- HUD y Reacciones -->
+  <div id="hud-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2.5 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 translate-y-16 pointer-events-none w-full max-w-[98vw] sm:max-w-xl px-1 sm:px-4" onmouseenter="window._kHA()" onmouseleave="window._sHI()">
+    <div id="reactionDock" class="relative flex items-center gap-1 sm:gap-1.5 p-1.5 sm:p-2 pointer-events-auto w-max mx-auto transition-all duration-300">
+      <div class="absolute inset-0 glass-panel rounded-[28px] shadow-2xl pointer-events-none border border-white/10"></div>
+      
+      <div class="hidden sm:flex relative z-10 items-center pl-2 pr-1 pointer-events-none select-none">
+        <img src="https://raw.githubusercontent.com/dg-istg-3a-2026/dg-istg-3a-2026.github.io/298f7f8c07538b457b472c804629c755b8726eab/ISTGXDISE%C3%91OBLANCO.svg" alt="ISTG Diseño Gráfico" class="h-5 w-auto object-contain opacity-85 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+      </div>
+      
+      <div class="hidden sm:block w-px h-6 bg-white/20 mx-1 z-10"></div>
+      
+      <script>
+        const _rxD=[{e:'😍',j:'¡ESTO ES CINE! 🚬'},{e:'😂',j:'Hecho en Canva 💀'},{e:'🤡',j:'JPG Pixelado 🤡'},{e:'😱',j:'Sin guardar (Ctrl+S) 📉'},{e:'🤌',j:'10000 de Aura ✨'}];
+        document.write(_rxD.map(r=>`<button type="button" onclick="window._hRC('${r.e}', '${r.j}')" id="btn-${r.e}" class="group relative z-10 flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-[18px] bg-transparent hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 hover:scale-110 active:scale-90 focus:outline-none overflow-visible cursor-pointer pointer-events-auto touch-manipulation"><span class="text-xl sm:text-2xl filter group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] relative z-10 pointer-events-none">${r.e}</span><div id="badge-${r.e}" class="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-0.5 bg-slate-800/90 border border-white/20 rounded-full flex items-center justify-center text-[9px] font-display font-bold text-slate-200 shadow-md z-20 transition-colors duration-300"><span id="count-${r.e}">0</span></div></button>`).join(''));
+      </script>
+      
+      <div class="w-px h-8 bg-white/20 mx-1 z-10"></div>
+      
+      <div class="static sm:relative z-10">
+        <button type="button" id="btnMega" onclick="window._tglS()" class="relative flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-[18px] bg-blue-500/20 border border-blue-400/30 hover:bg-blue-500/40 transition-all duration-300 hover:-translate-y-2 hover:scale-110 active:scale-90 focus:outline-none cursor-pointer pointer-events-auto overflow-hidden touch-manipulation">
+          <span class="text-xl sm:text-2xl pointer-events-none">📢</span>
+          <div id="mCd" class="absolute inset-0 bg-slate-900/90 flex items-center justify-center text-orange-500 font-black text-xl opacity-0 transition-opacity backdrop-blur-sm pointer-events-none z-20 font-display"></div>
+        </button>
+        
+        <div id="shoutMenu" class="absolute bottom-full left-1/2 -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-0 mb-3 sm:mb-4 bg-slate-900/95 backdrop-blur-xl border border-white/10 p-2 rounded-2xl shadow-2xl flex-col gap-1 w-[92vw] max-w-[320px] sm:w-max sm:max-w-none pointer-events-auto origin-bottom sm:origin-bottom-right z-[100] transition-all duration-200 scale-75 opacity-0 hidden">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import{initializeApp as _iA}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import{getAuth as _gA,signInAnonymously as _sIA}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import{getFirestore as _gF,doc as _dC,getDoc as _gD,setDoc as _sD,onSnapshot as _oS,serverTimestamp as _sT,runTransaction as _rT,increment as _inc, collection as _cC, query as _q, orderBy as _oB, limit as _lmt}from"https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    const _cfg={apiKey:"AIzaSyDYbe0MMuPvpdJiYlvtcDec-MybKqCad9k",authDomain:"web-feria-istg-2026.firebaseapp.com",databaseURL:"https://web-feria-istg-2026-default-rtdb.firebaseio.com",projectId:"web-feria-istg-2026",storageBucket:"web-feria-istg-2026.firebasestorage.app",messagingSenderId:"434583648721",appId:"1:434583648721:web:a31a4ec9e99dc7faf8c8f0"};
+    const _st={o:'dg-istg-3a-2026',r:'dg-istg-3a-2026.github.io',b:'MochilaDeCaleb',f:[],cP:'',eC:0};
+    
+    // Nueva variable global para chequear si Firebase está disponible
+    let _fbReady = false;
+
+    let _uCR=null,_db=null,_au=null,_aRU=null,_pRS={},_iFRL=true,_lRPE=null,_hAT=null,_sTck=false,_rdT,_cImg=null,_vRdy=false;
+    const _mnC=document.getElementById('mainCanvas'), _mnCx=_mnC.getContext('2d');
+
+    window._sGT=(m,i)=>{
+      const c=document.getElementById('toastContainer');if(!c)return;
+      const t=document.createElement('div');
+      t.className='flex items-center gap-2.5 px-3.5 py-2 bg-[#0B1B2F]/80 backdrop-blur-md border border-orange-500/30 rounded-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.5)] text-xs text-white transform translate-x-full opacity-0 transition-all duration-500 ease-out will-change-transform z-[200] relative';
+      t.innerHTML=`<span class="text-base drop-shadow-md animate-pulse">${i}</span><span class="font-light tracking-wide text-orange-50">${m}</span>`;
+      c.appendChild(t);
+      requestAnimationFrame(()=>{t.classList.remove('translate-x-full','opacity-0');t.classList.add('translate-x-0','opacity-100');});
+      setTimeout(()=>{t.classList.remove('translate-x-0','opacity-100');t.classList.add('translate-x-12','opacity-0');setTimeout(()=>t.remove(),500);},4000);
+    };
+
+    window._tH=(p)=>{if(navigator.vibrate)try{navigator.vibrate(p)}catch(e){}};
+
+    function _pSp(e){
+      const ds=document.querySelectorAll('.glass-panel');
+      const x=e.touches?e.touches[0].clientX:e.clientX, y=e.touches?e.touches[0].clientY:e.clientY;
+      ds.forEach(d=>{const r=d.getBoundingClientRect();d.style.setProperty('--spotlight-x',`${x-r.left}px`);d.style.setProperty('--spotlight-y',`${y-r.top}px`);});
+      window._rHA(); _sTck=false;
+    }
+    window.addEventListener('pointermove',e=>{if(!_sTck){requestAnimationFrame(()=>_pSp(e));_sTck=true}},{passive:true});
+
+    window._kHA=()=>{window._hHov=true;window._rHA()};
+    window._sHI=()=>{window._hHov=false;window._rHA()};
+    window._rHA=()=>{
+      if(!window._isRdy)return;
+      const h=document.getElementById('hud-container');
+      h.classList.remove('opacity-30','opacity-0');h.classList.add('opacity-100');
+      clearTimeout(_hAT);_hAT=setTimeout(()=>{if(!window._hHov&&document.getElementById('shoutMenu').classList.contains('hidden'))h.classList.add('opacity-30')},4000);
+    };
+
+    window._pPool = [
+      "El ISTG es el verdadero prime del diseño ✨", "Ratio al que no estudie en el ISTG 💀",
+      "Estudiar diseño aquí = Aura infinita 📈", "POV: Eres el GOAT del Illustrator en ISTG 🐐",
+      "Mi PC es NPC, pero mi talento es de ISTG 🤖", "Skibidi vectores, el ISTG es la meta 🐺",
+      "Mewing extremo mientras apruebo tipografía 🤫🧏‍♂️", "Dejen que el ISTG cocine nuevos talentos 🔥",
+      "Ese portafolio tiene un W rizz brutal 🗿", "Matricúlate y deja de ser un NPC 📉",
+      "El ISTG carrea toda la industria gráfica 🎮", "CMYK mode: activando el prime en ISTG 🖨️",
+      "Un W masivo estudiar diseño aquí fr fr 🧢", "Sin cap, los de diseño somos insanos 👻",
+      "Aura +999 al vectorizar a la primera 🤌", "El jefe final es la imprenta, ayuda ⚔️",
+      "Sus el que use Comic Sans, report 📮", "Evento canónico: tu primer render crasheado 🕷️",
+      "Bro de verdad pensó que Canva era diseño 💀", "Los profes del ISTG tienen W rizz 📚",
+      "Skibidi toilet no sabe de teoría del color 🎨", "Farmeando aura en el taller de diseño ⚡",
+      "Soy un Sigma del Photoshop, cero cap 🐺", "POV: Descubres que el ISTG es god 🌟",
+      "Mi salud mental crasheó con el Premiere 🎬", "Diseño gráfico is bussin en el ISTG 🚌",
+      "El ISTG te quita lo espantaviejas 🗿", "Aesthetic 100% solo en el ISTG ✨",
+      "El verdadero brainrot es no agrupar capas 🧠", "W instituto, W carrera, W futuro 🚀",
+      "Matricúlate y conviértete en el boss final 🕹️", "Tu diseño anterior daba cringe, ven al ISTG 😬",
+      "El ISTG repartiendo factos sobre vectores 🗣️", "Mewing para tener mandíbula de Illustrator 🤫",
+      "Cero lag mental al diseñar en el ISTG 🧠", "Este flyer tiene 10000 de aura ✨",
+      "Ratio a las otras carreras, Diseño es god 📈", "Los NPCs guardan en JPG, los Sigmas en SVG 🗿",
+      "El ISTG te saca del flop absoluto 📉", "Glow up masivo estudiando en el ISTG 💅",
+      "Bro usa Word para logos... skull emoji 💀", "El ISTG es el meta actual, no cap 🧢",
+      "Vectores insanos, rizz impecable, puro ISTG 🔥", "Este logo tiene main character energy ✨",
+      "No seas un normie, estudia en el ISTG 🤓", "Aura oscura si no pones sangría al archivo 🩸",
+      "De chill estudiando diseño en el ISTG 🤙", "El ISTG te da el buff que necesitas ⚔️",
+      "Puro cine diseñar en las aulas del ISTG 🚬", "GG WP a los que no entraron al ISTG 🎮"
+    ];
+
+    window._imgTk = 3; 
+    window._imgPhrases = [];
+
+    window._tglS=()=>{
+      window._tH([10]); 
+      const m = document.getElementById('shoutMenu');
+      if(m.classList.contains('hidden')) {
+          if(window._imgTk <= 0) {
+              m.innerHTML = `<div class="px-4 py-4 text-center text-red-400 font-bold text-sm w-full touch-manipulation">¡Agotaste tu aura en esta obra! 📢<br><span class="text-xs text-white/60 font-medium mt-1 block">Espera a la siguiente imagen 🗿</span></div>`;
+          } else {
+              const header = `<div class="px-3 py-1.5 mb-1 text-[10px] text-white/50 font-black text-center tracking-widest uppercase border-b border-white/10 bg-black/20 rounded-t-lg flex justify-between items-center"><span>USOS:</span><span class="text-orange-400 bg-orange-400/20 px-1.5 py-0.5 rounded-md font-mono font-bold">${window._imgTk}/3</span></div>`;
+              const colors = ['text-blue-100', 'text-yellow-100', 'text-orange-100'];
+              m.innerHTML = header + window._imgPhrases.map((p, i) => 
+                `<button type="button" onclick="window._sndS('${p.replace(/'/g, "\\'")}')" class="text-left px-4 py-3 sm:py-2 rounded-xl text-base sm:text-sm font-semibold hover:bg-white/10 active:bg-white/20 transition-colors ${colors[i]} w-full touch-manipulation">${p}</button>`
+              ).join('');
+          }
+          m.classList.remove('hidden');
+          m.classList.add('flex');
+          void m.offsetWidth; 
+          m.classList.remove('scale-75', 'opacity-0');
+          m.classList.add('scale-100', 'opacity-100');
+      } else {
+          m.classList.remove('scale-100', 'opacity-100');
+          m.classList.add('scale-75', 'opacity-0');
+          setTimeout(() => {
+              if(m.classList.contains('opacity-0')) {
+                m.classList.add('hidden');
+                m.classList.remove('flex');
+              }
+          }, 200);
+      }
+      window._rHA();
+    };
+
+    const _seenShouts = new Set();
+    let _isShtCld = false;
+
+    window._sndS=async(t)=>{
+      window._tglS(); 
+      window._tH([20,30]);
+      
+      const id = _gID(_st.cP);
+      if(window._imgTk <= 0) { window._sGT("Sin aura para esta obra", "🎟️"); return; }
+      if(_isShtCld) return;
+      
+      // Chequeo explícito de Firebase
+      if(!_fbReady || !_au.currentUser){ window._sGT("Conexión inactiva", "🔌"); return; }
+      
+      _isShtCld = true;
+      window._imgTk--;
+      localStorage.setItem(`_tk_${id}`, window._imgTk.toString());
+
+      const bm = document.getElementById('btnMega');
+      const mc = document.getElementById('mCd');
+      if(bm) bm.style.pointerEvents = 'none';
+      if(mc) { mc.style.opacity = '1'; mc.innerText = '6'; }
+
+      const mId = Date.now().toString(36) + Math.random().toString(36).substring(2);
+      _seenShouts.add(mId);
+      window._dDmk(t);
+
+      try{ 
+        await _sD(_dC(_db, 'Feria2026_Images', 'GLOBAL_SHOUTS', 'Mensajes', mId), { 
+            txt: t, ts: _sT(), id: mId
+        }); 
+      }catch(e){ console.error(e); }
+
+      let d = 6;
+      const cdI = setInterval(() => {
+        d--; if(mc) mc.innerText = d;
+        if(d <= 0) {
+          clearInterval(cdI); _isShtCld = false;
+          if(bm) bm.style.pointerEvents = 'auto';
+          if(mc) mc.style.opacity = '0';
+        }
+      }, 1000);
+    };
+
+    window._dDmk=(t)=>{
+      const d = document.createElement('div');
+      d.textContent = t;
+      const rY = 10 + Math.random() * 60; 
+      const isM = window.innerWidth < 768;
+      const rS = isM ? (20 + Math.random() * 8) : (32 + Math.random() * 16); 
+      
+      d.className = 'fixed z-[100] font-display font-black whitespace-nowrap opacity-90 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] text-white pointer-events-none will-change-transform';
+      d.style.fontSize = `${rS}px`; 
+      d.style.top = `${rY}%`; 
+      
+      const sW = isM ? 1.5 : 2.5;
+      d.style.textShadow = `-${sW}px -${sW}px 0 #000, 0 -${sW}px 0 #000, ${sW}px -${sW}px 0 #000, ${sW}px 0 0 #000, ${sW}px ${sW}px 0 #000, 0 ${sW}px 0 #000, -${sW}px ${sW}px 0 #000, -${sW}px 0 0 #000`;
+      
+      const startX = window.innerWidth;
+      d.style.transform = `translate3d(${startX}px, 0, 0)`;
+      document.body.appendChild(d);
+      
+      requestAnimationFrame(() => {
+        const w = d.offsetWidth; 
+        const v = isM ? (4000 + Math.random() * 1500) : (6000 + Math.random() * 2000); 
+        d.animate([{ transform: `translate3d(${startX}px, 0, 0)` }, { transform: `translate3d(-${w + 100}px, 0, 0)` }], { duration: v, easing: 'linear' }).onfinish = () => d.remove();
+      });
+    };
+
+    async function _fGH(){
+      try {
+        // Reservamos el control de caché mediante ?v=2.1
+        const r = await fetch(`https://raw.githubusercontent.com/${_st.o}/${_st.r}/${_st.b}/galeria.json?v=2.1`);
+        if(r.ok) {
+          const l = await r.json();
+          _st.f = l.map(n => ({ path: n }));
+        }
+      } catch(e) {}
+    }
+
+    window.onload=async()=>{
+      _rC();window.addEventListener('resize',_rC,{passive:true});
+      
+      // Asignación directa del SVG
+      const logoEl = document.getElementById('loaderLogo');
+      if(logoEl) logoEl.src = "https://raw.githubusercontent.com/caortiz-stack/hosting/fdee49b549ea1c399079948645fb51c8645a8a80/Recurso%201.svg";
+      
+      if(document.fonts)document.fonts.ready.then(()=>{const s=document.getElementById('stickerAssembly');if(s)s.classList.remove('opacity-0');});
+      
+      try{
+        const app=_iA(_cfg);_au=_gA(app);_db=_gF(app);
+        await Promise.all([_sIA(_au), _fGH()]);
+        _fbReady = true; // Firebase está operativo
+        await _iG();
+      }catch(e){
+        console.warn("Iniciando en modo local (sin Firebase)");
+        _fbReady = false; 
+        await _fGH();
+        await _iG();
+      }
+    };
+
+    async function _iG(){
+      if(_fbReady && _db) {
+        let _gSL = true;
+        _oS(_q(_cC(_db, 'Feria2026_Images', 'GLOBAL_SHOUTS', 'Mensajes'), _oB('ts', 'desc'), _lmt(1)), snap => {
+          snap.docChanges().forEach(ch => {
+            if (ch.type === 'added') {
+              const data = ch.doc.data();
+              if(!_gSL && data.id && !_seenShouts.has(data.id)) {
+                _seenShouts.add(data.id);
+                window._dDmk(data.txt);
+              }
+            }
+          });
+          _gSL = false;
+        });
+      }
+      if(_st.f.length>0)await _aLUI();else _dIL();
+    }
+    
+    // Solución al problema Unicode
+    const _gID = p => btoa(unescape(encodeURIComponent(p))).replace(/[\/+=]/g, '_');
+
+    window._tRR=(e)=>{
+      const b=document.getElementById(`btn-${e}`);if(!b)return;
+      const r=b.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top,isM=window.innerWidth<768,pC=isM?2:3+Math.floor(Math.random()*2);
+      for(let i=0;i<pC;i++){
+        const p=document.createElement('div');p.textContent=e;p.className='fixed z-[60] pointer-events-none select-none will-change-transform';
+        p.style.fontSize=`${14+Math.random()*10}px`;p.style.left=`${cx-10}px`;p.style.top=`${cy-10}px`;document.body.appendChild(p);
+        const a=-Math.PI/2+(Math.random()*1.6-0.8),v=40+Math.random()*80,ex=cx+Math.cos(a)*v,ey=cy-(isM?60:100+Math.random()*100);
+        p.animate([{transform:'translate3d(0,0,0) scale(0.4)',opacity:0.8},{transform:`translate3d(${ex-cx}px, ${ey-cy}px, 0) scale(1.2)`,opacity:0.6,offset:0.6},{transform:`translate3d(${(ex-cx)*1.3}px, ${(ey-cy)-60}px, 0) scale(0.5)`,opacity:0}],{duration:isM?500:1000+Math.random()*400,easing:'cubic-bezier(0.25, 1, 0.5, 1)'}).onfinish=()=>p.remove();
+      }
+    };
+
+    async function _sRL(pth){
+      if(!_fbReady||!_au.currentUser)return;
+      const id=_gID(pth);
+      if(_aRU)_aRU();
+      _uCR=null;_pRS={};_iFRL=true;_vRdy=false;_uRBU();
+
+      window._imgTk = parseInt(localStorage.getItem(`_tk_${id}`));
+      if(isNaN(window._imgTk)) window._imgTk = 3; 
+      
+      let imgPhrases = JSON.parse(localStorage.getItem(`_phr_${id}`) || '[]');
+      
+      if(imgPhrases.length < 3) {
+        let globalUsed = JSON.parse(localStorage.getItem('_g_uP') || '[]');
+        let avail = window._pPool.filter(x => !globalUsed.includes(x));
+        
+        if(avail.length < 3) { globalUsed = []; avail = window._pPool; } 
+        
+        const sel = avail.sort(() => 0.5 - Math.random()).slice(0, 3);
+        imgPhrases = sel;
+        
+        globalUsed.push(...sel);
+        localStorage.setItem('_g_uP', JSON.stringify(globalUsed));
+        localStorage.setItem(`_phr_${id}`, JSON.stringify(imgPhrases));
+      }
+      window._imgPhrases = imgPhrases;
+      
+      ['😍','😂','🤡','😱','🤌'].forEach(e=>{const c=document.getElementById(`count-${e}`);if(c)c.textContent='0';});
+
+      try{const s=await _gD(_dC(_db,'Feria2026_Images',id,'Voters',_au.currentUser.uid));if(s.exists()){_uCR=s.data().emoji;_uRBU();}}catch(e){}
+      _vRdy=true;
+      _aRU=_oS(_dC(_db,'Feria2026_Images',id),snap=>{
+        const d=snap.exists()?snap.data():{};
+        ['😍','😂','🤡','😱','🤌'].forEach(e=>{
+          const c=document.getElementById(`count-${e}`),b=document.getElementById(`badge-${e}`),nV=d[e]||0,oV=_pRS[e]||0;
+          if(!_iFRL&&nV>oV&&_lRPE!==e){window._tRR(e);}
+          if(c&&b&&c.textContent!==nV.toString()){c.textContent=nV.toString();b.classList.remove('animate-pop');void b.offsetWidth;b.classList.add('animate-pop');}
+          _pRS[e]=nV;
+        });
+        _lRPE=null;_iFRL=false;
+      });
+    }
+
+    function _uRBU(){['😍','😂','🤡','😱','🤌'].forEach(e=>{const b=document.getElementById(`btn-${e}`),bg=document.getElementById(`badge-${e}`);if(!b||!bg)return;if(_uCR===e){b.classList.add('bg-orange-500/30','border','border-orange-400/60');bg.classList.add('bg-orange-500','text-white','border-orange-300/50');}else{b.classList.remove('bg-orange-500/30','border','border-orange-400/60');bg.classList.remove('bg-orange-500','text-white','border-orange-300/50');}});}
+
+    let _rCdn=false;
+    window._hRC=async(e,j)=>{
+      if(_rCdn || !_vRdy) return;
+      _rCdn=true; // Bloqueo de escritura mantenido hasta resolver
+      
+      window._tH([15,20]);window._rHA();
+      const b=document.getElementById(`btn-${e}`);if(!b)return;
+      const r=b.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top,isM=window.innerWidth<768,pC=isM?2:8+Math.floor(Math.random()*6);
+      for(let i=0;i<pC;i++){const p=document.createElement('div');p.textContent=e;p.className='fixed z-[70] pointer-events-none select-none will-change-transform';p.style.fontSize=`${16+Math.random()*14}px`;p.style.left=`${cx-10}px`;p.style.top=`${cy-10}px`;document.body.appendChild(p);const a=-Math.PI/2+(Math.random()*1.4-0.7),v=50+Math.random()*100,ex=cx+Math.cos(a)*v,ey=cy-(isM?80:140+Math.random()*120);p.animate([{transform:'translate3d(0,0,0) scale(0.4)',opacity:1},{transform:`translate3d(${ex-cx}px, ${ey-cy}px, 0) scale(1.4)`,opacity:0.85,offset:0.6},{transform:`translate3d(${(ex-cx)*1.3}px, ${(ey-cy)-80}px, 0) scale(0.5)`,opacity:0}],{duration:isM?600:800+Math.random()*400,easing:'cubic-bezier(0.25, 1, 0.5, 1)'}).onfinish=()=>p.remove();}
+      
+      // Validar si Firebase está disponible antes de procesar
+      if(!_fbReady||!_au.currentUser||!_st.cP){
+        _rCdn = false;
+        window._sGT("Modo sin conexión", "🔌");
+        return;
+      }
+      
+      let py={},pR=_uCR;
+      if(pR===e){
+        _sJBA(e,j);
+        _rCdn = false;
+        return;
+      }
+      
+      // UI Optimista
+      const cNew = document.getElementById(`count-${e}`);
+      if(cNew) cNew.textContent = (parseInt(cNew.textContent) + 1).toString();
+      if(pR) {
+        const cOld = document.getElementById(`count-${pR}`);
+        if(cOld) cOld.textContent = Math.max(0, parseInt(cOld.textContent) - 1).toString();
+      }
+
+      if(pR)py[pR]=_inc(-1); py[e]=_inc(1);
+      _uCR=e;_lRPE=e;_uRBU();_sJBA(e,j);
+      
+      // Guardado con Rollback si falla
+      try {
+        await _sD(_dC(_db,'Feria2026_Images',_gID(_st.cP)),py,{merge:true});
+        await _sD(_dC(_db,'Feria2026_Images',_gID(_st.cP),'Voters',_au.currentUser.uid),{emoji:e,timestamp:_sT()});
+      } catch (er) {
+        console.error('Error guardando reacción:', er);
+        if(cNew) cNew.textContent = Math.max(0, parseInt(cNew.textContent) - 1).toString();
+        if(pR) {
+          const cOld = document.getElementById(`count-${pR}`);
+          if(cOld) cOld.textContent = (parseInt(cOld.textContent) + 1).toString();
+        }
+        _uCR = pR;
+        _uRBU();
+        window._sGT("No se pudo guardar la reacción", "⚠️");
+      } finally {
+        _rCdn = false; // Liberación garantizada
+      }
+    };
+
+    function _sJBA(e,j){
+      const c={'😍':'rgba(236, 72, 153, 0.25)','😂':'rgba(234, 179, 8, 0.25)','🤡':'rgba(168, 85, 247, 0.25)','😱':'rgba(6, 182, 212, 0.25)','🤌':'rgba(249, 115, 22, 0.25)'};
+      const o=document.createElement('div');o.className='fixed inset-0 z-[25] pointer-events-none transition-opacity duration-300 ease-out opacity-0';o.style.background=`radial-gradient(circle at center, ${c[e]||'rgba(255,255,255,0.15)'} 0%, transparent 80%)`;document.body.appendChild(o);
+      if(_mnC)_mnC.style.transform='scale(0.98) translateZ(0)';
+      requestAnimationFrame(()=>{o.style.opacity='1';setTimeout(()=>o.style.opacity='0',150);});
+      const b=document.createElement('div');b.className='fixed z-[80] pointer-events-none flex flex-col items-center justify-center w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 will-change-transform';
+      b.innerHTML=`<span class="text-[80px] sm:text-[110px] mb-[-20px] z-10 animate-bounce" style="text-shadow:0 10px 30px rgba(255,85,0,0.5)">${e}</span><span class="font-display bg-black/95 sm:bg-black/90 sm:backdrop-blur-md border-2 border-orange-500/40 text-orange-100 px-6 py-3 rounded-[24px] text-xl sm:text-2xl font-black tracking-wider uppercase shadow-2xl transform -rotate-1 text-center leading-none">Quedé<br><span class="text-lg text-white/80">${j}</span></span>`;document.body.appendChild(b);
+      b.animate([{transform:'translate3d(-50%, -30%, 0) scale(0.6)',opacity:0},{transform:'translate3d(-50%, -50%, 0) scale(1.04)',opacity:1,offset:0.15},{transform:'translate3d(-50%, -50%, 0) scale(1)',opacity:1,offset:0.20},{transform:'translate3d(-50%, -50%, 0) scale(1)',opacity:1,offset:0.70},{transform:'translate3d(-50%, -55%, 0) scale(0.9)',opacity:0}],{duration:1200,easing:'cubic-bezier(0.25, 1, 0.5, 1)'}).onfinish=()=>{b.remove();setTimeout(()=>o.remove(),200);if(_mnC)_mnC.style.transform='scale(1) translateZ(0)';};
+    }
+
+    async function _aLUI(){
+      if(!_st.f||!_st.f.length)return;
+      let sI=JSON.parse(localStorage.getItem('_vImgs')||'[]');
+      let uF=_st.f.filter(x=>!sI.includes(x.path));
+      if(uF.length===0){sI=[];uF=_st.f;localStorage.removeItem('_vImgs');} 
+      
+      let i=Math.floor(Math.random()*uF.length);
+      const sF=uF[i];
+      sI.push(sF.path);
+      localStorage.setItem('_vImgs',JSON.stringify(sI));
+      _dIBI(_st.f.indexOf(sF));
+    }
+
+    function _dIBI(i){
+      if(i<0||i>=_st.f.length)return;
+      const fl=_st.f[i];_st.cP=fl.path;_sRL(fl.path);
+      const fT=async()=>{
+        try{
+          // Petición directa y almacenada en caché habitual del navegador sin el bust param ?t=
+          const r=await fetch(`https://raw.githubusercontent.com/${_st.o}/${_st.r}/${_st.b}/${fl.path.split('/').map(encodeURIComponent).join('/')}`);
+          if(!r.ok) throw new Error("404");
+          const u=URL.createObjectURL(await r.blob()), im=new Image();
+          im.onload=()=>{_cImg=im; _st.eC=0;_rI(im);_dIL();setTimeout(()=>URL.revokeObjectURL(u),10);};
+          im.onerror=()=>{URL.revokeObjectURL(u);_rTY(i, fl.path);};im.src=u;
+        }catch(e){_rTY(i, fl.path);}
+      };fT();
+    }
+
+    function _rTY(i, bdPth){
+      if(bdPth) _st.f = _st.f.filter(x => x.path !== bdPth); 
+      _st.eC++;
+      if(_st.eC<3 && _st.f.length > 0) _aLUI(); else _dIL(); 
+    }
+
+    function _rC(){
+      clearTimeout(_rdT);
+      _rdT=setTimeout(()=>{
+        const w=window.innerWidth,h=window.innerHeight,d=Math.min(window.devicePixelRatio||1, 2);
+        _mnC.width=w*d;_mnC.height=h*d;_mnCx.scale(d,d);
+        if(_cImg) _rI(_cImg);
+      }, 100);
+    }
+
+    // --- NUEVO RENDERIZADO PREMIUM DE LA IMAGEN (CANVAS) ---
+    function _rI(im){
+      const w=window.innerWidth, h=window.innerHeight;
+      _mnCx.clearRect(0,0,w,h);
+      
+      // Espaciado inteligente (Padding)
+      const pad = w < 768 ? 20 : 40;
+      const availW = w - pad * 2;
+      // Menos espacio disponible en altura en móviles para esquivar el menú inferior
+      const availH = h - pad * 2 - (w < 768 ? 60 : 0);
+      
+      const iR = (im.naturalWidth || im.width) / (im.naturalHeight || im.height);
+      const sR = availW / availH;
+      
+      let dW = iR > sR ? availW : availH * iR;
+      let dH = iR > sR ? availW / iR : availH;
+      
+      _mnCx.save();
+      // Trasladar al centro visualmente correcto (desplazado un poco hacia arriba en celular)
+      _mnCx.translate(w/2, h/2 - (w < 768 ? 30 : 0));
+      
+      // Habilitar máxima nitidez
+      _mnCx.imageSmoothingEnabled = true;
+      _mnCx.imageSmoothingQuality = 'high';
+      
+      const x = -dW/2, y = -dH/2;
+      // Radio de borde suave de 12px (estilo carta hero)
+      const r = 12;
+      
+      // Configuración de la sombra 3D
+      _mnCx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+      _mnCx.shadowBlur = 40;
+      _mnCx.shadowOffsetY = 15;
+      
+      // Dibujar la figura recortada
+      _mnCx.beginPath();
+      if(_mnCx.roundRect){
+        _mnCx.roundRect(x, y, dW, dH, r);
+      } else {
+        // Fallback robusto por si un navegador viejito no soporta roundRect() nativo
+        _mnCx.moveTo(x + r, y);
+        _mnCx.arcTo(x + dW, y, x + dW, y + dH, r);
+        _mnCx.arcTo(x + dW, y + dH, x, y + dH, r);
+        _mnCx.arcTo(x, y + dH, x, y, r);
+        _mnCx.arcTo(x, y, x + dW, y, r);
+      }
+      
+      // Llenamos el fondo para proyectar la sombra
+      _mnCx.fillStyle = '#0f172a';
+      _mnCx.fill();
+      
+      // Apagamos la sombra para que la imagen se vea nítida y no emborronada
+      _mnCx.shadowColor = 'transparent';
+      
+      // Clip: "Cortamos" todo lo que salga de la figura
+      _mnCx.clip();
+      
+      // Dibujamos la foto original
+      _mnCx.drawImage(im, x, y, dW, dH);
+      
+      // Trazo semitransparente premium (efecto vidrio/iluminación interior)
+      _mnCx.lineWidth = 2; // Usamos 2px para que con el clip quede visualmente de 1px puro
+      _mnCx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+      _mnCx.stroke();
+      
+      _mnCx.restore();
+    }
+    // --------------------------------------------------------
+
+    const _lST=Date.now();let _iLD=false;
+    function _dIL(){
+      const l=document.getElementById('initialLoader');if(!l||_iLD)return;_iLD=true;
+      setTimeout(()=>{l.classList.add('pointer-events-none');let s=null;
+        function _st(ts){if(!s)s=ts;const t=Math.min((ts-s)/1000,1),eT=t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,r=eT*150;
+          l.style.mask=`radial-gradient(circle, transparent ${r}%, black ${r+1}%)`;l.style.WebkitMask=`radial-gradient(circle, transparent ${r}%, black ${r+1}%)`;
+          if(t<1)requestAnimationFrame(_st);else{l.style.display='none';window._isRdy=true;const hc=document.getElementById('hud-container');if(hc){hc.classList.remove('opacity-0','translate-y-16','pointer-events-none');window._rHA();}const ml=document.getElementById('mobile-top-logo');if(ml)ml.classList.remove('opacity-0','-translate-y-8');const sd=document.getElementById('social-dock');if(sd)sd.classList.remove('opacity-0','-translate-y-8');}
+        }requestAnimationFrame(_st);
+      },Math.max(0,1000-(Date.now()-_lST)));
+    }
+  </script>
+</body>
+</html>
